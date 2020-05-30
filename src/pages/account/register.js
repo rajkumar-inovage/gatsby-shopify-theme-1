@@ -1,27 +1,26 @@
-import React, { useState } from 'react';
-import SEO from "../../components/seo"
-import gql from 'graphql-tag';
-import { Mutation } from 'react-apollo'
-import ConnexionLayout from "../../components/account/ConnexionLayout"
-import { navigate } from 'gatsby'
+import React, { useState } from "react";
+import SEO from "../../components/seo";
+import gql from "graphql-tag";
+import { Mutation } from "react-apollo";
+import ConnexionLayout from "../../components/account/ConnexionLayout";
+import { navigate } from "gatsby";
 
 const CUSTOMER_REGISTER = gql`
-mutation customerCreate($input: CustomerCreateInput!) {
-  customerCreate(input: $input) {
-    customer {
-      id
-    }
-    customerUserErrors {
-      code
-      field
-      message
+  mutation customerCreate($input: CustomerCreateInput!) {
+    customerCreate(input: $input) {
+      customer {
+        id
+      }
+      customerUserErrors {
+        code
+        field
+        message
+      }
     }
   }
-}
-`
+`;
 
 const RegisterForm = () => {
-
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
@@ -37,15 +36,35 @@ const RegisterForm = () => {
                   return (
                     <>
                       <div className="field">
-                        <label className="label has-text-white" htmlFor="loginEmail">Email</label>
+                        <label
+                          className="label has-text-white"
+                          htmlFor="loginEmail"
+                        >
+                          Email
+                        </label>
                         <div className="control">
-                          <input className="input" type="email" id="loginEmail" onChange={(e) => setEmail(e.target.value)} />
+                          <input
+                            className="input"
+                            type="email"
+                            id="loginEmail"
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
                         </div>
                       </div>
                       <div className="field">
-                        <label className="label has-text-white" htmlFor="loginPassword">Password</label>
+                        <label
+                          className="label has-text-white"
+                          htmlFor="loginPassword"
+                        >
+                          Password
+                        </label>
                         <div className="control">
-                          <input className="input" type="password" id="loginPassword" onChange={(e) => (setPassword(e.target.value))} />
+                          <input
+                            className="input"
+                            type="password"
+                            id="loginPassword"
+                            onChange={(e) => setPassword(e.target.value)}
+                          />
                         </div>
                       </div>
                       <div className="field">
@@ -55,20 +74,22 @@ const RegisterForm = () => {
                             onClick={() => {
                               customerLogin({
                                 variables: {
-                                  "input": {
-                                    "email": email,
-                                    "password": password,
-                                  }
-                                }
+                                  input: {
+                                    email: email,
+                                    password: password,
+                                  },
+                                },
                               }).then((result) => {
-                                navigate(`/account/login`)
-                              })
+                                navigate(`/account/login`);
+                              });
                             }}
-                          >CREATE</button>
+                          >
+                            CREATE
+                          </button>
                         </div>
                       </div>
                     </>
-                  )
+                  );
                 }}
               </Mutation>
             </div>
@@ -78,8 +99,6 @@ const RegisterForm = () => {
     </section>
   );
 };
-
-
 
 const Register = () => {
   return (
@@ -93,4 +112,3 @@ const Register = () => {
 };
 
 export default Register;
-

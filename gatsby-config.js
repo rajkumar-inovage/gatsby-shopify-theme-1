@@ -1,12 +1,13 @@
-require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`
-})
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby & Shopify`,
-    description: `Simple theme to build a blazing simple and fast store with Gatsby and Shopify.`,
-    author: `@alexislepresle`,
+    author: `@4nkit-5hukla`,
+    title: `Gatsby Innovage Shopify Package`,
+    description: `A Gatsby Shopify theme package built by Team-Innovexia for Team-Innovexia.`,
+    short_title: `GISP`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -24,12 +25,6 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
-      },
-    },
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: "UA-146773242-1",
       },
     },
     {
@@ -58,4 +53,4 @@ module.exports = {
       },
     },
   ],
-}
+};

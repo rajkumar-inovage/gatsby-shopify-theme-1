@@ -1,7 +1,7 @@
-const path = require(`path`)
+const path = require(`path`);
 
 exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions
+  const { createPage } = actions;
   return graphql(`
     {
       allShopifyProduct {
@@ -12,22 +12,22 @@ exports.createPages = ({ graphql, actions }) => {
         }
       }
     }
-  `).then(result => {
+  `).then((result) => {
     result.data.allShopifyProduct.edges.forEach(({ node }) => {
-        const id = node.handle
+      const id = node.handle;
       createPage({
         path: `/product/${id}/`,
         component: path.resolve(`./src/templates/product-page.js`),
         context: {
-            id,
+          id,
         },
-      })
-    })
-  })
-}
+      });
+    });
+  });
+};
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
-    devtool: 'eval-source-map',
-  })
-}
+    devtool: "eval-source-map",
+  });
+};

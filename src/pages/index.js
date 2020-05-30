@@ -1,7 +1,7 @@
-import React from 'react'
-import SEO from "../components/seo"
-import { graphql } from "gatsby"
-import ProductList from '../components/productList';
+import React from "react";
+import SEO from "../components/seo";
+import { graphql } from "gatsby";
+import ProductList from "../components/productList";
 
 const IndexPage = ({ data }) => {
   return (
@@ -9,10 +9,10 @@ const IndexPage = ({ data }) => {
       <SEO title="Home" />
       <ProductList data={data} />
     </>
-  )
-}
+  );
+};
 
-export default IndexPage
+export default IndexPage;
 
 export const query = graphql`
   query {
@@ -51,4 +51,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;
