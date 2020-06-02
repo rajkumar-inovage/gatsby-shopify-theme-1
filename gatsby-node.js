@@ -11,7 +11,25 @@ exports.createPages = ({ graphql, actions }) => {
           }
         }
       }
+       allShopifyPage {
+          nodes {
+            handle
+          }
+        }
+        allShopifyArticle {
+          edges {
+            node {
+              id
+              url
+              blog {
+                url
+              }
+            }
+          }
+          totalCount
+        }
     }
+    
   `).then((result) => {
     result.data.allShopifyProduct.edges.forEach(({ node }) => {
       const id = node.handle;
@@ -23,7 +41,44 @@ exports.createPages = ({ graphql, actions }) => {
         },
       });
     });
+    result.data.allShopifyPage.nodes.forEach(({ handle }) => {
+      if (handle !== "home") {
+        if (handle === "contact-us") {
+          createPage({
+            path: `/page/${handle}/`,
+            component: path.resolve(`./src/templates/InnerPages/contact-us.js`),
+            context: {
+              handle: handle,
+            },
+          })
+        } else {
+          createPage({
+            path: `/page/${handle}/`,
+            component: path.resolve(`./src/templates/InnerPages/index.js`),
+            context: {
+              // Data passed to context is available
+              // in page queries as GraphQL variables.
+              handle: handle,
+            },
+          })
+        }
+      }
+    })
+    result.data.allShopifyArticle.edges.forEach(({
+      node
+    }) => {
+      createPage({
+        path: `/blogs/${node.blog.url.split("/").pop()}/${node.url.split("/").pop()}/`,
+        component: path.resolve(`./src/templates/ArticlePage/index.js`),
+        context: {
+          // Data passed to context is available
+          // in article queries as GraphQL variables.
+          id: node.id,
+        },
+      })
+    })
   });
+  
 };
 
 exports.onCreateWebpackConfig = ({ actions }) => {

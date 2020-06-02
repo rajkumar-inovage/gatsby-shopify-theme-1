@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import StoreContext from "../context/store";
 import ProductBox from "./productBox";
+import {Container, Row, Col } from 'reactstrap';
+
 
 const ProductList = ({ data }) => {
   const { edges: products } = data.allShopifyProduct;
@@ -59,19 +61,12 @@ const ProductList = ({ data }) => {
   });
   productTypes.sort();
   return (
-    <section className="hero is-dark">
+    <Container>
       <div className="hero-body">
         <div className="container">
-          <div
-            className="columns is-mobile"
-            style={{ marginBottom: "60px", margin: "0", padding: "10px" }}
-          >
+          <div className="columns is-mobile" style={{ marginBottom: "60px", margin: "0", padding: "10px" }}>
             <div className="column is-2-desktop is-6-mobile">
-              <label
-                htmlFor="sortBy"
-                className="has-text-weight-semibold is-uppercase"
-                style={{ margin: "-20px" }}
-              >
+              <label htmlFor="sortBy" className="has-text-weight-semibold is-uppercase" style={{ margin: "-20px" }}>
                 SORT BY :
                 <div className="field">
                   <div className="control">
@@ -88,28 +83,7 @@ const ProductList = ({ data }) => {
                 </div>
               </label>
             </div>
-            <div className="column is-2-desktop is-6-mobile">
-              <label
-                htmlFor="filter"
-                className="has-text-weight-semibold is-uppercase"
-                style={{ margin: "-20px" }}
-              >
-                FILTER BY :
-                <div className="field">
-                  <div className="control">
-                    <div className="select">
-                      <select
-                        defaultvalues={type}
-                        onChange={(e) => setType(e.target.value)}
-                        id="filter"
-                      >
-                        {types}
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </label>
-            </div>
+           
           </div>
           <div className="columns is-multiline" style={{ margin: "0" }}>
             {context.filteredType === "all"
@@ -171,8 +145,9 @@ const ProductList = ({ data }) => {
           </div>
         </div>
       </div>
-    </section>
+    </Container>
   );
 };
 
 export default ProductList;
+

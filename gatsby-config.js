@@ -1,11 +1,12 @@
+const path = require('path')
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
 module.exports = {
   siteMetadata: {
-    author: `@4nkit-5hukla`,
-    title: `Gatsby Innovage Shopify Package`,
+    author: `Inovexia`,
+    title: `Demosoap`,
     description: `A Gatsby Shopify theme package built by Team-Innovexia for Team-Innovexia.`,
     short_title: `GISP`,
   },
@@ -20,23 +21,56 @@ module.exports = {
         accessToken: process.env.SHOPIFY_ACCESS_TOKEN,
       },
     },
+     {
+      resolve: 'gatsby-plugin-root-import',
+      options: {
+        '~': path.join(__dirname, 'src/'),
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/images`,
+        path: `${__dirname}/src/images`
       },
     },
+    // {
+    //   resolve: "gatsby-source-shopify2",
+    //   options: {
+    //     shopName: process.env.SHOP_NAME,
+    //     accessToken: process.env.SHOPIFY_ACCESS_TOKEN,
+    //     verbose: true,
+    //     paginationSize: 250,
+    //     includeCollections: ["shop", "content"],
+    //   },
+    // },
     {
-      resolve: "gatsby-source-shopify2",
+      resolve: "gatsby-source-shopify",
       options: {
         shopName: process.env.SHOP_NAME,
         accessToken: process.env.SHOPIFY_ACCESS_TOKEN,
-        verbose: true,
-        paginationSize: 250,
-        includeCollections: ["shop", "content"],
+        verbose:false,
+        // paginationSize: 250,
+        // includeCollections: ["shop", "content"],
       },
     },
+    // {
+    //   resolve: "gatsby-source-graphql",
+    //   options: {
+    //   // This type will contain remote schema Query type
+    //     typeName: "Shopify",
+    //     // This is field under which it's accessible
+    //     fieldName: "shopify",
+    //     // Url to query from
+    //     url: `https://${process.env.SHOP_NAME}.myshopify.com/api/graphql.json`,
+    //     headers: {
+    //     // Learn about environment variables: https://gatsby.dev/env-vars
+    //     'X-Shopify-Storefront-Access-Token': `${process.env.SHOPIFY_ACCESS_TOKEN}`,
+    //     'Content-Type': 'application/graphql'
+    //   },
+    //       refetchInterval: 60
+    //   },
+    // },
 
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,

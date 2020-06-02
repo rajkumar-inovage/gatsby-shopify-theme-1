@@ -1,0 +1,18 @@
+@media only screen and (max-width: 600px) {
+
+	.contact-data .left-box , .contact-data .right-box{
+	width: 100%;
+	margin:15px 0px;
+}
+.navbar-brand.p-0.m-0 img {
+	width: 75px;
+}
+.collapse.show ul {
+	background-color: #fff;
+}
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+	.collapse.show ul {
+	background-color: #fff;
+}
+}

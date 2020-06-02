@@ -29,6 +29,8 @@
     "gatsby-query-params": "^1.2.1",
     "gatsby-remark-images-zoom": "^1.1.0",
     "gatsby-source-filesystem": "^2.3.8",
+    "gatsby-source-graphql": "^2.5.2",
+    "gatsby-source-shopify": "^3.2.8",
     "gatsby-source-shopify2": "^2.0.7",
     "gatsby-transformer-sharp": "^2.5.3",
     "graphql": "^14.6.0",
@@ -40,12 +42,15 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^5.2.1",
+    "react-html-parser": "^2.0.2",
     "react-notifications-component": "^2.4.0",
+    "reactstrap": "^8.4.1",
     "rebass": "^4.0.7",
     "shopify-buy": "^2.10.0",
     "styled-components": "^4.4.1"
   },
   "devDependencies": {
+    "gatsby-plugin-root-import": "^2.0.5",
     "prettier": "^1.19.1"
   },
   "keywords": [

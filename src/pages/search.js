@@ -23,7 +23,7 @@ export class SearchPage extends Component {
     return (
       <>
         <SEO title="Home" />
-        <section className="hero is-dark">
+        <section className="hero">
           <div className="hero-body">
             <div className="container">
               <div className="field">
@@ -46,10 +46,10 @@ export class SearchPage extends Component {
             </div>
           </div>
         </section>
-        <section className="hero is-dark">
+        <section className="hero">
           <div className="hero-body">
             <div className="hero-body">
-              <h1 className="is-size-5 has-text-medium">
+              <h1 className="is-size-5 has-text-medium josefin-sans-b">
                 RESULTS FOR "{this.state.document.toUpperCase()}" :
               </h1>
             </div>
@@ -77,7 +77,7 @@ export class SearchPage extends Component {
                       <p>Nothings with : {this.state.document} </p>
                     ) : (
                       <div
-                        className="column is-3"
+                        className="column"
                         style={{ marginBottom: "40px" }}
                         key={i}
                       >
