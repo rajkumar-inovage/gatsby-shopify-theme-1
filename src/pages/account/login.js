@@ -56,24 +56,24 @@ const LoginForm = () => {
             <div className="container">
               <div className="columns is-centered">
                 <div className="column is-4 is-centered">
-                  <h2 className=" title has-text-centered">
+                  <h2 className=" title has-text-centered josefin-sans-b">
                     RESET YOUR PASSWORD
                   </h2>
-                  <p>We will send you an email to reset your password.</p>
+                  <p className="josefin-sans">We will send you an email to reset your password.</p>
                   <Mutation mutation={CUSTOMER_PASSWORD_RESET}>
                     {(customerRecover) => {
                       return (
                         <>
                           <div className="field">
                             <label
-                              className="label has-text-white"
+                              className="label has-text-white josefin-sans-b"
                               htmlFor="loginEmail"
                             >
                               Email
                             </label>
                             <div className="control">
                               <input
-                                className="input"
+                                className="input josefin-sans"
                                 type="email"
                                 id="loginEmail"
                                 onChange={(e) => setEmailReset(e.target.value)}
@@ -83,7 +83,7 @@ const LoginForm = () => {
                           <div className="field">
                             <div className="control has-text-centered">
                               <button
-                                className="button"
+                                className="button josefin-sans-b"
                                 onClick={() => {
                                   customerRecover({
                                     variables: {
@@ -102,7 +102,7 @@ const LoginForm = () => {
                             </div>
                             <div className="field">
                               <div
-                                className="control has-text-centered"
+                                className="control has-text-centered josefin-sans-b"
                                 onClick={(e) =>
                                   setPasswordForgot(!passwordForgot)
                                 }

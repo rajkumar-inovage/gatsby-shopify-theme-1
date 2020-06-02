@@ -12,7 +12,7 @@ const Cart = () => {
       <div className="table-container">
         <table className="table is-fullwidth is-hoverable">
           <thead>
-            <tr align="center">
+            <tr align="center" className="josefin-sans-b">
               <th>Item Description</th>
               <th>Quantity</th>
               <th>Price</th>
@@ -33,7 +33,7 @@ const Cart = () => {
       <div className="has-text-centered">
         <p className="is-size-3">Your cart is currently empty.</p>
         <a
-          className="button is-medium is-dark"
+          className="button is-medium is-dark josefin-sans-b text-decoration-none"
           style={{ marginTop: "50px" }}
           href="/"
         >
@@ -54,9 +54,9 @@ const Cart = () => {
       })
     ) : (
       <div className="has-text-centered">
-        <p className="is-size-3">Your cart is currently empty.</p>
+        <p className="is-size-3 josefin-sans-sb">Your cart is currently empty.</p>
         <a
-          className="button is-medium is-dark"
+          className="button is-medium is-dark josefin-sans-b text-decoration-none"
           style={{ marginTop: "50px" }}
           href="/"
         >
@@ -73,41 +73,41 @@ const Cart = () => {
           <div className="container">
             <div className="columns is-vcentered">
               <div className="column">
-                <div className="box productBox">
-                  <h2 className="title has-text-weight-semibold">Card</h2>
-                  <div className="Line_item">{Line_item}</div>
-                  <div className="Line_itemMobile">{Line_item_Mobile}</div>
+                <div className="box productBox pb-3 pb-lg-5">
+                  <h2 className="title has-text-weight-semibold josefin-sans-b">CarT</h2>
+                  <div className="Line_item josefin-sans">{Line_item}</div>
+                  <div className="Line_itemMobile josefin-sans">{Line_item_Mobile}</div>
                 </div>
               </div>
               {checkout.lineItems.length !== 0 ? (
-                <div className="column is-3">
+                <div className="column is-3 mt-3 mt-lg-5">
                   <div className="box productBox">
-                    <h2 className="subtitle has-text-weight-semibold is-size-4">
+                    <h2 className="subtitle has-text-weight-semibold is-size-4 josefin-sans-b">
                       Order Summary
                     </h2>
                     <hr />
-                    <p className="subtitle has-text-weight-semibold ">
+                    <p className="subtitle has-text-weight-semibold josefin-sans-b">
                       Subtotal :
                     </p>
-                    <p className="has-text-right has-text-weight-semibold is-size-5">
+                    <p className="has-text-right has-text-weight-semibold is-size-5 josefin-sans-b">
                       $ {checkout.subtotalPrice}
                     </p>
-                    <p className="subtitle has-text-weight-semibold ">
+                    <p className="subtitle has-text-weight-semibold josefin-sans-b">
                       Taxes :
                     </p>
-                    <p className="has-text-right has-text-weight-semibold is-size-5">
+                    <p className="has-text-right has-text-weight-semibold is-size-5 josefin-sans-b">
                       {" "}
                       $ {checkout.totalTax}
                     </p>
-                    <p className="subtitle has-text-weight-semibold ">
+                    <p className="subtitle has-text-weight-semibold josefin-sans-b">
                       Total :
                     </p>
-                    <p className="has-text-right has-text-weight-semibold is-size-5">
+                    <p className="has-text-right has-text-weight-semibold is-size-5 josefin-sans-b">
                       $ {checkout.totalPrice}
                     </p>
                     <hr />
                     <a
-                      className="button is-medium is-fullwidth is-dark"
+                      className="button is-medium is-fullwidth is-dark josefin-sans-b"
                       href={checkout.webUrl}
                     >
                       Checkout

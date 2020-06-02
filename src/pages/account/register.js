@@ -25,26 +25,26 @@ const RegisterForm = () => {
   const [password, setPassword] = useState(null);
 
   return (
-    <section className="hero is-dark is-fullheight-with-navbar">
+    <section className="hero is-dark is-fullheight-with-navbar josefin-sans">
       <div className="hero-body">
         <div className="container">
           <div className="columns is-centered">
             <div className="column is-4 is-centered">
-              <h2 className=" title has-text-centered">Create</h2>
+              <h2 className="josefin-sans-b title has-text-centered">Create</h2>
               <Mutation mutation={CUSTOMER_REGISTER}>
                 {(customerLogin) => {
                   return (
                     <>
                       <div className="field">
                         <label
-                          className="label has-text-white"
+                          className="label has-text-white josefin-sans-b"
                           htmlFor="loginEmail"
                         >
                           Email
                         </label>
                         <div className="control">
                           <input
-                            className="input"
+                            className="input josefin-sans"
                             type="email"
                             id="loginEmail"
                             onChange={(e) => setEmail(e.target.value)}
@@ -53,14 +53,14 @@ const RegisterForm = () => {
                       </div>
                       <div className="field">
                         <label
-                          className="label has-text-white"
+                          className="label has-text-white josefin-sans-b"
                           htmlFor="loginPassword"
                         >
                           Password
                         </label>
                         <div className="control">
                           <input
-                            className="input"
+                            className="input josefin-sans"
                             type="password"
                             id="loginPassword"
                             onChange={(e) => setPassword(e.target.value)}
@@ -70,7 +70,7 @@ const RegisterForm = () => {
                       <div className="field">
                         <div className="control has-text-centered">
                           <button
-                            className="button"
+                            className="button josefin-sans-b"
                             onClick={() => {
                               customerLogin({
                                 variables: {
