@@ -44,7 +44,7 @@ const Logout = () => {
             }}
           >
             <p
-              className="has-text-centered has-text-underlined has-text-black"
+              className="has-text-centered has-text-underlined has-text-black josefin-sans-b"
               style={{ textDecoration: "underline" }}
             >
               Log out

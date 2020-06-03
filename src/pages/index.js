@@ -6,7 +6,7 @@ import {Container, Row, Col } from 'reactstrap';
 import banner from "../assets/img/soap.jpg"
 import shop from "../assets/img/shop.jpg"
 import RecentProducts from "../components/RecentProducts";
-import RecentBlogs from "../components/Blogs";
+import RecentBlogs from "../components/RecentBlogs";
 
 
 const IndexPage = ({ data }) => {
@@ -102,7 +102,7 @@ const IndexPage = ({ data }) => {
                     <Link
                       className="btn bdr-btn text-uppercase josefin-sans-b"
                       style={{ fontSize: '0.8rem', color: '#000' }}
-                      to="/contact-us/"
+                      to="/page/contact-us/"
                     >
                       Contact Us
                     </Link>
@@ -184,3 +184,4 @@ export const query = graphql`
     }
   }
 `;
+

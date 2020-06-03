@@ -76,13 +76,9 @@ export class SearchPage extends Component {
                     return !p ? (
                       <p>Nothings with : {this.state.document} </p>
                     ) : (
-                      <div
-                        className="column"
-                        style={{ marginBottom: "40px" }}
-                        key={i}
-                      >
+                      
                         <ProductBox product={p} />
-                      </div>
+                      
                     );
                   })}
               </div>
