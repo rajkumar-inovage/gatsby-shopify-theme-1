@@ -1,7 +1,8 @@
 import { Link } from "gatsby"
 import React from "react"
-import {Container, Row, Col} from 'reactstrap';
-import payment from "~/assets/img/payment.png";
+import {Container, Row, Col} from 'reactstrap'
+import payment from "~/assets/img/payment.png"
+import ScrollUpButton from "react-scroll-up-button"
 
 const Footer = (data) => {
   return (
@@ -138,6 +139,7 @@ const Footer = (data) => {
             </Row>
           </Container>
         </div>
+        <ScrollUpButton />
       </footer>
     </>
   )

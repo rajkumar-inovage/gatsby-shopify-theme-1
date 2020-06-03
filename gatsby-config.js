@@ -28,22 +28,19 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-plugin-tidio-chat',
+      options: {
+        tidioKey: process.env.TIDIOKEY,
+        enableDuringDevelop: true,
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
         path: `${__dirname}/src/images`
       },
     },
-    // {
-    //   resolve: "gatsby-source-shopify2",
-    //   options: {
-    //     shopName: process.env.SHOP_NAME,
-    //     accessToken: process.env.SHOPIFY_ACCESS_TOKEN,
-    //     verbose: true,
-    //     paginationSize: 250,
-    //     includeCollections: ["shop", "content"],
-    //   },
-    // },
     {
       resolve: "gatsby-source-shopify",
       options: {
@@ -54,24 +51,18 @@ module.exports = {
         // includeCollections: ["shop", "content"],
       },
     },
-    // {
-    //   resolve: "gatsby-source-graphql",
-    //   options: {
-    //   // This type will contain remote schema Query type
-    //     typeName: "Shopify",
-    //     // This is field under which it's accessible
-    //     fieldName: "shopify",
-    //     // Url to query from
-    //     url: `https://${process.env.SHOP_NAME}.myshopify.com/api/graphql.json`,
-    //     headers: {
-    //     // Learn about environment variables: https://gatsby.dev/env-vars
-    //     'X-Shopify-Storefront-Access-Token': `${process.env.SHOPIFY_ACCESS_TOKEN}`,
-    //     'Content-Type': 'application/graphql'
-    //   },
-    //       refetchInterval: 60
-    //   },
-    // },
-
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+      	typeName: 'Shopify',
+        fieldName: 'shopify',
+        url: `https://${process.env.SHOP_NAME}.myshopify.com/api/graphql`,
+    	headers: {
+          'X-Shopify-Storefront-Access-Token': process.env.SHOPIFY_ACCESS_TOKEN,
+        },
+    	//refetchInterval: 60
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

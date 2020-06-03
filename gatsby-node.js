@@ -1,4 +1,33 @@
+const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const path = require(`path`);
+
+exports.createResolvers = ({
+  actions,
+  cache,
+  createNodeId,
+  createResolvers,
+  store,
+  reporter,
+}) => {
+  const { createNode } = actions
+  createResolvers({
+    Shopify_Image: {
+      imageFile: {
+        type: `File`,
+        resolve(source, args, context, info) {
+          return createRemoteFileNode({
+            url: source.originalSrc,
+            store,
+            cache,
+            createNode,
+            createNodeId,
+            reporter,
+          })
+        },
+      },
+    },
+  })
+}
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -11,26 +40,41 @@ exports.createPages = ({ graphql, actions }) => {
           }
         }
       }
-       allShopifyPage {
-          nodes {
-            handle
-          }
+      allShopifyCollection {
+        nodes {
+          handle
         }
-        allShopifyArticle {
-          edges {
-            node {
-              id
+      }
+      allShopifyPage {
+        nodes {
+          handle
+        }
+      }
+      allShopifyArticle {
+        edges {
+          node {
+            id
+            url
+            blog {
               url
-              blog {
-                url
-              }
             }
           }
-          totalCount
         }
-    }
-    
+        totalCount
+      }
+    }    
   `).then((result) => {
+    result.data.allShopifyCollection.nodes.forEach(({ handle }) => {
+      createPage({
+        path: `/collections/${handle}/`,
+        component: path.resolve(`./src/templates/collectionsPage/index.js`),
+        context: {
+          // Data passed to context is available
+          // in page queries as GraphQL variables.
+          handle: handle,
+        },
+      })
+    })
     result.data.allShopifyProduct.edges.forEach(({ node }) => {
       const id = node.handle;
       createPage({
