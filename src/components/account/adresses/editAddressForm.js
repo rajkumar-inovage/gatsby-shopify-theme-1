@@ -86,10 +86,10 @@ const EditAddressForm = ({ address }) => {
         <div className="columns is-centered">
           <div className="column is-6 has-text-left">
             <Mutation mutation={CUSTOMER_EDIT_ADDRESS}>
-              {(customerAddressUpdate) => {
+              {customerAddressUpdate => {
                 return (
                   <Mutation mutation={CUSTOMER_EDIT_DEFAULT_ADDRESS}>
-                    {(customerDefaultAddressUpdate) => {
+                    {customerDefaultAddressUpdate => {
                       return (
                         <form>
                           <h1 className="subtitle is-uppercase has-text-weight-semibold ">
@@ -109,7 +109,7 @@ const EditAddressForm = ({ address }) => {
                                     className="input"
                                     value={firstNameInput}
                                     type="text"
-                                    onChange={(e) =>
+                                    onChange={e =>
                                       setFirstNameInput(e.target.value)
                                     }
                                   />
@@ -129,7 +129,7 @@ const EditAddressForm = ({ address }) => {
                                     className="input"
                                     value={lastNameInput}
                                     type="text"
-                                    onChange={(e) =>
+                                    onChange={e =>
                                       setLastNameInput(e.target.value)
                                     }
                                   />
@@ -146,9 +146,7 @@ const EditAddressForm = ({ address }) => {
                                 className="input"
                                 value={companyInput}
                                 type="text"
-                                onChange={(e) =>
-                                  setCompanyInput(e.target.value)
-                                }
+                                onChange={e => setCompanyInput(e.target.value)}
                               />
                             </div>
                           </div>
@@ -161,9 +159,7 @@ const EditAddressForm = ({ address }) => {
                                 className="input"
                                 value={addressInput}
                                 type="text"
-                                onChange={(e) =>
-                                  setAddressInput(e.target.value)
-                                }
+                                onChange={e => setAddressInput(e.target.value)}
                               />
                             </div>
                           </div>
@@ -176,7 +172,7 @@ const EditAddressForm = ({ address }) => {
                                 className="input"
                                 value={apartmentInput}
                                 type="text"
-                                onChange={(e) =>
+                                onChange={e =>
                                   setApartmentInput(e.target.value)
                                 }
                               />
@@ -193,9 +189,7 @@ const EditAddressForm = ({ address }) => {
                                     className="input"
                                     value={cityInput}
                                     type="text"
-                                    onChange={(e) =>
-                                      setCityInput(e.target.value)
-                                    }
+                                    onChange={e => setCityInput(e.target.value)}
                                   />
                                 </div>
                               </div>
@@ -209,15 +203,15 @@ const EditAddressForm = ({ address }) => {
                                   <div className="select">
                                     <select
                                       value={countryInput}
-                                      onChange={(e) =>
+                                      onChange={e =>
                                         setCountryInput(e.target.value)
                                       }
                                       style={{
                                         minWidth: "140px",
-                                        maxWidth: "310px",
+                                        maxWidth: "310px"
                                       }}
                                     >
-                                      {countriesAll.map((country) => (
+                                      {countriesAll.map(country => (
                                         <option
                                           key={country.name}
                                           value={country.name}
@@ -240,7 +234,7 @@ const EditAddressForm = ({ address }) => {
                                 className="input"
                                 value={zipInput}
                                 type="text"
-                                onChange={(e) => setZipInput(e.target.value)}
+                                onChange={e => setZipInput(e.target.value)}
                               />
                             </div>
                           </div>
@@ -253,7 +247,7 @@ const EditAddressForm = ({ address }) => {
                                 className="input"
                                 value={phoneInput}
                                 type="text"
-                                onChange={(e) => setPhoneInput(e.target.value)}
+                                onChange={e => setPhoneInput(e.target.value)}
                               />
                             </div>
                           </div>
@@ -290,18 +284,18 @@ const EditAddressForm = ({ address }) => {
                                     firstName: firstNameInput,
                                     lastName: lastNameInput,
                                     phone: phoneInput,
-                                    zip: zipInput,
-                                  },
-                                },
+                                    zip: zipInput
+                                  }
+                                }
                               });
                               checkDefaultAddress &&
                                 customerDefaultAddressUpdate({
                                   variables: {
                                     customerAccessToken:
                                       customerAccessToken.accessToken,
-                                    addressId: address.id,
-                                  },
-                                }).then((result) => alert(result));
+                                    addressId: address.id
+                                  }
+                                }).then(result => alert(result));
                             }}
                           >
                             Update address

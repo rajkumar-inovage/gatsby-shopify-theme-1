@@ -8,12 +8,12 @@ export class SearchPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      document: "",
+      document: ""
     };
   }
   componentDidMount() {
     this.setState({
-      document: document.location.search.substring(7).split("=")[0],
+      document: document.location.search.substring(7).split("=")[0]
     });
   }
 
@@ -33,9 +33,7 @@ export class SearchPage extends Component {
                     name="value"
                     type="text"
                     value={this.state.document}
-                    onChange={(e) =>
-                      this.setState({ document: e.target.value })
-                    }
+                    onChange={e => this.setState({ document: e.target.value })}
                     placeholder="Search"
                   />
                   <span className="icon is-right">
@@ -58,7 +56,7 @@ export class SearchPage extends Component {
               <div className="columns is-multiline ">
                 {products
                   .filter(
-                    (p) =>
+                    p =>
                       p.node.title
                         .toUpperCase()
                         .includes(this.state.document.toUpperCase()) ||
@@ -76,9 +74,7 @@ export class SearchPage extends Component {
                     return !p ? (
                       <p>Nothings with : {this.state.document} </p>
                     ) : (
-                      
-                        <ProductBox product={p} />
-                      
+                      <ProductBox product={p} />
                     );
                   })}
               </div>
@@ -94,8 +90,8 @@ export default SearchPage;
 
 SearchPage.propTypes = {
   data: PropTypes.shape({
-    allShopifyProduct: PropTypes.object,
-  }),
+    allShopifyProduct: PropTypes.object
+  })
 };
 export const query = graphql`
   query {

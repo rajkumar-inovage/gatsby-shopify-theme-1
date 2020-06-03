@@ -1,4 +1,4 @@
-const { createRemoteFileNode } = require("gatsby-source-filesystem")
+const { createRemoteFileNode } = require("gatsby-source-filesystem");
 const path = require(`path`);
 
 exports.createResolvers = ({
@@ -7,9 +7,9 @@ exports.createResolvers = ({
   createNodeId,
   createResolvers,
   store,
-  reporter,
+  reporter
 }) => {
-  const { createNode } = actions
+  const { createNode } = actions;
   createResolvers({
     Shopify_Image: {
       imageFile: {
@@ -21,12 +21,12 @@ exports.createResolvers = ({
             cache,
             createNode,
             createNodeId,
-            reporter,
-          })
-        },
-      },
-    },
-  })
+            reporter
+          });
+        }
+      }
+    }
+  });
   createResolvers({
     WPGraphQL_MediaItem: {
       imageFile: {
@@ -38,13 +38,13 @@ exports.createResolvers = ({
             cache,
             createNode,
             createNodeId,
-            reporter,
-          })
-        },
-      },
-    },
-  })
-}
+            reporter
+          });
+        }
+      }
+    }
+  });
+};
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -79,8 +79,8 @@ exports.createPages = ({ graphql, actions }) => {
         }
         totalCount
       }
-    }    
-  `).then((result) => {
+    }
+  `).then(result => {
     result.data.allShopifyCollection.nodes.forEach(({ handle }) => {
       createPage({
         path: `/collections/${handle}/`,
@@ -88,18 +88,18 @@ exports.createPages = ({ graphql, actions }) => {
         context: {
           // Data passed to context is available
           // in page queries as GraphQL variables.
-          handle: handle,
-        },
-      })
-    })
+          handle: handle
+        }
+      });
+    });
     result.data.allShopifyProduct.edges.forEach(({ node }) => {
       const id = node.handle;
       createPage({
         path: `/product/${id}/`,
         component: path.resolve(`./src/templates/product-page.js`),
         context: {
-          id,
-        },
+          id
+        }
       });
     });
     result.data.allShopifyPage.nodes.forEach(({ handle }) => {
@@ -109,9 +109,9 @@ exports.createPages = ({ graphql, actions }) => {
             path: `/page/${handle}/`,
             component: path.resolve(`./src/templates/InnerPages/contact-us.js`),
             context: {
-              handle: handle,
-            },
-          })
+              handle: handle
+            }
+          });
         } else {
           createPage({
             path: `/page/${handle}/`,
@@ -119,31 +119,30 @@ exports.createPages = ({ graphql, actions }) => {
             context: {
               // Data passed to context is available
               // in page queries as GraphQL variables.
-              handle: handle,
-            },
-          })
+              handle: handle
+            }
+          });
         }
       }
-    })
-    result.data.allShopifyArticle.edges.forEach(({
-      node
-    }) => {
+    });
+    result.data.allShopifyArticle.edges.forEach(({ node }) => {
       createPage({
-        path: `/blogs/${node.blog.url.split("/").pop()}/${node.url.split("/").pop()}/`,
+        path: `/blogs/${node.blog.url.split("/").pop()}/${node.url
+          .split("/")
+          .pop()}/`,
         component: path.resolve(`./src/templates/ArticlePage/index.js`),
         context: {
           // Data passed to context is available
           // in article queries as GraphQL variables.
-          id: node.id,
-        },
-      })
-    })
+          id: node.id
+        }
+      });
+    });
   });
-  
 };
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
-    devtool: "eval-source-map",
+    devtool: "eval-source-map"
   });
 };

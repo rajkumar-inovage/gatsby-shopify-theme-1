@@ -21,7 +21,7 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody>
-            {checkout.lineItems.map((line_item) => {
+            {checkout.lineItems.map(line_item => {
               return (
                 <LineItem key={line_item.id.toString()} line_item={line_item} />
               );
@@ -44,7 +44,7 @@ const Cart = () => {
 
   const Line_item_Mobile =
     checkout.lineItems.length !== 0 ? (
-      checkout.lineItems.map((line_item_mobile) => {
+      checkout.lineItems.map(line_item_mobile => {
         return (
           <LineItem_Mobile
             key={line_item_mobile.id.toString()}
@@ -54,7 +54,9 @@ const Cart = () => {
       })
     ) : (
       <div className="has-text-centered">
-        <p className="is-size-3 josefin-sans-sb">Your cart is currently empty.</p>
+        <p className="is-size-3 josefin-sans-sb">
+          Your cart is currently empty.
+        </p>
         <a
           className="button is-medium is-dark josefin-sans-b text-decoration-none"
           style={{ marginTop: "50px" }}
@@ -74,9 +76,13 @@ const Cart = () => {
             <div className="columns is-vcentered">
               <div className="column">
                 <div className="box productBox pb-3 pb-lg-5">
-                  <h2 className="title has-text-weight-semibold josefin-sans-b">CarT</h2>
+                  <h2 className="title has-text-weight-semibold josefin-sans-b">
+                    CarT
+                  </h2>
                   <div className="Line_item josefin-sans">{Line_item}</div>
-                  <div className="Line_itemMobile josefin-sans">{Line_item_Mobile}</div>
+                  <div className="Line_itemMobile josefin-sans">
+                    {Line_item_Mobile}
+                  </div>
                 </div>
               </div>
               {checkout.lineItems.length !== 0 ? (

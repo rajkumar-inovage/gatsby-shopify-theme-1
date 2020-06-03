@@ -32,7 +32,7 @@ const RegisterForm = () => {
             <div className="column is-4 is-centered">
               <h2 className="josefin-sans-b title has-text-centered">Create</h2>
               <Mutation mutation={CUSTOMER_REGISTER}>
-                {(customerLogin) => {
+                {customerLogin => {
                   return (
                     <>
                       <div className="field">
@@ -47,7 +47,7 @@ const RegisterForm = () => {
                             className="input josefin-sans"
                             type="email"
                             id="loginEmail"
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={e => setEmail(e.target.value)}
                           />
                         </div>
                       </div>
@@ -63,7 +63,7 @@ const RegisterForm = () => {
                             className="input josefin-sans"
                             type="password"
                             id="loginPassword"
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={e => setPassword(e.target.value)}
                           />
                         </div>
                       </div>
@@ -76,10 +76,10 @@ const RegisterForm = () => {
                                 variables: {
                                   input: {
                                     email: email,
-                                    password: password,
-                                  },
-                                },
-                              }).then((result) => {
+                                    password: password
+                                  }
+                                }
+                              }).then(result => {
                                 navigate(`/account/login`);
                               });
                             }}

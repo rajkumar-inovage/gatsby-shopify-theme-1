@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 
 const ListIcon = () => {
   return (
-    <svg id="global__symbols-list" style={{ width: '20px', height: '20px' }}>
+    <svg id="global__symbols-list" style={{ width: "20px", height: "20px" }}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
         <g>
           <path d="M501.333,96H10.667C4.779,96,0,100.779,0,106.667s4.779,10.667,10.667,10.667h490.667c5.888,0,10.667-4.779,10.667-10.667    S507.221,96,501.333,96z"></path>
@@ -11,6 +11,6 @@ const ListIcon = () => {
         </g>
       </svg>
     </svg>
-  )
-}
-export default ListIcon
+  );
+};
+export default ListIcon;

@@ -24,7 +24,7 @@ const OrdersList = ({ orders }) => {
               </tr>
             </thead>
             <tbody>
-              {orders.edges.map((order) => (
+              {orders.edges.map(order => (
                 <tr key={order.node.id}>
                   <td>
                     <button

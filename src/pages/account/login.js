@@ -44,7 +44,7 @@ const LoginForm = () => {
   const [messsageInfo, setMessageInfo] = useState("");
 
   const [password, setPassword] = useState(null);
-  const handleCustomerAccessToken = (value) => {
+  const handleCustomerAccessToken = value => {
     setValue(value);
   };
 
@@ -59,9 +59,11 @@ const LoginForm = () => {
                   <h2 className=" title has-text-centered josefin-sans-b">
                     RESET YOUR PASSWORD
                   </h2>
-                  <p className="josefin-sans">We will send you an email to reset your password.</p>
+                  <p className="josefin-sans">
+                    We will send you an email to reset your password.
+                  </p>
                   <Mutation mutation={CUSTOMER_PASSWORD_RESET}>
-                    {(customerRecover) => {
+                    {customerRecover => {
                       return (
                         <>
                           <div className="field">
@@ -76,7 +78,7 @@ const LoginForm = () => {
                                 className="input josefin-sans"
                                 type="email"
                                 id="loginEmail"
-                                onChange={(e) => setEmailReset(e.target.value)}
+                                onChange={e => setEmailReset(e.target.value)}
                               />
                             </div>
                           </div>
@@ -87,8 +89,8 @@ const LoginForm = () => {
                                 onClick={() => {
                                   customerRecover({
                                     variables: {
-                                      email: emailReset,
-                                    },
+                                      email: emailReset
+                                    }
                                   }).then(() => {
                                     setMessageInfo(
                                       "We've sent you an email with a link to update your password."
@@ -103,7 +105,7 @@ const LoginForm = () => {
                             <div className="field">
                               <div
                                 className="control has-text-centered josefin-sans-b"
-                                onClick={(e) =>
+                                onClick={e =>
                                   setPasswordForgot(!passwordForgot)
                                 }
                               >
@@ -131,7 +133,7 @@ const LoginForm = () => {
                   )}
                   <h2 className=" title has-text-centered">Login</h2>
                   <Mutation mutation={CUSTOMER_LOGIN}>
-                    {(customerLogin) => {
+                    {customerLogin => {
                       return (
                         <>
                           <div className="field">
@@ -146,7 +148,7 @@ const LoginForm = () => {
                                 className="input"
                                 type="email"
                                 id="loginEmail"
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={e => setEmail(e.target.value)}
                               />
                             </div>
                           </div>
@@ -162,16 +164,14 @@ const LoginForm = () => {
                                 className="input"
                                 type="password"
                                 id="loginPassword"
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={e => setPassword(e.target.value)}
                               />
                             </div>
                           </div>
                           <div className="field">
                             <div
                               className="control has-text-centered"
-                              onClick={(e) =>
-                                setPasswordForgot(!passwordForgot)
-                              }
+                              onClick={e => setPasswordForgot(!passwordForgot)}
                             >
                               <p>Forgot your password? </p>
                             </div>
@@ -185,17 +185,17 @@ const LoginForm = () => {
                                     variables: {
                                       input: {
                                         email: email,
-                                        password: password,
-                                      },
-                                    },
+                                        password: password
+                                      }
+                                    }
                                   })
-                                    .then((result) => {
+                                    .then(result => {
                                       handleCustomerAccessToken(
                                         result.data.customerAccessTokenCreate
                                           .customerAccessToken
                                       );
                                     })
-                                    .catch((err) => {
+                                    .catch(err => {
                                       alert(err);
                                     });
                                 }}

@@ -73,7 +73,7 @@ const Index = () => {
       <Query
         query={CUSTOMER_INFO}
         variables={{
-          customerAccessToken: customerAccessToken.accessToken,
+          customerAccessToken: customerAccessToken.accessToken
         }}
       >
         {({ loading, error, data }) => {

@@ -18,7 +18,7 @@ const Order = ({ order }) => {
           </thead>
           <tbody>
             {order.lineItems &&
-              order.lineItems.edges.map((lineItem) => (
+              order.lineItems.edges.map(lineItem => (
                 <tr key={lineItem.node.title}>
                   <td>
                     <p style={{ width: "200px" }}>{lineItem.node.title}</p>

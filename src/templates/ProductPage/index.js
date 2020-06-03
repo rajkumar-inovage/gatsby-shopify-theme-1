@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { graphql, Link } from 'gatsby'
+import React, { useState, useEffect } from "react";
+import { graphql, Link } from "gatsby";
 import {
   TabContent,
   TabPane,
@@ -12,7 +12,7 @@ import {
   Alert,
   UncontrolledPopover,
   PopoverBody
-} from 'reactstrap'
+} from "reactstrap";
 import {
   FacebookShareButton,
   PinterestShareButton,
@@ -20,55 +20,55 @@ import {
   FacebookIcon,
   PinterestIcon,
   TwitterIcon
-} from "react-share"
-import SEO from '~/components/seo'
-import ProductForm from '~/components/ProductForm'
-import { Img } from '~/utils/styles'
-import classnames from 'classnames'
-import ReactHtmlParser from 'react-html-parser'
-import atob from 'atob'
-import RecommendedProducts from '~/components/RecommendedProducts'
+} from "react-share";
+import SEO from "~/components/seo";
+import ProductForm from "~/components/ProductForm";
+import { Img } from "~/utils/styles";
+import classnames from "classnames";
+import ReactHtmlParser from "react-html-parser";
+import atob from "atob";
+import RecommendedProducts from "~/components/RecommendedProducts";
 
 const ProductPage = ({ data }) => {
-  const shopName = 'demo-soap.myshopify.com'
-  const [shopID, setShopID] = useState()
-  const product = data.shopifyProduct
+  const shopName = "demo-soap.myshopify.com";
+  const [shopID, setShopID] = useState();
+  const product = data.shopifyProduct;
   const productID = parseInt(
     atob(product.shopifyId)
-      .split('/')
+      .split("/")
       .pop()
-  )
-  const productHandle = product.handle
-  const productTitle = product.title
-  const productImg = product.images.length?product.images[0].originalSrc:""
-  const [productRating, setProductRating] = useState(0)
-  const [responseColor, setResponseColor] = useState('')
-  const [responseContent, setResponseContent] = useState(false)
-  const [responseVisible, setResponseVisible] = useState(false)
-  const [responseErrorVisible, setResponseErrorVisible] = useState(false)
-  const showReviews = 5
-  const [ratingData, setRatingData] = useState([])
-  const [totalRating, setTotalRating] = useState(0)
-  const [avgRating, setAvgRating] = useState(0)
+  );
+  const productHandle = product.handle;
+  const productTitle = product.title;
+  const productImg = product.images.length ? product.images[0].originalSrc : "";
+  const [productRating, setProductRating] = useState(0);
+  const [responseColor, setResponseColor] = useState("");
+  const [responseContent, setResponseContent] = useState(false);
+  const [responseVisible, setResponseVisible] = useState(false);
+  const [responseErrorVisible, setResponseErrorVisible] = useState(false);
+  const showReviews = 5;
+  const [ratingData, setRatingData] = useState([]);
+  const [totalRating, setTotalRating] = useState(0);
+  const [avgRating, setAvgRating] = useState(0);
   const dismissResponse = () => {
-    setResponseVisible(false)
-    setResponseContent(false)
-  }
+    setResponseVisible(false);
+    setResponseContent(false);
+  };
   const dismissErrorResponse = () => {
-    setResponseErrorVisible(false)
-    setResponseContent(false)
-  }
+    setResponseErrorVisible(false);
+    setResponseContent(false);
+  };
   const getDate = date => {
-    const Months = 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
-      '_'
-    )
-    const msec = Date.parse(date)
-    const d = new Date(msec)
-    const month = Months[d.getMonth()]
-    const day = d.getDate()
-    const year = d.getFullYear()
-    return `${month} ${day}, ${year}`
-  }
+    const Months = "January_February_March_April_May_June_July_August_September_October_November_December".split(
+      "_"
+    );
+    const msec = Date.parse(date);
+    const d = new Date(msec);
+    const month = Months[d.getMonth()];
+    const day = d.getDate();
+    const year = d.getFullYear();
+    return `${month} ${day}, ${year}`;
+  };
   const response = (
     <Alert
       className="rounded-0"
@@ -78,7 +78,7 @@ const ProductPage = ({ data }) => {
     >
       {responseContent}
     </Alert>
-  )
+  );
   const response_Error = (
     <Alert
       className="rounded-0"
@@ -88,155 +88,155 @@ const ProductPage = ({ data }) => {
     >
       {responseContent}
     </Alert>
-  )
-  const [activeTab, setActiveTab] = useState('1')
+  );
+  const [activeTab, setActiveTab] = useState("1");
 
   const toggle = tab => {
-    if (activeTab !== tab) setActiveTab(tab)
-  }
+    if (activeTab !== tab) setActiveTab(tab);
+  };
   const mouseOverRating = (event, selectedButton) => {
-    event.preventDefault()
-    const buttons = document.querySelectorAll('.rating-starts button')
+    event.preventDefault();
+    const buttons = document.querySelectorAll(".rating-starts button");
     for (let i = 0; i <= selectedButton; i++) {
-      buttons[i].firstChild.classList.remove('fa-star-o')
-      buttons[i].firstChild.classList.add('fa-star')
+      buttons[i].firstChild.classList.remove("fa-star-o");
+      buttons[i].firstChild.classList.add("fa-star");
     }
-  }
+  };
   const mouseLeaveRating = (event, selectedButton) => {
-    event.preventDefault()
+    event.preventDefault();
     if (productRating === 0) {
-      const buttons = document.querySelectorAll('.rating-starts button')
+      const buttons = document.querySelectorAll(".rating-starts button");
       for (let i = 0; i <= selectedButton; i++) {
-        buttons[i].firstChild.classList.remove('fa-star')
-        buttons[i].firstChild.classList.add('fa-star-o')
+        buttons[i].firstChild.classList.remove("fa-star");
+        buttons[i].firstChild.classList.add("fa-star-o");
       }
     }
-  }
+  };
   const changeRating = (event, selectedButton) => {
-    event.preventDefault()
-    const spans = document.querySelectorAll('.rating-starts button span')
+    event.preventDefault();
+    const spans = document.querySelectorAll(".rating-starts button span");
     spans.forEach(span => {
-      span.classList.remove('fa-star')
-      span.classList.add('fa-star-o')
-    })
-    const buttons = document.querySelectorAll('.rating-starts button')
+      span.classList.remove("fa-star");
+      span.classList.add("fa-star-o");
+    });
+    const buttons = document.querySelectorAll(".rating-starts button");
     for (let i = 0; i <= selectedButton; i++) {
-      buttons[i].firstChild.classList.remove('fa-star-o')
-      buttons[i].firstChild.classList.add('fa-star')
+      buttons[i].firstChild.classList.remove("fa-star-o");
+      buttons[i].firstChild.classList.add("fa-star");
     }
-    setProductRating(selectedButton + 1)
-  }
+    setProductRating(selectedButton + 1);
+  };
   const submitReview = event => {
-    event.preventDefault()
-      const reviewForm = event.target
-      const elements = event.target.elements
-      const data = {
-        author: elements.author.value,
-        email: elements.email.value,
-        rating: parseInt(elements.rating.value),
-        title: elements.title.value,
-        body: elements.body.value,
-        shopify_id: elements.shopify_id.value,
-        product_id: parseInt(elements.product_id.value),
-        product_handle: elements.product_handle.value,
-        product_title: elements.product_title.value,
-        product_image: elements.product_image.value,
-      }
-      const sendReview = async URL => {
-        return await fetch(URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-requested-with': 'XMLHttpRequest',
-          },
-          body: JSON.stringify(data),
+    event.preventDefault();
+    const reviewForm = event.target;
+    const elements = event.target.elements;
+    const data = {
+      author: elements.author.value,
+      email: elements.email.value,
+      rating: parseInt(elements.rating.value),
+      title: elements.title.value,
+      body: elements.body.value,
+      shopify_id: elements.shopify_id.value,
+      product_id: parseInt(elements.product_id.value),
+      product_handle: elements.product_handle.value,
+      product_title: elements.product_title.value,
+      product_image: elements.product_image.value
+    };
+    const sendReview = async URL => {
+      return await fetch(URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-requested-with": "XMLHttpRequest"
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => {
+          if (response.status === 200) {
+            response.json().then(responseJson => {
+              setResponseVisible(true);
+              setResponseColor("success");
+              setResponseContent(
+                <div>
+                  {responseJson.message}
+                  <strong>&nbsp;successfully</strong>.
+                </div>
+              );
+              reviewForm.reset();
+              setProductRating(0);
+              const spans = document.querySelectorAll(
+                ".rating-starts button span"
+              );
+              spans.forEach(span => {
+                span.classList.remove("fa-star");
+                span.classList.add("fa-star-o");
+              });
+            });
+          } else if (response.status === 422) {
+            response.json().then(responseJson => {
+              setResponseErrorVisible(true);
+              setResponseColor("warning");
+              setResponseContent(
+                <>
+                  <strong> {responseJson.message}</strong>{" "}
+                  <ul className="mb-0 pl-4">
+                    {" "}
+                    {Object.keys(responseJson.errors).map(error => (
+                      <li key={error}>{responseJson.errors[error][0]}</li>
+                    ))}{" "}
+                  </ul>
+                </>
+              );
+            });
+          }
         })
-          .then(response => {
-            if (response.status === 200) {
-              response.json().then(responseJson => {
-                setResponseVisible(true)
-                setResponseColor('success')
-                setResponseContent(
-                  <div>
-                    {responseJson.message}
-                    <strong>&nbsp;successfully</strong>.
-                  </div>
-                )
-                reviewForm.reset()
-                setProductRating(0)
-                const spans = document.querySelectorAll(
-                  '.rating-starts button span'
-                )
-                spans.forEach(span => {
-                  span.classList.remove('fa-star')
-                  span.classList.add('fa-star-o')
-                })
-              })
-            } else if (response.status === 422) {
-              response.json().then(responseJson => {
-                setResponseErrorVisible(true)
-                setResponseColor('warning')
-                setResponseContent(
-                  <>
-                    <strong> {responseJson.message}</strong>{' '}
-                    <ul className="mb-0 pl-4">
-                      {' '}
-                      {Object.keys(responseJson.errors).map(error => (
-                        <li key={error}>{responseJson.errors[error][0]}</li>
-                      ))}{' '}
-                    </ul>
-                  </>
-                )
-              })
-            }
-          })
-          .catch(error => {
-            console.error(error)
-          })
-      }
-      sendReview(`//reviews.hulkapps.com/api/shop/${shopID}/reviews`)
-  }
+        .catch(error => {
+          console.error(error);
+        });
+    };
+    sendReview(`//reviews.hulkapps.com/api/shop/${shopID}/reviews`);
+  };
   useEffect(() => {
     const fetchAllRating = async URL => {
       const res = await fetch(URL, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+          "Content-Type": "application/json"
+        }
+      });
       res
         .json()
         .then(responseJson => {
-          console.log(responseJson)
-          const allRating = responseJson.data
-          let sum = 0
+          console.log(responseJson);
+          const allRating = responseJson.data;
+          let sum = 0;
           allRating.forEach(function(v) {
-            sum += v.rating
-          })
-          setTotalRating(allRating.length)
-          setAvgRating((sum / allRating.length).toFixed(2))
-          setRatingData(allRating)
+            sum += v.rating;
+          });
+          setTotalRating(allRating.length);
+          setAvgRating((sum / allRating.length).toFixed(2));
+          setRatingData(allRating);
         })
         .catch(error => {
-          console.error(error)
-        })
-    }
+          console.error(error);
+        });
+    };
     const fetchShopID = async URL => {
-      const res = await fetch(URL)
+      const res = await fetch(URL);
       res
         .json()
         .then(responseJson => {
-          setShopID(responseJson.data.shopify_id)
+          setShopID(responseJson.data.shopify_id);
           fetchAllRating(
             `//reviews.hulkapps.com/api/shop/${responseJson.data.shopify_id}/reviews/all?product_id=${productID}`
-          )
+          );
         })
         .catch(error => {
-          console.error(error)
-        })
-    }
-    fetchShopID(`//reviews.hulkapps.com/api/shop?shopify_domain=${shopName}`)
-  }, [productID])
+          console.error(error);
+        });
+    };
+    fetchShopID(`//reviews.hulkapps.com/api/shop?shopify_domain=${shopName}`);
+  }, [productID]);
   return (
     <>
       <SEO title={product.title} description={product.description} />
@@ -259,22 +259,34 @@ const ProductPage = ({ data }) => {
                     {product.title}
                   </h1>
                   <div className="text-right p-0 m-0">
-                  <button id="share" style={{
-                  color: 'rgba(0,0,0,0.4)'
-                }} className="bg-transparent border-0 outline-none ml-0 ml-sm-0 ml-lg-4 ml-xl-4">
-               
-                <span style={{color:'#000'}}>
-                      <i className="fa fa-share-alt"></i>
-                    </span>
-              </button>
-              <UncontrolledPopover placement="left" trigger="legacy" target="share">
-                <PopoverBody>
-                  <FacebookShareButton url={URL} className="p-1"><FacebookIcon size={25} round={true}/></FacebookShareButton>
-                  <TwitterShareButton url={URL} className="p-1"><TwitterIcon size={25} round={true}/></TwitterShareButton>
-                  <PinterestShareButton url={URL} className="p-1"><PinterestIcon size={25} round={true}/></PinterestShareButton>
-                </PopoverBody>
-              </UncontrolledPopover>
-        
+                    <button
+                      id="share"
+                      style={{
+                        color: "rgba(0,0,0,0.4)"
+                      }}
+                      className="bg-transparent border-0 outline-none ml-0 ml-sm-0 ml-lg-4 ml-xl-4"
+                    >
+                      <span style={{ color: "#000" }}>
+                        <i className="fa fa-share-alt"></i>
+                      </span>
+                    </button>
+                    <UncontrolledPopover
+                      placement="left"
+                      trigger="legacy"
+                      target="share"
+                    >
+                      <PopoverBody>
+                        <FacebookShareButton url={URL} className="p-1">
+                          <FacebookIcon size={25} round={true} />
+                        </FacebookShareButton>
+                        <TwitterShareButton url={URL} className="p-1">
+                          <TwitterIcon size={25} round={true} />
+                        </TwitterShareButton>
+                        <PinterestShareButton url={URL} className="p-1">
+                          <PinterestIcon size={25} round={true} />
+                        </PinterestShareButton>
+                      </PopoverBody>
+                    </UncontrolledPopover>
                   </div>
                 </div>
                 <div className="reviews font-1rem d-flex my-3 my-lg-4">
@@ -324,15 +336,15 @@ const ProductPage = ({ data }) => {
               >
                 <NavItem className="d-inline-block">
                   <NavLink
-                    className={classnames({ active: activeTab === '1' })}
+                    className={classnames({ active: activeTab === "1" })}
                     onClick={() => {
-                      toggle('1')
+                      toggle("1");
                     }}
                     style={{
-                      fontSize: '2rem',
-                      textAlign: 'center',
-                      fontFamily: 'josefinSans-Bold',
-                      fontWeight: 1000,
+                      fontSize: "2rem",
+                      textAlign: "center",
+                      fontFamily: "josefinSans-Bold",
+                      fontWeight: 1000
                     }}
                   >
                     Description
@@ -340,15 +352,15 @@ const ProductPage = ({ data }) => {
                 </NavItem>
                 <NavItem className="d-inline-block">
                   <NavLink
-                    className={classnames({ active: activeTab === '2' })}
+                    className={classnames({ active: activeTab === "2" })}
                     onClick={() => {
-                      toggle('2')
+                      toggle("2");
                     }}
                     style={{
-                      fontSize: '2rem',
-                      textAlign: 'center',
-                      fontFamily: 'josefinSans-Bold',
-                      fontWeight: 1000,
+                      fontSize: "2rem",
+                      textAlign: "center",
+                      fontFamily: "josefinSans-Bold",
+                      fontWeight: 1000
                     }}
                   >
                     Reviews
@@ -356,15 +368,15 @@ const ProductPage = ({ data }) => {
                 </NavItem>
                 <NavItem className="d-inline-block">
                   <NavLink
-                    className={classnames({ active: activeTab === '3' })}
+                    className={classnames({ active: activeTab === "3" })}
                     onClick={() => {
-                      toggle('3')
+                      toggle("3");
                     }}
                     style={{
-                      fontSize: '2rem',
-                      textAlign: 'center',
-                      fontFamily: 'josefinSans-Bold',
-                      fontWeight: 1000,
+                      fontSize: "2rem",
+                      textAlign: "center",
+                      fontFamily: "josefinSans-Bold",
+                      fontWeight: 1000
                     }}
                   >
                     Shipping
@@ -377,7 +389,7 @@ const ProductPage = ({ data }) => {
                     <Col sm="12">
                       <div
                         className="josefin-sans"
-                        style={{ fontSize: '1.3rem' }}
+                        style={{ fontSize: "1.3rem" }}
                       >
                         {ReactHtmlParser(product.descriptionHtml)}
                       </div>
@@ -386,8 +398,13 @@ const ProductPage = ({ data }) => {
                 </TabPane>
                 <TabPane tabId="2">
                   <Row>
-                    <Col sm="6" className="px-3 px-lg-5 border border-left-0 border-top-0 border-bottom-0">
-                      <h2 className="spr-header-title josefin-sans-b">Customer Reviews</h2>
+                    <Col
+                      sm="6"
+                      className="px-3 px-lg-5 border border-left-0 border-top-0 border-bottom-0"
+                    >
+                      <h2 className="spr-header-title josefin-sans-b">
+                        Customer Reviews
+                      </h2>
                       {ratingData.length ? (
                         <ul className="list-unstyled d-inline-block p-0 mb-0 ratings">
                           {ratingData
@@ -397,14 +414,14 @@ const ProductPage = ({ data }) => {
                                 <h4
                                   className="color-primary erbaum-bold text-uppercase"
                                   style={{
-                                    fontSize: '16px',
+                                    fontSize: "16px"
                                   }}
                                 >
                                   {review.product_title}
                                 </h4>
                                 <div
                                   className="d-inline-block br-widget br-readonly pt-2"
-                                  title={'Rating: ' + review.rating}
+                                  title={"Rating: " + review.rating}
                                 >
                                   {[...Array(review.rating)].map((elem, i) => (
                                     <button
@@ -412,8 +429,8 @@ const ProductPage = ({ data }) => {
                                       data-rating-text={i}
                                       className={
                                         review.rating - 1 === i
-                                          ? 'p-0 border-0 bg-transparent p-0 border-0 bg-transparent'
-                                          : 'br-selected p-0 border-0 bg-transparent p-0 border-0 bg-transparent'
+                                          ? "p-0 border-0 bg-transparent p-0 border-0 bg-transparent"
+                                          : "br-selected p-0 border-0 bg-transparent p-0 border-0 bg-transparent"
                                       }
                                       key={i}
                                     >
@@ -427,7 +444,7 @@ const ProductPage = ({ data }) => {
                                 <p
                                   className="filson-pro-reg pt-2"
                                   style={{
-                                    fontSize: '14px',
+                                    fontSize: "14px"
                                   }}
                                 >
                                   <b className="color-primary">
@@ -455,7 +472,12 @@ const ProductPage = ({ data }) => {
                         onSubmit={e => submitReview(e)}
                         className="josefin-sans"
                       >
-                        <h3 className="josefin-sans-b" style={{color:'#000'}}>Write a Review</h3>
+                        <h3
+                          className="josefin-sans-b"
+                          style={{ color: "#000" }}
+                        >
+                          Write a Review
+                        </h3>
                         <div className="form-row">
                           <div className="col-12 form-group">
                             {response}
@@ -464,7 +486,13 @@ const ProductPage = ({ data }) => {
                         </div>
                         <div className="form-row">
                           <div className="col-12 form-group">
-                            <label className="josefin-sans-b" style={{color:'#000', fontSize:'1.1rem'}} htmlFor="author">Name</label>
+                            <label
+                              className="josefin-sans-b"
+                              style={{ color: "#000", fontSize: "1.1rem" }}
+                              htmlFor="author"
+                            >
+                              Name
+                            </label>
                             <input
                               type="text"
                               className="form-control rounded-0"
@@ -477,7 +505,13 @@ const ProductPage = ({ data }) => {
                         </div>
                         <div className="form-row">
                           <div className="col-12 form-group">
-                            <label className="josefin-sans-b" style={{color:'#000', fontSize:'1.1rem'}} htmlFor="email">Email</label>
+                            <label
+                              className="josefin-sans-b"
+                              style={{ color: "#000", fontSize: "1.1rem" }}
+                              htmlFor="email"
+                            >
+                              Email
+                            </label>
                             <input
                               type="email"
                               className="form-control rounded-0"
@@ -491,7 +525,11 @@ const ProductPage = ({ data }) => {
 
                         <div className="form-row">
                           <div className="col-12 form-group">
-                            <label className="josefin-sans-b" style={{color:'#000', fontSize:'1.1rem'}} htmlFor="rating">
+                            <label
+                              className="josefin-sans-b"
+                              style={{ color: "#000", fontSize: "1.1rem" }}
+                              htmlFor="rating"
+                            >
                               Rating:&nbsp;{productRating}&nbsp;
                             </label>
                             <div className="rating-starts d-inline">
@@ -505,7 +543,10 @@ const ProductPage = ({ data }) => {
                                   onBlur={e => mouseLeaveRating(e, i)}
                                   onClick={e => changeRating(e, i)}
                                 >
-                                  <span className="fa fa-star-o" style={{color:'#F5CA59'}}></span>
+                                  <span
+                                    className="fa fa-star-o"
+                                    style={{ color: "#F5CA59" }}
+                                  ></span>
                                 </button>
                               ))}
                             </div>
@@ -519,7 +560,13 @@ const ProductPage = ({ data }) => {
 
                         <div className="form-row">
                           <div className="col-12 form-group">
-                            <label className="josefin-sans-b" style={{color:'#000', fontSize:'1.1rem'}} htmlFor="title">Review Title</label>
+                            <label
+                              className="josefin-sans-b"
+                              style={{ color: "#000", fontSize: "1.1rem" }}
+                              htmlFor="title"
+                            >
+                              Review Title
+                            </label>
                             <input
                               type="text"
                               className="form-control rounded-0"
@@ -532,7 +579,13 @@ const ProductPage = ({ data }) => {
                         </div>
                         <div className="form-row">
                           <div className="col-sm-12 form-group">
-                            <label className="josefin-sans-b" style={{color:'#000', fontSize:'1.1rem'}} htmlFor="body">Body of Review</label>
+                            <label
+                              className="josefin-sans-b"
+                              style={{ color: "#000", fontSize: "1.1rem" }}
+                              htmlFor="body"
+                            >
+                              Body of Review
+                            </label>
                             <textarea
                               className="form-control rounded-0"
                               name="body"
@@ -541,7 +594,7 @@ const ProductPage = ({ data }) => {
                               rows="10"
                               required={true}
                               style={{
-                                resize: 'none',
+                                resize: "none"
                               }}
                             ></textarea>
                           </div>
@@ -573,7 +626,13 @@ const ProductPage = ({ data }) => {
                               name="product_image"
                               value={productImg}
                             />
-                            <button type="submit" className="josefin-sans-b py-2 px-4 cart-btn border border-dark btns position-relative text-uppercase" style={{fontSize:'0.9rem'}}>SUBMIT REVIEW</button>
+                            <button
+                              type="submit"
+                              className="josefin-sans-b py-2 px-4 cart-btn border border-dark btns position-relative text-uppercase"
+                              style={{ fontSize: "0.9rem" }}
+                            >
+                              SUBMIT REVIEW
+                            </button>
                           </div>
                         </div>
                       </form>
@@ -585,12 +644,12 @@ const ProductPage = ({ data }) => {
                     <Col sm="12">
                       <div
                         className="josefin-sans"
-                        style={{ fontSize: '1.3rem' }}
+                        style={{ fontSize: "1.3rem" }}
                       >
                         <p>Free Shipping over $45.</p>
                         <p className="pt-3 pt-lg-5">
                           Express Delivery areas include Including Richmond
-                          hill, York, Scarborough, Mississauga.{' '}
+                          hill, York, Scarborough, Mississauga.{" "}
                         </p>
                       </div>
                     </Col>
@@ -606,9 +665,9 @@ const ProductPage = ({ data }) => {
           <Row className="mx-0 text-center">
             <p
               className="josefin-sans-sb w-100 text-center"
-              style={{ fontSize: '1.2rem' }}
+              style={{ fontSize: "1.2rem" }}
             >
-              <strong style={{ color: '#000' }}>Categories: </strong>
+              <strong style={{ color: "#000" }}>Categories: </strong>
               <Link to=""></Link>
               <Link
                 to="/collections/recommended-products-seguno/"
@@ -618,23 +677,24 @@ const ProductPage = ({ data }) => {
               </Link>
             </p>
           </Row>
-    
-         
         </Container>
       </section>
       <section>
-          <Container>
-
-              <Row className="mx-0">
-                  <h2 className="josefin-sans-b w-100 text-center" style={{color:'#000', fontSize:'2.8rem'}}>We also recommend</h2>
-                  <RecommendedProducts/>
-              </Row>
-        
-          </Container>
+        <Container>
+          <Row className="mx-0">
+            <h2
+              className="josefin-sans-b w-100 text-center"
+              style={{ color: "#000", fontSize: "2.8rem" }}
+            >
+              We also recommend
+            </h2>
+            <RecommendedProducts />
+          </Row>
+        </Container>
       </section>
     </>
-  )
-}
+  );
+};
 
 export const query = graphql`
   query($handle: String!) {
@@ -685,6 +745,6 @@ export const query = graphql`
       }
     }
   }
-`
+`;
 
-export default ProductPage
+export default ProductPage;

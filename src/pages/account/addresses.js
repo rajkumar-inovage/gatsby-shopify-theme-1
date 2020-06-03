@@ -42,7 +42,7 @@ const Addresses = () => {
       <Query
         query={CUSTOMER_ADDRESS}
         variables={{
-          customerAccessToken: customerAccessToken.accessToken,
+          customerAccessToken: customerAccessToken.accessToken
         }}
       >
         {({ loading, error, data }) => {
@@ -64,7 +64,7 @@ const Addresses = () => {
               <AddAddressForm />
               <div>
                 {addresses != null &&
-                  addresses.edges.map((address) => (
+                  addresses.edges.map(address => (
                     <div key={address.node.id} className="columns is-centered">
                       <div className="column">
                         <br />

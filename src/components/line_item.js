@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import StoreContext from "../context/store";
 
-const Line_item = (props) => {
+const Line_item = props => {
   const { line_item } = props;
   const context = useContext(StoreContext);
 

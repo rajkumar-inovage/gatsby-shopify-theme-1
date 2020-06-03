@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { navigate } from "gatsby";
 import StoreContext from "../../context/store";
 
-const Layout = (props) => {
+const Layout = props => {
   const { customerAccessToken } = useContext(StoreContext);
   let isAuthenticated = false;
   customerAccessToken != null &&

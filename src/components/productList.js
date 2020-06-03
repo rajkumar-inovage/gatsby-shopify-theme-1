@@ -1,8 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import StoreContext from "../context/store";
 import ProductBox from "./productBox";
-import {Container, Row, Col } from 'reactstrap';
-
+import { Container, Row, Col } from "reactstrap";
 
 const ProductList = ({ data }) => {
   const { edges: products } = data.allShopifyProduct;
@@ -64,16 +63,23 @@ const ProductList = ({ data }) => {
     <Container>
       <div className="hero-body">
         <div className="container">
-          <div className="columns is-mobile" style={{ marginBottom: "60px", margin: "0", padding: "10px" }}>
+          <div
+            className="columns is-mobile"
+            style={{ marginBottom: "60px", margin: "0", padding: "10px" }}
+          >
             <div className="column is-2-desktop is-6-mobile">
-              <label htmlFor="sortBy" className="has-text-weight-semibold is-uppercase" style={{ margin: "-20px" }}>
+              <label
+                htmlFor="sortBy"
+                className="has-text-weight-semibold is-uppercase"
+                style={{ margin: "-20px" }}
+              >
                 SORT BY :
                 <div className="field">
                   <div className="control">
                     <div className="select">
                       <select
                         defaultvalues={sort}
-                        onChange={(e) => setSort(e.target.value)}
+                        onChange={e => setSort(e.target.value)}
                         id="sortBy"
                       >
                         {sorts}
@@ -83,7 +89,6 @@ const ProductList = ({ data }) => {
                 </div>
               </label>
             </div>
-           
           </div>
           <div className="columns is-multiline" style={{ margin: "0" }}>
             {context.filteredType === "all"
@@ -112,12 +117,12 @@ const ProductList = ({ data }) => {
                     );
                   })
               : products
-                  .filter((p) =>
+                  .filter(p =>
                     p.node.productType.includes(context.filteredType)
                   )
                   .sort(
                     context.filteredSort === "featured"
-                      ? (a) => a
+                      ? a => a
                       : context.filteredSort === "low"
                       ? (a, b) =>
                           a.node.variants[0].price - b.node.variants[0].price
@@ -150,4 +155,3 @@ const ProductList = ({ data }) => {
 };
 
 export default ProductList;
-

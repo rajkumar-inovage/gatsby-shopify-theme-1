@@ -1,7 +1,7 @@
 import React, {
   useContext,
   useState,
-  useEffect,
+  useEffect
 } from "react"; /* eslint-disable */
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
@@ -18,11 +18,11 @@ import "react-notifications-component/dist/theme.css";
 
 const ThumbnailBox = styled(Box)(() => ({
   transition: "0.5s ease all",
-  cursor: "pointer",
+  cursor: "pointer"
 }));
 
 const ThumbnailFlex = styled(Flex)(() => ({
-  transition: "0.5s ease all",
+  transition: "0.5s ease all"
 }));
 
 const productPage = ({ data }) => {
@@ -39,7 +39,7 @@ const productPage = ({ data }) => {
 
   useEffect(() => {
     let defaultOptionValues = {};
-    product.options.forEach((selector) => {
+    product.options.forEach(selector => {
       defaultOptionValues[selector.name] = selector.values[0];
     });
     setVariant(defaultOptionValues);
@@ -49,11 +49,11 @@ const productPage = ({ data }) => {
     checkAvailability(product.shopifyId);
   }, [productVariant]);
 
-  const checkAvailability = (productId) => {
-    context.client.product.fetch(productId).then((product) => {
+  const checkAvailability = productId => {
+    context.client.product.fetch(productId).then(product => {
       // this checks the currently selected variant for availability
       const result = product.variants.filter(
-        (variant) => variant.id === productVariant.shopifyId
+        variant => variant.id === productVariant.shopifyId
       );
       setAvailable(result[0].available);
     });
@@ -68,7 +68,7 @@ const productPage = ({ data }) => {
       animationIn: ["animated", "fadeIn"],
       animationOut: ["animated", "fadeOut"],
       dismissable: { click: true },
-      dismiss: { duration: 4000 },
+      dismiss: { duration: 4000 }
     });
   };
 
@@ -81,21 +81,21 @@ const productPage = ({ data }) => {
     context.addVariantToCartAndBuyNow(productVariant.shopifyId, quantity);
   };
 
-  const handleOptionChange = (event) => {
+  const handleOptionChange = event => {
     const { target } = event;
-    setVariant((prevState) => ({
+    setVariant(prevState => ({
       ...prevState,
       [target.name]: target.value,
-      ...console.log(variant),
+      ...console.log(variant)
     }));
   };
 
   function increaseQuantity() {
-    setQuantity((q) => q + 1);
+    setQuantity(q => q + 1);
   }
 
   function decreaseQuantity() {
-    setQuantity((q) => (q <= 1 ? 1 : q - 1));
+    setQuantity(q => (q <= 1 ? 1 : q - 1));
   }
 
   return (
@@ -126,7 +126,7 @@ const productPage = ({ data }) => {
                           key={i}
                           style={{
                             marginBottom: "10px",
-                            border: "3px solid black",
+                            border: "3px solid black"
                           }}
                           width={["400px", null, "auto"]}
                           ml={[0, null, 2]}
@@ -139,15 +139,13 @@ const productPage = ({ data }) => {
                             loading="auto"
                             imgStyle={{
                               WebkitFilter: "blur(1px)",
-                              marginBorder: "10px solid black",
+                              marginBorder: "10px solid black"
                             }}
                           />
                         </ThumbnailBox>
                       ) : (
                         <ThumbnailBox
-                          onMouseOver={(e) =>
-                            setCurrentImage(product.images[i])
-                          }
+                          onMouseOver={e => setCurrentImage(product.images[i])}
                           style={{ marginBottom: "10px" }}
                           key={i}
                           width={["400px", null, "auto"]}
@@ -192,7 +190,7 @@ const productPage = ({ data }) => {
               >
                 <div className="box">
                   <ProductInfo product={product} />
-                  {product.options.map((options) => (
+                  {product.options.map(options => (
                     <VariantSelectors
                       onChange={handleOptionChange}
                       key={options.id.toString()}
@@ -257,7 +255,7 @@ const productPage = ({ data }) => {
                     id="content"
                     className="content"
                     dangerouslySetInnerHTML={{
-                      __html: product.descriptionHtml,
+                      __html: product.descriptionHtml
                     }}
                   />
                 </div>
@@ -280,7 +278,7 @@ const productPage = ({ data }) => {
   );
 };
 productPage.propTypes = {
-  addVariantToCart: PropTypes.func,
+  addVariantToCart: PropTypes.func
 };
 export default productPage;
 
