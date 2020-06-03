@@ -27,6 +27,23 @@ exports.createResolvers = ({
       },
     },
   })
+  createResolvers({
+    WPGraphQL_MediaItem: {
+      imageFile: {
+        type: `File`,
+        resolve(source, args, context, info) {
+          return createRemoteFileNode({
+            url: source.sourceUrl,
+            store,
+            cache,
+            createNode,
+            createNodeId,
+            reporter,
+          })
+        },
+      },
+    },
+  })
 }
 
 exports.createPages = ({ graphql, actions }) => {

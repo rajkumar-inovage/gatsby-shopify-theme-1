@@ -63,6 +63,19 @@ module.exports = {
     	//refetchInterval: 60
       },
     },
+    {
+      resolve: `gatsby-source-graphql`,
+      options: {
+        typeName: `WPGraphQL`,
+        fieldName: `wpgraphql`,
+        url: `${process.env.WORDPRESS_URL}/graphql`,
+        searchAndReplaceContentUrls: {
+          sourceUrl: `${process.env.WORDPRESS_URL}`,
+          replacementUrl: ``,
+        },
+        // refetchInterval: 60,
+      }
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
