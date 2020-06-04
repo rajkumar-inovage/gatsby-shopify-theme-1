@@ -19,7 +19,6 @@ const Footer = (data) => {
   const handleChange = (e) => {
     setEmail(e.target.value);
   };
-  console.log(response, email);
   return (
     <>
       <footer className="border border-bottom-0 border-left-0 border-right-0">
