@@ -7,6 +7,10 @@ import banner from "../assets/img/soap.jpg";
 import shop from "../assets/img/shop.jpg";
 import RecentProducts from "../components/RecentProducts";
 import RecentBlogs from "../components/RecentBlogs";
+import s1 from "../assets/img/s1.jpg"
+import s2 from "../assets/img/s2.jpg"
+import s3 from "../assets/img/s3.jpg"
+import s4 from "../assets/img/s4.jpg"
 
 const IndexPage = ({ data }) => {
   return (
@@ -151,6 +155,62 @@ const IndexPage = ({ data }) => {
       <section className="py-3 py-lg-5">
         <RecentBlogs />
       </section>
+      <section className="pt-3 pt-lg-5">
+          <Row className="mx-0">
+            <div className="col-12 col-md-6 col-lg-3 position-relative px-0 outer">
+              <a href="https://demosoap.com/#0-insta-feed">
+                <img src={s1} alt="" width="100%" className="m-0" />
+                <div className="layer">
+                  <div className="layer-content">
+                    <i
+                      className="fa fa-play text-white"
+                      style={{ fontSize: '1.3rem' }}
+                    ></i>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div className="col-12 col-md-6 col-lg-3 position-relative px-0 outer">
+              <a href="https://demosoap.com/#1-insta-feed">
+                <img src={s2} alt="" width="100%" className="m-0" />
+                <div className="layer">
+                  <div className="layer-content">
+                    <i
+                      className="fa fa-instagram text-white"
+                      style={{ fontSize: '1.3rem' }}
+                    ></i>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div className="col-12 col-md-6 col-lg-3 position-relative px-0 outer">
+              <a href="https://demosoap.com/#2-insta-feed">
+                <img src={s3} alt="" width="100%" className="m-0" />
+                <div className="layer">
+                  <div className="layer-content">
+                    <i
+                      className="fa fa-instagram text-white"
+                      style={{ fontSize: '1.3rem' }}
+                    ></i>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div className="col-12 col-md-6 col-lg-3 position-relative px-0 outer">
+              <a href="https://demosoap.com/#3-insta-feed">
+                <img src={s4} alt="" width="100%" className="m-0" />
+                <div className="layer">
+                  <div className="layer-content">
+                    <i
+                      className="fa fa-instagram text-white"
+                      style={{ fontSize: '1.3rem' }}
+                    ></i>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </Row>
+        </section>
     </>
   );
 };

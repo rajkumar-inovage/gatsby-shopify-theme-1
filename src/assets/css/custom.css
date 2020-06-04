@@ -514,6 +514,9 @@ body .news-letter-form input:focus {
 	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
 }
+body .select-qnty button {
+	background-color: #E7E7E7;
+}
 .select-qnty .ri-minus::before {
 	content: '-';
 	font-size:20px;

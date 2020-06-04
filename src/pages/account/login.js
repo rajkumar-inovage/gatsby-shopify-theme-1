@@ -44,31 +44,30 @@ const LoginForm = () => {
   const [messsageInfo, setMessageInfo] = useState("");
 
   const [password, setPassword] = useState(null);
-  const handleCustomerAccessToken = value => {
+  const handleCustomerAccessToken = (value) => {
     setValue(value);
   };
 
   return (
     <>
       {passwordForgot ? (
-        <section className="hero is-dark is-fullheight-with-navbar">
+        <section className="hero is-fullheight-with-navbar" style={{backgroundColor:'#e7e7e7'}}>
           <div className="hero-body">
             <div className="container">
               <div className="columns is-centered">
-                <div className="column is-4 is-centered">
+                <div className="column is-centered">
                   <h2 className=" title has-text-centered josefin-sans-b">
                     RESET YOUR PASSWORD
                   </h2>
-                  <p className="josefin-sans">
-                    We will send you an email to reset your password.
-                  </p>
+                  <p className="josefin-sans text-center">We will send you an email to reset your password.</p>
                   <Mutation mutation={CUSTOMER_PASSWORD_RESET}>
-                    {customerRecover => {
+                    {(customerRecover) => {
                       return (
                         <>
-                          <div className="field">
+                        <div className="col-12 col-md-6 col-lg-4 mx-auto" >
+                          <div className="field mt-5">
                             <label
-                              className="label has-text-white josefin-sans-b"
+                              className="label text-dark josefin-sans-b"
                               htmlFor="loginEmail"
                             >
                               Email
@@ -78,19 +77,19 @@ const LoginForm = () => {
                                 className="input josefin-sans"
                                 type="email"
                                 id="loginEmail"
-                                onChange={e => setEmailReset(e.target.value)}
+                                onChange={(e) => setEmailReset(e.target.value)}
                               />
                             </div>
                           </div>
                           <div className="field">
                             <div className="control has-text-centered">
                               <button
-                                className="button josefin-sans-b"
+                                className="button text-center josefin-sans-b overflow-hidden py-3 px-5 cart-btn border border-dark btns position-relative text-uppercase text-center"
                                 onClick={() => {
                                   customerRecover({
                                     variables: {
-                                      email: emailReset
-                                    }
+                                      email: emailReset,
+                                    },
                                   }).then(() => {
                                     setMessageInfo(
                                       "We've sent you an email with a link to update your password."
@@ -105,13 +104,14 @@ const LoginForm = () => {
                             <div className="field">
                               <div
                                 className="control has-text-centered josefin-sans-b"
-                                onClick={e =>
+                                onClick={(e) =>
                                   setPasswordForgot(!passwordForgot)
                                 }
                               >
-                                <p>Cancel</p>
+                                <p className="text-dark josefin-sans-b mt-4">Cancel</p>
                               </div>
                             </div>
+                          </div>
                           </div>
                         </>
                       );
@@ -123,7 +123,7 @@ const LoginForm = () => {
           </div>
         </section>
       ) : (
-        <section className="hero is-dark is-fullheight-with-navbar">
+        <section className="hero is-fullheight-with-navbar" style={{backgroundColor:'#e7e7e7'}}>
           <div className="hero-body">
             <div className="container">
               <div className="columns is-centered">
@@ -131,71 +131,73 @@ const LoginForm = () => {
                   {messsageInfo && (
                     <div class="notification is-success">{messsageInfo}</div>
                   )}
-                  <h2 className=" title has-text-centered">Login</h2>
+                  <h2 className=" title has-text-centered josefin-sans-b">Login</h2>
                   <Mutation mutation={CUSTOMER_LOGIN}>
-                    {customerLogin => {
+                    {(customerLogin) => {
                       return (
                         <>
                           <div className="field">
                             <label
-                              className="label has-text-white"
+                              className="label text-dark josefin-sans-b"
                               htmlFor="loginEmail"
                             >
                               Email
                             </label>
                             <div className="control">
                               <input
-                                className="input"
+                                className="input josefin-sans"
                                 type="email"
                                 id="loginEmail"
-                                onChange={e => setEmail(e.target.value)}
+                                onChange={(e) => setEmail(e.target.value)}
                               />
                             </div>
                           </div>
                           <div className="field">
                             <label
-                              className="label has-text-white"
+                              className="label text-dark josefin-sans-b"
                               htmlFor="loginPassword"
                             >
                               Password
                             </label>
                             <div className="control">
                               <input
-                                className="input"
+                                className="input josefin-sans"
                                 type="password"
                                 id="loginPassword"
-                                onChange={e => setPassword(e.target.value)}
+                                onChange={(e) => setPassword(e.target.value)}
                               />
                             </div>
                           </div>
                           <div className="field">
                             <div
                               className="control has-text-centered"
-                              onClick={e => setPasswordForgot(!passwordForgot)}
+                              onClick={(e) =>
+                                setPasswordForgot(!passwordForgot)
+                              }
                             >
-                              <p>Forgot your password? </p>
+                              <p className="josefin-sans-sb">Forgot your password? </p>
                             </div>
                           </div>
                           <div className="field">
                             <div className="control has-text-centered">
                               <button
-                                className="button"
+                                className="button josefin-sans-b overflow-hidden py-3 px-5 cart-btn border rounded-none out-line-none border-dark btns position-relative text-uppercase text-center"
                                 onClick={() => {
                                   customerLogin({
                                     variables: {
                                       input: {
                                         email: email,
-                                        password: password
-                                      }
-                                    }
+                                        password: password,
+                                      },
+                                    },
                                   })
-                                    .then(result => {
+                                    .then((result) => {
                                       handleCustomerAccessToken(
                                         result.data.customerAccessTokenCreate
                                           .customerAccessToken
                                       );
                                     })
-                                    .catch(err => {
+                                    .catch((err) => {
                                       alert(err);
                                     });
                                 }}
@@ -206,8 +208,8 @@ const LoginForm = () => {
                           </div>
                           <div className="field">
                             <div className="control has-text-centered">
-                              <Link to="account/register">
-                                <p className="has-text-white">Create account</p>
+                              <Link to="/account/register">
+                                <p className="text-dark josefin-sans-b">Create account</p>
                               </Link>
                             </div>
                           </div>

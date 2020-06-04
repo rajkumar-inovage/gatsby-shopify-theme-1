@@ -23,20 +23,21 @@ export class SearchPage extends Component {
     return (
       <>
         <SEO title="Home" />
-        <section className="hero">
-          <div className="hero-body">
+        <section className="hero mt-5">
+          <div className="hero-body mt-5">
             <div className="container">
               <div className="field">
-                <p className="control has-icons-right">
+                <p className="control has-icons-right col-12 col-md-6 mx-auto">
                   <input
-                    className="input is-large"
+                    className="input p-4 josefin-sans"
                     name="value"
                     type="text"
                     value={this.state.document}
                     onChange={e => this.setState({ document: e.target.value })}
                     placeholder="Search"
+                    style={{fontSize:'1.3rem'}}
                   />
-                  <span className="icon is-right">
+                  <span className="icon is-right" style={{top:'8px', right:'15px'}}>
                     <i className="fas fa-search"></i>
                   </span>
                 </p>

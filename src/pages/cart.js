@@ -74,7 +74,7 @@ const Cart = () => {
         <div className="hero-body">
           <div className="container">
             <div className="columns is-vcentered">
-              <div className="column">
+              <div className="column mt-5 pt-5">
                 <div className="box productBox pb-3 pb-lg-5">
                   <h2 className="title has-text-weight-semibold josefin-sans-b">
                     CarT

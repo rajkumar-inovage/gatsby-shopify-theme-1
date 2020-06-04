@@ -46,6 +46,8 @@
     "react-html-parser": "^2.0.2",
     "react-notifications-component": "^2.4.0",
     "react-scroll-up-button": "^1.6.4",
+    "react-share": "^4.1.0",
+    "react-slick": "^0.26.1",
     "reactstrap": "^8.4.1",
     "rebass": "^4.0.7",
     "shopify-buy": "^2.10.0",

@@ -109,7 +109,7 @@ const CollectionsPage = ({ data }) => {
                   ></i>
                 </Link>
                 <h1
-                  className="m-0"
+                  className="m-0 josefin-sans-b"
                   style={{
                     fontSize: "2.5rem",
                     color: "#000",
@@ -179,7 +179,7 @@ const CollectionsPage = ({ data }) => {
                   <div className={gridClass + " mb-3 mb-lg-5"}>
                     <div className={displayClass + " trending-products"}>
                       <div className={imgClass}>
-                        <Link to={`/products/${handle}/`} className="">
+                        <Link to={`/product/${handle}/`} className="">
                           <div className="tp-image">
                             {images[0] &&
                               images[0].localFile.childImageSharp.fluid.src && (
@@ -232,7 +232,7 @@ const CollectionsPage = ({ data }) => {
                           </div>
 
                           <Link
-                            to={`/products/${handle}/`}
+                            to={`/product/${handle}/`}
                             className="josefin-sans-b mt-2 d-block"
                             style={{ textDecoration: "none" }}
                           >
@@ -260,7 +260,7 @@ const CollectionsPage = ({ data }) => {
                                 {description.substring(0, MAX_LENGTH)}...
                               </p>
                               <Link
-                                to={`/products/${handle}/`}
+                                to={`/product/${handle}/`}
                                 className="more josefin-sans-sb text-decoration-none position-relative"
                                 style={{ fontSize: "1.3rem", color: "#000" }}
                               >
@@ -272,7 +272,7 @@ const CollectionsPage = ({ data }) => {
                               style={{ minWidth: "150px" }}
                             >
                               <Link
-                                to={`/products/${handle}/`}
+                                to={`/product/${handle}/`}
                                 className="text-decoration-none px-3 py-3 d-block josefin-sans-b cart-btn border border-dark btns position-relative"
                                 style={{ fontSize: "0.8rem" }}
                               >

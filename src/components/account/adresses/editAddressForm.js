@@ -112,6 +112,7 @@ const EditAddressForm = ({ address }) => {
                                     onChange={e =>
                                       setFirstNameInput(e.target.value)
                                     }
+                                    aria-label="First Name"
                                   />
                                 </div>
                               </div>
@@ -132,6 +133,7 @@ const EditAddressForm = ({ address }) => {
                                     onChange={e =>
                                       setLastNameInput(e.target.value)
                                     }
+                                    aria-label="Last Name"
                                   />
                                 </div>
                               </div>
@@ -147,6 +149,7 @@ const EditAddressForm = ({ address }) => {
                                 value={companyInput}
                                 type="text"
                                 onChange={e => setCompanyInput(e.target.value)}
+                                aria-label="Company"
                               />
                             </div>
                           </div>
@@ -160,6 +163,7 @@ const EditAddressForm = ({ address }) => {
                                 value={addressInput}
                                 type="text"
                                 onChange={e => setAddressInput(e.target.value)}
+                                aria-label="Address"
                               />
                             </div>
                           </div>
@@ -175,6 +179,7 @@ const EditAddressForm = ({ address }) => {
                                 onChange={e =>
                                   setApartmentInput(e.target.value)
                                 }
+                                aria-label="Apartment, suite, etc."
                               />
                             </div>
                           </div>
@@ -190,6 +195,7 @@ const EditAddressForm = ({ address }) => {
                                     value={cityInput}
                                     type="text"
                                     onChange={e => setCityInput(e.target.value)}
+                                    aria-label="City"
                                   />
                                 </div>
                               </div>
@@ -235,6 +241,7 @@ const EditAddressForm = ({ address }) => {
                                 value={zipInput}
                                 type="text"
                                 onChange={e => setZipInput(e.target.value)}
+                                aria-label="Postal/Zip Code"
                               />
                             </div>
                           </div>
@@ -248,6 +255,7 @@ const EditAddressForm = ({ address }) => {
                                 value={phoneInput}
                                 type="text"
                                 onChange={e => setPhoneInput(e.target.value)}
+                                aria-label="Phone"
                               />
                             </div>
                           </div>

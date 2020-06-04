@@ -25,7 +25,7 @@ const RegisterForm = () => {
   const [password, setPassword] = useState(null);
 
   return (
-    <section className="hero is-dark is-fullheight-with-navbar josefin-sans">
+    <section className="hero is-fullheight-with-navbar josefin-sans" style={{backgroundColor:'#e7e7e7'}}>
       <div className="hero-body">
         <div className="container">
           <div className="columns is-centered">
@@ -37,7 +37,7 @@ const RegisterForm = () => {
                     <>
                       <div className="field">
                         <label
-                          className="label has-text-white josefin-sans-b"
+                          className="label text-dark josefin-sans-b"
                           htmlFor="loginEmail"
                         >
                           Email
@@ -48,12 +48,13 @@ const RegisterForm = () => {
                             type="email"
                             id="loginEmail"
                             onChange={e => setEmail(e.target.value)}
+                            aria-label="Email"
                           />
                         </div>
                       </div>
                       <div className="field">
                         <label
-                          className="label has-text-white josefin-sans-b"
+                          className="label text-dark josefin-sans-b"
                           htmlFor="loginPassword"
                         >
                           Password
@@ -64,13 +65,14 @@ const RegisterForm = () => {
                             type="password"
                             id="loginPassword"
                             onChange={e => setPassword(e.target.value)}
+                            aria-label="Password"
                           />
                         </div>
                       </div>
                       <div className="field">
                         <div className="control has-text-centered">
                           <button
-                            className="button josefin-sans-b"
+                            className="button josefin-sans-b overflow-hidden py-3 px-5 cart-btn border rounded-none out-line-none border-dark btns position-relative text-uppercase text-center"
                             onClick={() => {
                               customerLogin({
                                 variables: {

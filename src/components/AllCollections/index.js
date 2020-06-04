@@ -2,13 +2,11 @@ import React from "react";
 import { useStaticQuery, graphql, Link } from "gatsby";
 import { Row, Col } from "reactstrap";
 
-const RecentCollections = () => {
+const AllCollections = () => {
   const { allShopifyCollection } = useStaticQuery(
     graphql`
       query {
         allShopifyCollection(
-          limit: 4
-          skip: 1
           sort: { fields: updatedAt, order: ASC }
         ) {
           nodes {
@@ -76,4 +74,4 @@ const RecentCollections = () => {
   );
 };
 
-export default RecentCollections;
+export default AllCollections;
