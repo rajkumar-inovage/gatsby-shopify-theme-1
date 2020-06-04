@@ -5,7 +5,6 @@ import SEO from "~/components/seo";
 import ReactHtmlParser from "react-html-parser";
 
 const ArticlePage = ({ data }) => {
-  console.log(data.shopifyArticle);
   return (
     <>
       <SEO title={data.shopifyArticle.title} />

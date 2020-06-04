@@ -2,7 +2,7 @@ import SEO from "~/components/seo";
 import { Container, Row, Col } from "reactstrap";
 import React, { useContext, useState } from "react";
 import { graphql, Link } from "gatsby";
-import StoreContext from "~/context/StoreContext";
+import StoreContext from "~/context/store";
 // import $ from 'jquery'
 
 import GridIcon from "~/components/grid-icon";
@@ -16,9 +16,8 @@ const CollectionsPage = ({ data }) => {
   const [displayClass, setDisplayClass] = useState("d-unset");
   const [descClass, setDescClass] = useState("d-none");
   const [rowpriceClass, setRowpriceClass] = useState("d-inline-block");
-  const {
-    store: { checkout }
-  } = useContext(StoreContext);
+  const context = useContext(StoreContext);
+  const { checkout } = context;
   const buttonClasses =
     "btn-link bg-transparent border-0 text-decoration-none text-body p-0";
   const getPrice = price =>

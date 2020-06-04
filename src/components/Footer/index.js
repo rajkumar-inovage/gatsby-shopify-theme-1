@@ -78,6 +78,7 @@ const Footer = data => {
                     <div className="input-group col-12 col-md-8 px-0 news-letter-form">
                       <input
                         type="email"
+                        aria-label="Email Address"
                         className="form-control josefin-sans"
                         placeholder="Your Email Address"
                       />

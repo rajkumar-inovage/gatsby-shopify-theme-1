@@ -1,6 +1,6 @@
-const { createRemoteFileNode } = require("gatsby-source-filesystem");
+//const { createRemoteFileNode } = require("gatsby-source-filesystem");
 const path = require(`path`);
-
+/*
 exports.createResolvers = ({
   actions,
   cache,
@@ -27,24 +27,8 @@ exports.createResolvers = ({
       }
     }
   });
-  createResolvers({
-    WPGraphQL_MediaItem: {
-      imageFile: {
-        type: `File`,
-        resolve(source, args, context, info) {
-          return createRemoteFileNode({
-            url: source.sourceUrl,
-            store,
-            cache,
-            createNode,
-            createNodeId,
-            reporter
-          });
-        }
-      }
-    }
-  });
 };
+*/
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -80,8 +64,8 @@ exports.createPages = ({ graphql, actions }) => {
         totalCount
       }
     }
-  `).then(result => {
-    result.data.allShopifyCollection.nodes.forEach(({ handle }) => {
+    `).then(result => {
+      result.data.allShopifyCollection.nodes.forEach(({ handle }) => {
       createPage({
         path: `/collections/${handle}/`,
         component: path.resolve(`./src/templates/collectionsPage/index.js`),
@@ -140,9 +124,10 @@ exports.createPages = ({ graphql, actions }) => {
     });
   });
 };
-
+/*
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     devtool: "eval-source-map"
   });
 };
+*/
