@@ -1,8 +1,7 @@
 import React from 'react'
-import { graphql, Link } from 'gatsby'
+import { Link } from 'gatsby'
 import {Container, Row, Col } from 'reactstrap';
 import SEO from "~/components/seo"
-import ReactHtmlParser from 'react-html-parser'
 import AllCollections from "../components/AllCollections"
 
 const Collections = (data) => {

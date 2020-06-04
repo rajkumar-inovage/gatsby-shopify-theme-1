@@ -109,13 +109,8 @@ const LoginForm = () => {
                                   setPasswordForgot(!passwordForgot)
                                 }
                               >
-<<<<<<< HEAD
                                 <span>Cancel</span>
                               </button>
-=======
-                                <p className="text-dark josefin-sans-b mt-4">Cancel</p>
-                              </div>
->>>>>>> 4f80a677ab57346e917b2cc1f18107acbba37618
                             </div>
                           </div>
                           </div>
@@ -183,13 +178,8 @@ const LoginForm = () => {
                                 setPasswordForgot(!passwordForgot)
                               }
                             >
-<<<<<<< HEAD
                               <span>Forgot your password? </span>
                             </button>
-=======
-                              <p className="josefin-sans-sb">Forgot your password? </p>
-                            </div>
->>>>>>> 4f80a677ab57346e917b2cc1f18107acbba37618
                           </div>
                           <div className="field">
                             <div className="control has-text-centered">
