@@ -97,7 +97,7 @@ const Header = ({ siteTitle }) => {
                 >
                   <NavItem className="mx-3 my-0 d-inline-block py-md-3 py-lg-0">
                     <Link
-                      to="collections/essentials/"
+                      to="/collections/essentials/"
                       onClick={closeNav}
                       className="space-1 p-sm-0 p-lg-0 p-xl-0 nav-link font-weight-bold"
                     >
@@ -106,7 +106,7 @@ const Header = ({ siteTitle }) => {
                   </NavItem>
                   <NavItem className="mx-3 my-0 d-inline-block py-md-3 py-lg-0">
                     <Link
-                      to="collections/fragrant/"
+                      to="/collections/fragrant/"
                       onClick={closeNav}
                       className="space-1 p-sm-0 p-lg-0 p-xl-0 nav-link font-weight-bold"
                     >
@@ -115,7 +115,7 @@ const Header = ({ siteTitle }) => {
                   </NavItem>
                   <NavItem className="mx-3 my-0 d-inline-block py-md-3 py-lg-0">
                     <Link
-                      to="collections/figure/"
+                      to="/collections/figure/"
                       onClick={closeNav}
                       className="space-1 p-sm-0 p-lg-0 p-xl-0 nav-link font-weight-bold"
                     >
@@ -124,7 +124,7 @@ const Header = ({ siteTitle }) => {
                   </NavItem>
                   <NavItem className="mx-3 my-0 d-inline-block py-md-3 py-lg-0">
                     <Link
-                      to="collections/donut/"
+                      to="/collections/donut/"
                       onClick={closeNav}
                       className="space-1 p-sm-0 p-lg-0 p-xl-0 nav-link font-weight-bold"
                     >
@@ -133,7 +133,7 @@ const Header = ({ siteTitle }) => {
                   </NavItem>
                   <NavItem className="mx-3 my-0 d-inline-block py-md-3 py-lg-0">
                     <Link
-                      to="collections/bath-bath-bomb/"
+                      to="/collections/bath-bath-bomb/"
                       className="space-1 p-sm-0 p-lg-0 p-xl-0 nav-link font-weight-bold"
                     >
                       Bath bombs
@@ -141,7 +141,7 @@ const Header = ({ siteTitle }) => {
                   </NavItem>
                   <NavItem className="mx-3 my-0 d-inline-block py-md-3 py-lg-0">
                     <Link
-                      to="collections/treat/"
+                      to="/collections/treat/"
                       onClick={closeNav}
                       className="space-1 p-sm-0 p-lg-0 p-xl-0 nav-link font-weight-bold"
                     >
@@ -150,7 +150,7 @@ const Header = ({ siteTitle }) => {
                   </NavItem>
                   <NavItem className="mx-3 my-0 d-inline-block py-md-3 py-lg-0">
                     <Link
-                      to="collections/gift/"
+                      to="/collections/gift/"
                       onClick={closeNav}
                       className="space-1 p-sm-0 p-lg-0 p-xl-0 nav-link font-weight-bold"
                     >
