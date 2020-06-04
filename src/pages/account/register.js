@@ -47,8 +47,13 @@ const RegisterForm = () => {
                             className="input josefin-sans"
                             type="email"
                             id="loginEmail"
+<<<<<<< HEAD
+                            aria-label="Email"
+                            onChange={(e) => setEmail(e.target.value)}
+=======
                             onChange={e => setEmail(e.target.value)}
                             aria-label="Email"
+>>>>>>> 4f80a677ab57346e917b2cc1f18107acbba37618
                           />
                         </div>
                       </div>
@@ -63,9 +68,14 @@ const RegisterForm = () => {
                           <input
                             className="input josefin-sans"
                             type="password"
+                            aria-label="Password"
                             id="loginPassword"
+<<<<<<< HEAD
+                            onChange={(e) => setPassword(e.target.value)}
+=======
                             onChange={e => setPassword(e.target.value)}
                             aria-label="Password"
+>>>>>>> 4f80a677ab57346e917b2cc1f18107acbba37618
                           />
                         </div>
                       </div>
@@ -78,10 +88,10 @@ const RegisterForm = () => {
                                 variables: {
                                   input: {
                                     email: email,
-                                    password: password
-                                  }
-                                }
-                              }).then(result => {
+                                    password: password,
+                                  },
+                                },
+                              }).then((result) => {
                                 navigate(`/account/login`);
                               });
                             }}

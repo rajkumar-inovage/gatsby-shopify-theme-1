@@ -109,10 +109,10 @@ const EditAddressForm = ({ address }) => {
                                     className="input"
                                     value={firstNameInput}
                                     type="text"
-                                    onChange={e =>
+                                    aria-label="First Name"
+                                    onChange={(e) =>
                                       setFirstNameInput(e.target.value)
                                     }
-                                    aria-label="First Name"
                                   />
                                 </div>
                               </div>
@@ -129,11 +129,11 @@ const EditAddressForm = ({ address }) => {
                                   <input
                                     className="input"
                                     value={lastNameInput}
+                                    aria-label="Last Name"
                                     type="text"
-                                    onChange={e =>
+                                    onChange={(e) =>
                                       setLastNameInput(e.target.value)
                                     }
-                                    aria-label="Last Name"
                                   />
                                 </div>
                               </div>
@@ -148,8 +148,10 @@ const EditAddressForm = ({ address }) => {
                                 className="input"
                                 value={companyInput}
                                 type="text"
-                                onChange={e => setCompanyInput(e.target.value)}
                                 aria-label="Company"
+                                onChange={(e) =>
+                                  setCompanyInput(e.target.value)
+                                }
                               />
                             </div>
                           </div>
@@ -160,10 +162,12 @@ const EditAddressForm = ({ address }) => {
                             <div className="control">
                               <input
                                 className="input"
+                                aria-label="Address"
                                 value={addressInput}
                                 type="text"
-                                onChange={e => setAddressInput(e.target.value)}
-                                aria-label="Address"
+                                onChange={(e) =>
+                                  setAddressInput(e.target.value)
+                                }
                               />
                             </div>
                           </div>
@@ -174,12 +178,12 @@ const EditAddressForm = ({ address }) => {
                             <div className="control">
                               <input
                                 className="input"
+                                aria-label="Apartment, suite, etc."
                                 value={apartmentInput}
                                 type="text"
-                                onChange={e =>
+                                onChange={(e) =>
                                   setApartmentInput(e.target.value)
                                 }
-                                aria-label="Apartment, suite, etc."
                               />
                             </div>
                           </div>
@@ -192,10 +196,12 @@ const EditAddressForm = ({ address }) => {
                                 <div className="control">
                                   <input
                                     className="input"
+                                    aria-label="City"
                                     value={cityInput}
                                     type="text"
-                                    onChange={e => setCityInput(e.target.value)}
-                                    aria-label="City"
+                                    onChange={(e) =>
+                                      setCityInput(e.target.value)
+                                    }
                                   />
                                 </div>
                               </div>
@@ -209,15 +215,15 @@ const EditAddressForm = ({ address }) => {
                                   <div className="select">
                                     <select
                                       value={countryInput}
-                                      onChange={e =>
+                                      onBlur={(e) =>
                                         setCountryInput(e.target.value)
                                       }
                                       style={{
                                         minWidth: "140px",
-                                        maxWidth: "310px"
+                                        maxWidth: "310px",
                                       }}
                                     >
-                                      {countriesAll.map(country => (
+                                      {countriesAll.map((country) => (
                                         <option
                                           key={country.name}
                                           value={country.name}
@@ -238,10 +244,10 @@ const EditAddressForm = ({ address }) => {
                             <div className="control">
                               <input
                                 className="input"
+                                aria-label="Postal/Zip Code"
                                 value={zipInput}
                                 type="text"
-                                onChange={e => setZipInput(e.target.value)}
-                                aria-label="Postal/Zip Code"
+                                onChange={(e) => setZipInput(e.target.value)}
                               />
                             </div>
                           </div>
@@ -252,10 +258,10 @@ const EditAddressForm = ({ address }) => {
                             <div className="control">
                               <input
                                 className="input"
+                                aria-label="Phone"
                                 value={phoneInput}
                                 type="text"
-                                onChange={e => setPhoneInput(e.target.value)}
-                                aria-label="Phone"
+                                onChange={(e) => setPhoneInput(e.target.value)}
                               />
                             </div>
                           </div>
@@ -267,6 +273,7 @@ const EditAddressForm = ({ address }) => {
                               >
                                 <input
                                   type="checkbox"
+                                  aria-label="Set as default address"
                                   onChange={() =>
                                     setCheckDefaultAddress(!checkDefaultAddress)
                                   }
@@ -292,25 +299,25 @@ const EditAddressForm = ({ address }) => {
                                     firstName: firstNameInput,
                                     lastName: lastNameInput,
                                     phone: phoneInput,
-                                    zip: zipInput
-                                  }
-                                }
+                                    zip: zipInput,
+                                  },
+                                },
                               });
                               checkDefaultAddress &&
                                 customerDefaultAddressUpdate({
                                   variables: {
                                     customerAccessToken:
                                       customerAccessToken.accessToken,
-                                    addressId: address.id
-                                  }
-                                }).then(result => alert(result));
+                                    addressId: address.id,
+                                  },
+                                }).then((result) => alert(result));
                             }}
                           >
                             Update address
                           </button>
-                          <p onClick={() => setEditAdressForm(!editAdressForm)}>
+                          <button onClick={() => setEditAdressForm(!editAdressForm)}>
                             Cancel
-                          </p>
+                          </button>
                         </form>
                       );
                     }}

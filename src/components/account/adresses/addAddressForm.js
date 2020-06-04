@@ -80,8 +80,10 @@ const AddAddressForm = () => {
                               className="input"
                               value={firstNameInput}
                               type="text"
-                              onChange={e => setFirstNameInput(e.target.value)}
                               aria-label="First Name"
+                              onChange={(e) =>
+                                setFirstNameInput(e.target.value)
+                              }
                             />
                           </div>
                         </div>
@@ -96,8 +98,8 @@ const AddAddressForm = () => {
                               className="input"
                               value={lastNameInput}
                               type="text"
-                              onChange={e => setLastNameInput(e.target.value)}
                               aria-label="Last Name"
+                              onChange={(e) => setLastNameInput(e.target.value)}
                             />
                           </div>
                         </div>
@@ -112,8 +114,8 @@ const AddAddressForm = () => {
                           className="input"
                           value={companyInput}
                           type="text"
-                          onChange={e => setCompanyInput(e.target.value)}
                           aria-label="Company"
+                          onChange={(e) => setCompanyInput(e.target.value)}
                         />
                       </div>
                     </div>
@@ -126,8 +128,8 @@ const AddAddressForm = () => {
                           className="input"
                           value={addressInput}
                           type="text"
-                          onChange={e => setAddressInput(e.target.value)}
                           aria-label="Address"
+                          onChange={(e) => setAddressInput(e.target.value)}
                         />
                       </div>
                     </div>
@@ -140,8 +142,8 @@ const AddAddressForm = () => {
                           className="input"
                           value={apartmentInput}
                           type="text"
-                          onChange={e => setApartmentInput(e.target.value)}
-                          aria-label="Apartment, suite, etx."
+                          aria-label="Apartment, suite, etc."
+                          onChange={(e) => setApartmentInput(e.target.value)}
                         />
                       </div>
                     </div>
@@ -156,8 +158,8 @@ const AddAddressForm = () => {
                               className="input"
                               value={cityInput}
                               type="text"
-                              onChange={e => setCityInput(e.target.value)}
                               aria-label="City"
+                              onChange={(e) => setCityInput(e.target.value)}
                             />
                           </div>
                         </div>
@@ -171,10 +173,10 @@ const AddAddressForm = () => {
                             <div className="select">
                               <select
                                 value={countryInput}
-                                onChange={e => setCountryInput(e.target.value)}
+                                onBlur={(e) => setCountryInput(e.target.value)}
                                 style={{ minWidth: "140px", maxWidth: "310px" }}
                               >
-                                {countriesAll.map(country => (
+                                {countriesAll.map((country) => (
                                   <option value={country.name}>
                                     {country.name}
                                   </option>
@@ -194,8 +196,8 @@ const AddAddressForm = () => {
                           className="input"
                           value={zipInput}
                           type="text"
-                          onChange={e => setZipInput(e.target.value)}
                           aria-label="Postal/Zip Code"
+                          onChange={(e) => setZipInput(e.target.value)}
                         />
                       </div>
                     </div>
@@ -208,8 +210,8 @@ const AddAddressForm = () => {
                           className="input"
                           value={phoneInput}
                           type="text"
-                          onChange={e => setPhoneInput(e.target.value)}
                           aria-label="Phone"
+                          onChange={(e) => setPhoneInput(e.target.value)}
                         />
                       </div>
                     </div>
@@ -219,7 +221,10 @@ const AddAddressForm = () => {
                           className="checkbox"
                           htmlFor="checkboxDefaultAddress"
                         >
-                          <input type="checkbox" />
+                          <input
+                            type="checkbox"
+                            aria-label="Set as default address"
+                          />
                           Set as default address
                         </label>
                       </div>
@@ -239,19 +244,19 @@ const AddAddressForm = () => {
                               firstName: firstNameInput,
                               lastName: lastNameInput,
                               phone: phoneInput,
-                              zip: zipInput
-                            }
-                          }
-                        }).then(result => {
+                              zip: zipInput,
+                            },
+                          },
+                        }).then((result) => {
                           setAddAdressForm(!addAdressForm);
                         });
                       }}
                     >
                       Add adress
                     </button>
-                    <p onClick={() => setAddAdressForm(!addAdressForm)}>
+                    <button onClick={() => setAddAdressForm(!addAdressForm)}>
                       Cancel
-                    </p>
+                    </button>
                   </form>
                 );
               }}

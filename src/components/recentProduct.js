@@ -1,14 +1,9 @@
-import React, { useContext, useState, useEffect } from "react";
-import StoreContext from "../context/store";
+import React from "react";
 import ProductBox from "./productBox";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row } from "reactstrap";
 
 const ProductList = ({ data }) => {
   const { edges: products } = data.allShopifyProduct;
-
-  const context = useContext(StoreContext);
-  const [type, setType] = useState(context.filteredType);
-  const [sort, setSort] = useState(context.filteredSort);
 
   return (
     <Container>

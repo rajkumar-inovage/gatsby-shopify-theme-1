@@ -24,15 +24,15 @@ const OrdersList = ({ orders }) => {
               </tr>
             </thead>
             <tbody>
-              {orders.edges.map(order => (
+              {orders.edges.map((order) => (
                 <tr key={order.node.id}>
                   <td>
                     <button
                       className="button is-dark"
-                      onClick={() => (
-                        setSelectedOrder(order.node),
-                        setOnClickOrder(!onClickOrder)
-                      )}
+                      onClick={() => {
+                        setSelectedOrder(order.node);
+                        setOnClickOrder(!onClickOrder);
+                      }}
                     >
                       {order.node.name}
                     </button>
@@ -52,10 +52,11 @@ const OrdersList = ({ orders }) => {
         )}
       </div>
       <div className={onClickOrder ? "modal is-active" : "modal"}>
-        <div
+        <button
           class="modal-background"
           onClick={() => setOnClickOrder(!onClickOrder)}
-        ></div>
+          aria-label="onClickOrder"
+        ></button>
         <div class="modal-content" style={{ width: "auto", padding: "10px" }}>
           <section class="modal-card-body">
             {selectedOrder != null && <Order order={selectedOrder} />}

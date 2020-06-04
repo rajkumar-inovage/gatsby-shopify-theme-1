@@ -5,7 +5,6 @@ import ProductList from "../components/recentProduct";
 import { Container, Row, Col } from "reactstrap";
 import banner from "../assets/img/soap.jpg";
 import shop from "../assets/img/shop.jpg";
-import RecentProducts from "../components/RecentProducts";
 import RecentBlogs from "../components/RecentBlogs";
 import s1 from "../assets/img/s1.jpg"
 import s2 from "../assets/img/s2.jpg"
