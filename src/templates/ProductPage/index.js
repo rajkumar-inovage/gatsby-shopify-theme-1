@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { graphql, Link } from "gatsby";
+import PropTypes from "prop-types";
+import Img from "gatsby-image";
+import { Box } from "rebass";
 import {
   TabContent,
   TabPane,
@@ -11,7 +14,7 @@ import {
   Col,
   Alert,
   UncontrolledPopover,
-  PopoverBody
+  PopoverBody,
 } from "reactstrap";
 import {
   FacebookShareButton,
@@ -19,20 +22,19 @@ import {
   TwitterShareButton,
   FacebookIcon,
   PinterestIcon,
-  TwitterIcon
+  TwitterIcon,
 } from "react-share";
-import SEO from "~/components/seo";
-import ProductForm from "~/components/ProductForm";
-import { Img } from "~/utils/styles";
+import atob from "atob";
 import classnames from "classnames";
 import ReactHtmlParser from "react-html-parser";
-import atob from "atob";
+import ProductForm from "~/components/ProductForm";
 import RecommendedProducts from "~/components/RecommendedProducts";
+import SEO from "~/components/seo";
 
 const ProductPage = ({ data }) => {
+  const product = data.shopifyProduct;
   const shopName = "demo-soap.myshopify.com";
   const [shopID, setShopID] = useState();
-  const product = data.shopifyProduct;
   const productID = parseInt(
     atob(product.shopifyId)
       .split("/")
@@ -41,15 +43,17 @@ const ProductPage = ({ data }) => {
   const productHandle = product.handle;
   const productTitle = product.title;
   const productImg = product.images.length ? product.images[0].originalSrc : "";
-  const [productRating, setProductRating] = useState(0);
+  const currentImage = product.images[0];
+  const [activeTab, setActiveTab] = useState("1");
   const [responseColor, setResponseColor] = useState("");
   const [responseContent, setResponseContent] = useState(false);
   const [responseVisible, setResponseVisible] = useState(false);
   const [responseErrorVisible, setResponseErrorVisible] = useState(false);
   const showReviews = 5;
-  const [ratingData, setRatingData] = useState([]);
-  const [totalRating, setTotalRating] = useState(0);
   const [avgRating, setAvgRating] = useState(0);
+  const [ratingData, setRatingData] = useState([]);
+  const [productRating, setProductRating] = useState(0);
+  const [totalRating, setTotalRating] = useState(0);
   const dismissResponse = () => {
     setResponseVisible(false);
     setResponseContent(false);
@@ -57,17 +61,6 @@ const ProductPage = ({ data }) => {
   const dismissErrorResponse = () => {
     setResponseErrorVisible(false);
     setResponseContent(false);
-  };
-  const getDate = date => {
-    const Months = "January_February_March_April_May_June_July_August_September_October_November_December".split(
-      "_"
-    );
-    const msec = Date.parse(date);
-    const d = new Date(msec);
-    const month = Months[d.getMonth()];
-    const day = d.getDate();
-    const year = d.getFullYear();
-    return `${month} ${day}, ${year}`;
   };
   const response = (
     <Alert
@@ -89,11 +82,67 @@ const ProductPage = ({ data }) => {
       {responseContent}
     </Alert>
   );
-  const [activeTab, setActiveTab] = useState("1");
-
-  const toggle = tab => {
+  const getDate = (date) => {
+    const Months = "January_February_March_April_May_June_July_August_September_October_November_December".split(
+      "_"
+    );
+    const msec = Date.parse(date);
+    const d = new Date(msec);
+    const month = Months[d.getMonth()];
+    const day = d.getDate();
+    const year = d.getFullYear();
+    return `${month} ${day}, ${year}`;
+  };
+  const toggle = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);
   };
+  const fetchAllRating = useCallback(
+    async (URL) => {
+      const res = await fetch(URL, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      res
+        .json()
+        .then((responseJson) => {
+          console.log(responseJson);
+          const allRating = responseJson.data;
+          let sum = 0;
+          allRating.forEach(function(v) {
+            sum += v.rating;
+          });
+          setTotalRating(allRating.length);
+          setAvgRating((sum / allRating.length).toFixed(2));
+          setRatingData(allRating);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    []
+  );
+  const fetchShopID = useCallback(
+    async (URL) => {
+      const res = await fetch(URL);
+      res
+        .json()
+        .then((responseJson) => {
+          setShopID(responseJson.data.shopify_id);
+          fetchAllRating(
+            `//reviews.hulkapps.com/api/shop/${responseJson.data.shopify_id}/reviews/all?product_id=${productID}`
+          );
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    [productID, fetchAllRating]
+  );
+  useEffect(() => {
+    fetchShopID(`//reviews.hulkapps.com/api/shop?shopify_domain=${shopName}`);
+  }, [product, productID, fetchShopID]);
   const mouseOverRating = (event, selectedButton) => {
     event.preventDefault();
     const buttons = document.querySelectorAll(".rating-starts button");
@@ -115,7 +164,7 @@ const ProductPage = ({ data }) => {
   const changeRating = (event, selectedButton) => {
     event.preventDefault();
     const spans = document.querySelectorAll(".rating-starts button span");
-    spans.forEach(span => {
+    spans.forEach((span) => {
       span.classList.remove("fa-star");
       span.classList.add("fa-star-o");
     });
@@ -126,7 +175,7 @@ const ProductPage = ({ data }) => {
     }
     setProductRating(selectedButton + 1);
   };
-  const submitReview = event => {
+  const submitReview = (event) => {
     event.preventDefault();
     const reviewForm = event.target;
     const elements = event.target.elements;
@@ -140,20 +189,20 @@ const ProductPage = ({ data }) => {
       product_id: parseInt(elements.product_id.value),
       product_handle: elements.product_handle.value,
       product_title: elements.product_title.value,
-      product_image: elements.product_image.value
+      product_image: elements.product_image.value,
     };
-    const sendReview = async URL => {
+    const sendReview = async (URL) => {
       return await fetch(URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-requested-with": "XMLHttpRequest"
+          "x-requested-with": "XMLHttpRequest",
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       })
-        .then(response => {
+        .then((response) => {
           if (response.status === 200) {
-            response.json().then(responseJson => {
+            response.json().then((responseJson) => {
               setResponseVisible(true);
               setResponseColor("success");
               setResponseContent(
@@ -167,13 +216,13 @@ const ProductPage = ({ data }) => {
               const spans = document.querySelectorAll(
                 ".rating-starts button span"
               );
-              spans.forEach(span => {
+              spans.forEach((span) => {
                 span.classList.remove("fa-star");
                 span.classList.add("fa-star-o");
               });
             });
           } else if (response.status === 422) {
-            response.json().then(responseJson => {
+            response.json().then((responseJson) => {
               setResponseErrorVisible(true);
               setResponseColor("warning");
               setResponseContent(
@@ -181,7 +230,7 @@ const ProductPage = ({ data }) => {
                   <strong> {responseJson.message}</strong>{" "}
                   <ul className="mb-0 pl-4">
                     {" "}
-                    {Object.keys(responseJson.errors).map(error => (
+                    {Object.keys(responseJson.errors).map((error) => (
                       <li key={error}>{responseJson.errors[error][0]}</li>
                     ))}{" "}
                   </ul>
@@ -190,53 +239,12 @@ const ProductPage = ({ data }) => {
             });
           }
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
     };
     sendReview(`//reviews.hulkapps.com/api/shop/${shopID}/reviews`);
   };
-  useEffect(() => {
-    const fetchAllRating = async URL => {
-      const res = await fetch(URL, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      });
-      res
-        .json()
-        .then(responseJson => {
-          console.log(responseJson);
-          const allRating = responseJson.data;
-          let sum = 0;
-          allRating.forEach(function(v) {
-            sum += v.rating;
-          });
-          setTotalRating(allRating.length);
-          setAvgRating((sum / allRating.length).toFixed(2));
-          setRatingData(allRating);
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    };
-    const fetchShopID = async URL => {
-      const res = await fetch(URL);
-      res
-        .json()
-        .then(responseJson => {
-          setShopID(responseJson.data.shopify_id);
-          fetchAllRating(
-            `//reviews.hulkapps.com/api/shop/${responseJson.data.shopify_id}/reviews/all?product_id=${productID}`
-          );
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    };
-    fetchShopID(`//reviews.hulkapps.com/api/shop?shopify_domain=${shopName}`);
-  }, [productID]);
   return (
     <>
       <SEO title={product.title} description={product.description} />
@@ -244,8 +252,20 @@ const ProductPage = ({ data }) => {
         <Container>
           <Row className="mx-0 pt-3 pt-lg-5">
             <Col className="col-12 col-md-6">
-              {product.images.map(image => (
+              <Box
+                style={{ margin: "auto", marginTop: "0", boxShadow: "none" }}
+                className="img-hover-zoom--zoom-n-rotate img-hover-zoom"
+              >
                 <Img
+                  fluid={currentImage.localFile.childImageSharp.fluid}
+                  key={currentImage.localFile.id}
+                  alt={product.title}
+                  className="imgProduct"
+                />
+              </Box>
+              {product.images.map((image) => (
+                <Img
+                  className="d-none"
                   fluid={image.localFile.childImageSharp.fluid}
                   key={image.id}
                   alt={product.title}
@@ -262,7 +282,7 @@ const ProductPage = ({ data }) => {
                     <button
                       id="share"
                       style={{
-                        color: "rgba(0,0,0,0.4)"
+                        color: "rgba(0,0,0,0.4)",
                       }}
                       className="bg-transparent border-0 outline-none ml-0 ml-sm-0 ml-lg-4 ml-xl-4"
                     >
@@ -344,7 +364,7 @@ const ProductPage = ({ data }) => {
                       fontSize: "2rem",
                       textAlign: "center",
                       fontFamily: "josefinSans-Bold",
-                      fontWeight: 1000
+                      fontWeight: 1000,
                     }}
                   >
                     Description
@@ -360,7 +380,7 @@ const ProductPage = ({ data }) => {
                       fontSize: "2rem",
                       textAlign: "center",
                       fontFamily: "josefinSans-Bold",
-                      fontWeight: 1000
+                      fontWeight: 1000,
                     }}
                   >
                     Reviews
@@ -376,7 +396,7 @@ const ProductPage = ({ data }) => {
                       fontSize: "2rem",
                       textAlign: "center",
                       fontFamily: "josefinSans-Bold",
-                      fontWeight: 1000
+                      fontWeight: 1000,
                     }}
                   >
                     Shipping
@@ -414,7 +434,7 @@ const ProductPage = ({ data }) => {
                                 <h4
                                   className="color-primary erbaum-bold text-uppercase"
                                   style={{
-                                    fontSize: "16px"
+                                    fontSize: "16px",
                                   }}
                                 >
                                   {review.product_title}
@@ -444,7 +464,7 @@ const ProductPage = ({ data }) => {
                                 <p
                                   className="filson-pro-reg pt-2"
                                   style={{
-                                    fontSize: "14px"
+                                    fontSize: "14px",
                                   }}
                                 >
                                   <b className="color-primary">
@@ -469,7 +489,7 @@ const ProductPage = ({ data }) => {
                     <Col sm="6" className="px-3 px-lg-5">
                       <form
                         encType="multipart/form-data"
-                        onSubmit={e => submitReview(e)}
+                        onSubmit={(e) => submitReview(e)}
                         className="josefin-sans"
                       >
                         <h3
@@ -498,6 +518,7 @@ const ProductPage = ({ data }) => {
                               className="form-control rounded-0"
                               name="author"
                               id="author"
+                              aria-label="Name"
                               placeholder="Enter your name"
                               required={true}
                             />
@@ -517,6 +538,7 @@ const ProductPage = ({ data }) => {
                               className="form-control rounded-0"
                               name="email"
                               id="email"
+                              aria-label="Email"
                               placeholder="john.smith@example.com"
                               required={true}
                             />
@@ -537,11 +559,11 @@ const ProductPage = ({ data }) => {
                                 <button
                                   key={i}
                                   className="p-0 border-0 bg-transparent p-0 border-0 bg-transparent outline-none"
-                                  onMouseOver={e => mouseOverRating(e, i)}
-                                  onFocus={e => mouseOverRating(e, i)}
-                                  onMouseLeave={e => mouseLeaveRating(e, i)}
-                                  onBlur={e => mouseLeaveRating(e, i)}
-                                  onClick={e => changeRating(e, i)}
+                                  onMouseOver={(e) => mouseOverRating(e, i)}
+                                  onFocus={(e) => mouseOverRating(e, i)}
+                                  onMouseLeave={(e) => mouseLeaveRating(e, i)}
+                                  onBlur={(e) => mouseLeaveRating(e, i)}
+                                  onClick={(e) => changeRating(e, i)}
                                 >
                                   <span
                                     className="fa fa-star-o"
@@ -553,6 +575,7 @@ const ProductPage = ({ data }) => {
                             <input
                               type="hidden"
                               name="rating"
+                              aria-label="Rating"
                               value={productRating}
                             />
                           </div>
@@ -572,6 +595,7 @@ const ProductPage = ({ data }) => {
                               className="form-control rounded-0"
                               id="title"
                               name="title"
+                              aria-label="Review Title"
                               placeholder="Give your review a title"
                               required={true}
                             />
@@ -592,9 +616,10 @@ const ProductPage = ({ data }) => {
                               id="body"
                               placeholder="Write your comments here"
                               rows="10"
+                              aria-label="Body of Review"
                               required={true}
                               style={{
-                                resize: "none"
+                                resize: "none",
                               }}
                             ></textarea>
                           </div>
@@ -604,26 +629,31 @@ const ProductPage = ({ data }) => {
                             <input
                               type="hidden"
                               name="shopify_id"
+                              aria-label="shopify_id"
                               value={shopID}
                             />
                             <input
                               type="hidden"
                               name="product_id"
+                              aria-label="product_id"
                               value={productID}
                             />
                             <input
                               type="hidden"
                               name="product_handle"
+                              aria-label="product_handle"
                               value={productHandle}
                             />
                             <input
                               type="hidden"
                               name="product_title"
+                              aria-label="product_title"
                               value={productTitle}
                             />
                             <input
                               type="hidden"
                               name="product_image"
+                              aria-label="product_image"
                               value={productImg}
                             />
                             <button
@@ -695,10 +725,15 @@ const ProductPage = ({ data }) => {
     </>
   );
 };
+ProductPage.propTypes = {
+  addVariantToCart: PropTypes.func,
+};
+export default ProductPage;
 
 export const query = graphql`
-  query($handle: String!) {
-    shopifyProduct(handle: { eq: $handle }) {
+  query($id: String!) {
+    shopifyProduct(handle: { eq: $id }) {
+      handle
       id
       title
       handle
@@ -738,7 +773,7 @@ export const query = graphql`
         localFile {
           childImageSharp {
             fluid(maxWidth: 910) {
-              ...GatsbyImageSharpFluid_withWebp_tracedSVG
+              ...GatsbyImageSharpFluid_noBase64
             }
           }
         }
@@ -746,5 +781,3 @@ export const query = graphql`
     }
   }
 `;
-
-export default ProductPage;

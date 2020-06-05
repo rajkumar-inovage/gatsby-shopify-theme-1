@@ -80,10 +80,10 @@ exports.createPages = ({ graphql, actions }) => {
       const id = node.handle;
       createPage({
         path: `/product/${id}/`,
-        component: path.resolve(`./src/templates/product-page.js`),
+        component: path.resolve(`./src/templates/ProductPage/index.js`),
         context: {
-          id
-        }
+          id,
+        },
       });
     });
     result.data.allShopifyPage.nodes.forEach(({ handle }) => {

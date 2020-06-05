@@ -38,6 +38,7 @@
     "graphql": "^14.6.0",
     "graphql-tag": "^2.10.3",
     "isomorphic-fetch": "^2.2.1",
+    "jquery": "^3.5.1",
     "local-storage": "^2.0.0",
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
@@ -52,6 +53,7 @@
     "reactstrap": "^8.4.1",
     "rebass": "^4.0.7",
     "shopify-buy": "^2.10.0",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^4.4.1"
   },
   "devDependencies": {
