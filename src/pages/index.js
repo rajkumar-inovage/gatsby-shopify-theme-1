@@ -4,7 +4,6 @@ import { Link, graphql } from "gatsby";
 import ProductList from "../components/recentProduct";
 import banner from "../assets/img/soap.jpg";
 import shop from "../assets/img/shop.jpg";
-import RecentProducts from "../components/RecentProducts";
 import RecentBlogs from "../components/RecentBlogs";
 import Essentials from "../components/CollectionFilter/Essentials";
 import BathBomb from "../components/CollectionFilter/BathBombs";

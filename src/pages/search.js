@@ -32,8 +32,11 @@ export class SearchPage extends Component {
                     className="input p-4 josefin-sans"
                     name="value"
                     type="text"
+                    aria-label="Search"
                     value={this.state.document}
-                    onChange={e => this.setState({ document: e.target.value })}
+                    onChange={(e) =>
+                      this.setState({ document: e.target.value })
+                    }
                     placeholder="Search"
                     style={{fontSize:'1.3rem'}}
                   />
@@ -57,7 +60,7 @@ export class SearchPage extends Component {
               <div className="columns is-multiline ">
                 {products
                   .filter(
-                    p =>
+                    (p) =>
                       p.node.title
                         .toUpperCase()
                         .includes(this.state.document.toUpperCase()) ||

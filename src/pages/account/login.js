@@ -76,6 +76,7 @@ const LoginForm = () => {
                               <input
                                 className="input josefin-sans"
                                 type="email"
+                                aria-label="Email"
                                 id="loginEmail"
                                 onChange={(e) => setEmailReset(e.target.value)}
                               />
@@ -102,14 +103,14 @@ const LoginForm = () => {
                               </button>
                             </div>
                             <div className="field">
-                              <div
+                              <button
                                 className="control has-text-centered josefin-sans-b"
                                 onClick={(e) =>
                                   setPasswordForgot(!passwordForgot)
                                 }
                               >
-                                <p className="text-dark josefin-sans-b mt-4">Cancel</p>
-                              </div>
+                                <span>Cancel</span>
+                              </button>
                             </div>
                           </div>
                           </div>
@@ -147,6 +148,7 @@ const LoginForm = () => {
                               <input
                                 className="input josefin-sans"
                                 type="email"
+                                aria-label="Email"
                                 id="loginEmail"
                                 onChange={(e) => setEmail(e.target.value)}
                               />
@@ -163,20 +165,21 @@ const LoginForm = () => {
                               <input
                                 className="input josefin-sans"
                                 type="password"
+                                aria-label="Password"
                                 id="loginPassword"
                                 onChange={(e) => setPassword(e.target.value)}
                               />
                             </div>
                           </div>
                           <div className="field">
-                            <div
+                            <button
                               className="control has-text-centered"
                               onClick={(e) =>
                                 setPasswordForgot(!passwordForgot)
                               }
                             >
-                              <p className="josefin-sans-sb">Forgot your password? </p>
-                            </div>
+                              <span>Forgot your password? </span>
+                            </button>
                           </div>
                           <div className="field">
                             <div className="control has-text-centered">

@@ -1,10 +1,24 @@
 import { Link } from "gatsby";
-import React from "react";
-import { Container, Row, Col } from "reactstrap";
+import React, { useState } from "react";
+import { Container, Row, Col, Alert } from "reactstrap";
 import payment from "~/assets/img/payment.png";
 import ScrollUpButton from "react-scroll-up-button";
+import addToMailchimp from "gatsby-plugin-mailchimp";
 
-const Footer = data => {
+const Footer = (data) => {
+  const [email, setEmail] = useState("");
+  const [response, setResponse] = useState(null);
+  const dismissResponse = () => {
+    setResponse(null)
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const result = await addToMailchimp(email);
+    setResponse(result);
+  };
+  const handleChange = (e) => {
+    setEmail(e.target.value);
+  };
   return (
     <>
       <footer className="border border-bottom-0 border-left-0 border-right-0">
@@ -75,12 +89,28 @@ const Footer = data => {
                     Stay up to date with our latest creations and discounts!
                   </p>
                   <div className="single mt-3 mt-lg-4">
-                    <div className="input-group col-12 col-md-8 px-0 news-letter-form">
+                    {response !== null && (
+                      <Alert
+                        className="rounded-0"
+                        isOpen={response !== null}
+                        toggle={dismissResponse}
+                        color={
+                          response.result !== "error" ? "success" : "danger"
+                        }
+                      >
+                        {response.msg}
+                      </Alert>
+                    )}
+                    <form
+                      onSubmit={handleSubmit}
+                      className="input-group col-12 col-md-8 px-0 news-letter-form"
+                    >
                       <input
                         type="email"
                         aria-label="Email Address"
                         className="form-control josefin-sans"
                         placeholder="Your Email Address"
+                        onChange={handleChange}
                       />
                       <span className="input-group-btn">
                         <button
@@ -90,7 +120,7 @@ const Footer = data => {
                           SIGN UP
                         </button>
                       </span>
-                    </div>
+                    </form>
                   </div>
                 </div>
               </Col>

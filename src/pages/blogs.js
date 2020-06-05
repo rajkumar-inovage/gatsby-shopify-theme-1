@@ -3,11 +3,6 @@ import { useStaticQuery, graphql, Link } from 'gatsby'
 import { Container, Row, Col } from 'reactstrap'
 import ReactHtmlParser from 'react-html-parser'
 import SEO from '~/components/seo'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAngleRight,
-} from "@fortawesome/free-solid-svg-icons";
-
 
 const Blogs = () => {
   const MAX_LENGTH = 200

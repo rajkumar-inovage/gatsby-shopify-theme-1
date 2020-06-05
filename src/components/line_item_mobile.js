@@ -32,9 +32,12 @@ const LineItem_Mobile = props => {
           </p>
         </div>
         <div className="column is-1">
-          <p className="has-text-weight-normal delete" onClick={removeItem}>
+          <button
+            className="has-text-weight-normal delete"
+            onClick={removeItem}
+          >
             Delete
-          </p>
+          </button>
         </div>
       </div>
       <div className="columns is-mobile is-vcentered">

@@ -44,9 +44,9 @@ const Line_item = props => {
       <th>${line_item.variant.price}</th>
       <th>{`$${(line_item.quantity * line_item.variant.price).toFixed(2)}`}</th>
       <th>
-        <p className="has-text-weight-normal delete" onClick={removeItem}>
+        <button className="has-text-weight-normal delete" onClick={removeItem}>
           Delete
-        </p>
+        </button>
       </th>
     </tr>
   );

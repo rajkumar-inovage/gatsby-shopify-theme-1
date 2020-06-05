@@ -12,7 +12,6 @@ const CollectionsPage = ({ data }) => {
   const [gridClass, setGridClass] = useState("col-md-4");
   const [imgClass, setImgClass] = useState("col-md-12");
   const [cntClass, setCntClass] = useState("col-md-12");
-  const [cartClass, setCartClass] = useState("col-md-12");
   const [displayClass, setDisplayClass] = useState("d-unset");
   const [descClass, setDescClass] = useState("d-none");
   const [rowpriceClass, setRowpriceClass] = useState("d-inline-block");
@@ -34,7 +33,6 @@ const CollectionsPage = ({ data }) => {
       setDisplayClass("d-flex");
       setDescClass("d-flex");
       setImgClass("col-md-3");
-      setCartClass("col-md-3");
       setRowpriceClass("d-none");
     }
     if (size === 2) {
@@ -43,7 +41,6 @@ const CollectionsPage = ({ data }) => {
       setDisplayClass("d-unset");
       setDescClass("d-none");
       setImgClass("col-md-12");
-      setCartClass("d-none");
       setRowpriceClass("d-inline-block");
     }
     if (size === 3) {
@@ -52,7 +49,6 @@ const CollectionsPage = ({ data }) => {
       setDisplayClass("d-unset");
       setDescClass("d-none");
       setImgClass("col-md-12");
-      setCartClass("d-none");
       setRowpriceClass("d-inline-block");
     }
     if (size === 4) {
@@ -61,7 +57,6 @@ const CollectionsPage = ({ data }) => {
       setDisplayClass("d-unset");
       setDescClass("d-none");
       setImgClass("col-md-12");
-      setCartClass("d-none");
       setRowpriceClass("d-inline-block");
     }
   };
