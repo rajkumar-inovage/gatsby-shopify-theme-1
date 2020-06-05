@@ -102,7 +102,7 @@ const LoginForm = () => {
                                 SUBMIT
                               </button>
                             </div>
-                            <div className="field">
+                            <div className="field text-center mt-3">
                               <button
                                 className="control has-text-centered josefin-sans-b"
                                 onClick={(e) =>
@@ -171,7 +171,7 @@ const LoginForm = () => {
                               />
                             </div>
                           </div>
-                          <div className="field">
+                          <div className="field text-center">
                             <button
                               className="control has-text-centered"
                               onClick={(e) =>

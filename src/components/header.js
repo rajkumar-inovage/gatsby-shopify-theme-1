@@ -150,7 +150,7 @@ const Header = ({ siteTitle }) => {
               </Nav>
               <div className="navbar-end d-block d-lg-flex text-center pb-3 pb-lg-0">
               <div className="navbar-item d-inline-block">
-                <span className="has-text-dark is-size-5" onClick={openSearchBar} icon={faSearch}><i class="fa fa-search" aria-hidden="true"></i></span>
+                <span className="has-text-dark is-size-5" onClick={openSearchBar}  icon={faSearch}><i class="fa fa-search" aria-hidden="true"></i></span>
 
               </div>
               <div className="navbar-item d-inline-block">
@@ -180,7 +180,7 @@ const Header = ({ siteTitle }) => {
                             <div className="media-left">
                               <button
                                 onClick={e => handleRemove(e, lineItem.id)}
-                                className="btn btn-link p-0 color-primary"
+                                className="btn btn-link p-0 text-dark"
                                 title="Remove this item"
                               >
                                 <i className="fa fa-remove"></i>
@@ -195,21 +195,19 @@ const Header = ({ siteTitle }) => {
                               />
                             </div>
                             <div className="media-body">
-                              <span className="d-block color-primary fs-1">
+                              <span className="d-block text-dark fs-1 josefin-sans-b">
                                 {lineItem.title}
                               </span>
-                              <span className="d-block color-primary fs-1">
-                                {lineItem.variant.title}
-                              </span>
-                              <span className="text-dark fs-2 float-left">
+                              
+                              <span className="text-dark fs-2 float-left josefin-sans">
                                 X&nbsp;{lineItem.quantity}
                               </span>
-                              <span className="color-primary fs-2 float-right">
+                              <span className="color-primary fs-2 float-right josefin-sans-b">
                                 CAD&nbsp;
-                                <span className="color-primary fs-2">
+                                <span className="color-primary fs-2 josefin-sans">
                                   $&nbsp;
                                 </span>
-                                <span className="color-primary fs-2">
+                                <span className="color-primary fs-2 josefin-sans-b">
                                   {getLineItemTotal(
                                     lineItem.quantity,
                                     lineItem.variant.price
@@ -222,10 +220,10 @@ const Header = ({ siteTitle }) => {
                       ))}
                       <li className="list-group-item p-2 text-center border-left-0 border-right-0 mb-0 rounded-0">
                         <p className="text-center mb-0 color-primary">
-                          <strong>Subtotal: </strong>
-                          <span className="color-primary fs-2 font-weight-bold amount">
+                          <strong className="josefin-sans-b">Subtotal: </strong>
+                          <span className="text-dark josefin-sans-b fs-2 font-weight-bold amount">
                             CAD&nbsp;
-                            <span className="color-primary fs-2 font-weight-bold currencySymbol">
+                            <span className="text-dark josefin-sans fs-2 font-weight-bold currencySymbol">
                               $
                             </span>
                             {subtotalPrice}
@@ -233,22 +231,20 @@ const Header = ({ siteTitle }) => {
                         </p>
                       </li>
                       <li className="list-group-item p-2 text-center border-0 rounded-0">
-                        <Link
-                          to="/cart/"
-                          className="btn btn-custom-secondary font-weight-bold btn-sm text-dark mx-1"
-                        >
+                        <Link to="/cart/" className="btn btn-custom-secondary josefin-sans-b font-weight-bold btn-sm  mx-1" style={{color:'#000'}}>
                           View Cart
                         </Link>
                         <button
                           onClick={handleCheckout}
-                          className="btn btn-checkout btn-sm font-weight-bold space-1 text-dark mx-1"
+                          className="btn btn-checkout josefin-sans-b btn-sm font-weight-bold space-1 text-dark mx-1"
+                          style={{color:'#000'}}
                         >
                           Checkout
                         </button>
                       </li>
                     </ul>
                   ) : (
-                    <p className="text-center mb-0 color-primary">
+                    <p className="text-center mb-0 color-primary josefin-sans">
                       Cart is Empty!
                     </p>
                   )}

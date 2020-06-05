@@ -698,18 +698,29 @@ const ProductPage = ({ data }) => {
               style={{ fontSize: "1.2rem" }}
             >
               <strong style={{ color: "#000" }}>Categories: </strong>
-              <Link to=""></Link>
+              <Link
+                to="/collections/fragrant/"
+                className="text-decoration-none text-dark px-1"
+              >
+                 Fragrant
+              </Link>,
               <Link
                 to="/collections/recommended-products-seguno/"
-                className="text-decoration-none text-dark"
+                className="text-decoration-none text-dark px-1"
               >
                 Recommended products
+              </Link>,
+              <Link
+                to="/collections/new/"
+                className="text-decoration-none text-dark px-1"
+              >
+                Trending
               </Link>
             </p>
           </Row>
         </Container>
       </section>
-      <section>
+      <section className="mt-5">
         <Container>
           <Row className="mx-0">
             <h2

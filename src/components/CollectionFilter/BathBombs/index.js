@@ -1,10 +1,7 @@
-import SEO from "~/components/seo";
-import { Container, Row, Col } from "reactstrap";
-import React, { useContext, useState } from "react";
+import {Row, Col } from "reactstrap";
+import React, { useContext } from "react";
 import { graphql, Link, useStaticQuery } from "gatsby";
 import StoreContext from "~/context/store";
-import GridIcon from "~/components/grid-icon";
-import ListIcon from "~/components/list-icon";
 
 const BathBombs = () => {
   const context = useContext(StoreContext);
