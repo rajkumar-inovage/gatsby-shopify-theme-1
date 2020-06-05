@@ -54,7 +54,7 @@ const AddAddressForm = () => {
   return (
     <>
       <button
-        className="button is-dark josefin-sans-b"
+        className="button is-dark"
         onClick={() => setAddAdressForm(!addAdressForm)}
       >
         Add a new adress
@@ -66,117 +66,118 @@ const AddAddressForm = () => {
               {customerAddressCreate => {
                 return (
                   <form>
-                    <h1 className="subtitle is-uppercase has-text-weight-semibold josefin-sans-b">
+                    <h1 className="subtitle is-uppercase has-text-weight-semibold ">
                       ADD A NEW ADDRESS
                     </h1>
                     <div className="columns">
                       <div className="column">
                         <div className="field">
-                          <label className="label josefin-sans-b" htmlFor="firstNameInput">
+                          <label className="label" htmlFor="firstNameInput">
                             First Name
                           </label>
                           <div className="control">
                             <input
-                              className="input josefin-sans"
+                              className="input"
                               value={firstNameInput}
                               type="text"
-                              onChange={e => setFirstNameInput(e.target.value)}
                               aria-label="First Name"
+                              onChange={(e) =>
+                                setFirstNameInput(e.target.value)
+                              }
                             />
                           </div>
                         </div>
                       </div>
                       <div className="column">
                         <div className="field">
-                          <label className="label josefin-sans-b" htmlFor="lastNameInput">
+                          <label className="label" htmlFor="lastNameInput">
                             Last Name
                           </label>
                           <div className="control">
                             <input
-                              className="input josefin-sans"
+                              className="input"
                               value={lastNameInput}
                               type="text"
-                              onChange={e => setLastNameInput(e.target.value)}
                               aria-label="Last Name"
+                              onChange={(e) => setLastNameInput(e.target.value)}
                             />
                           </div>
                         </div>
                       </div>
                     </div>
                     <div className="field">
-                      <label className="label josefin-sans-b" htmlFor="companyInput">
+                      <label className="label" htmlFor="companyInput">
                         Company
                       </label>
                       <div className="control">
                         <input
-                          className="input josefin-sans"
+                          className="input"
                           value={companyInput}
                           type="text"
-                          onChange={e => setCompanyInput(e.target.value)}
                           aria-label="Company"
+                          onChange={(e) => setCompanyInput(e.target.value)}
                         />
                       </div>
                     </div>
                     <div className="field">
-                      <label className="label josefin-sans-b" htmlFor="addressInput">
+                      <label className="label" htmlFor="addressInput">
                         Address
                       </label>
                       <div className="control">
                         <input
-                          className="input josefin-sans"
+                          className="input"
                           value={addressInput}
                           type="text"
-                          onChange={e => setAddressInput(e.target.value)}
                           aria-label="Address"
+                          onChange={(e) => setAddressInput(e.target.value)}
                         />
                       </div>
                     </div>
                     <div className="field">
-                      <label className="label josefin-sans-b" htmlFor="apartmentInput">
+                      <label className="label" htmlFor="apartmentInput">
                         Apartment, suite, etc.
                       </label>
                       <div className="control">
                         <input
-                          className="input josefin-sans"
+                          className="input"
                           value={apartmentInput}
                           type="text"
-                          onChange={e => setApartmentInput(e.target.value)}
-                          aria-label="Apartment, suite, etx."
+                          aria-label="Apartment, suite, etc."
+                          onChange={(e) => setApartmentInput(e.target.value)}
                         />
                       </div>
                     </div>
                     <div className="columns">
                       <div className="column">
                         <div className="field">
-                          <label className="label josefin-sans-b" htmlFor="cityInput">
+                          <label className="label" htmlFor="cityInput">
                             City
                           </label>
                           <div className="control">
                             <input
-                              className="input josefin-sans"
+                              className="input"
                               value={cityInput}
                               type="text"
-                              onChange={e => setCityInput(e.target.value)}
                               aria-label="City"
+                              onChange={(e) => setCityInput(e.target.value)}
                             />
                           </div>
                         </div>
                       </div>
                       <div className="column">
                         <div className="field">
-                          <label className="label josefin-sans-b" htmlFor="countryInput">
+                          <label className="label" htmlFor="countryInput">
                             Country
                           </label>
                           <div className="control">
                             <div className="select">
                               <select
-                                className="josefin-sans"
                                 value={countryInput}
-                                onChange={e => setCountryInput(e.target.value)}
+                                onBlur={(e) => setCountryInput(e.target.value)}
                                 style={{ minWidth: "140px", maxWidth: "310px" }}
                               >
-                                {countriesAll.map(country => (
-                                  <option className="josefin-sans" value={country.name}>
+                                {countriesAll.map((country) => (
+                                  <option value={country.name}>
                                     {country.name}
                                   </option>
                                 ))}
@@ -187,46 +188,49 @@ const AddAddressForm = () => {
                       </div>
                     </div>
                     <div className="field">
-                      <label className="label josefin-sans-b" htmlFor="zipInput">
+                      <label className="label" htmlFor="zipInput">
                         Postal/Zip Code
                       </label>
                       <div className="control">
                         <input
-                          className="input josefin-sans"
+                          className="input"
                           value={zipInput}
                           type="text"
-                          onChange={e => setZipInput(e.target.value)}
                           aria-label="Postal/Zip Code"
+                          onChange={(e) => setZipInput(e.target.value)}
                         />
                       </div>
                     </div>
                     <div className="field">
-                      <label className="label josefin-sans-b" htmlFor="phoneInput">
+                      <label className="label" htmlFor="phoneInput">
                         Phone
                       </label>
                       <div className="control">
                         <input
-                          className="input josefin-sans"
+                          className="input"
                           value={phoneInput}
                           type="text"
-                          onChange={e => setPhoneInput(e.target.value)}
                           aria-label="Phone"
+                          onChange={(e) => setPhoneInput(e.target.value)}
                         />
                       </div>
                     </div>
                     <div className="field">
                       <div className="control">
                         <label
-                          className="checkbox josefin-sans-b"
+                          className="checkbox"
                           htmlFor="checkboxDefaultAddress"
                         >
-                          <input type="checkbox" />
+                          <input
+                            type="checkbox"
+                            aria-label="Set as default address"
+                          />
                           Set as default address
                         </label>
                       </div>
                     </div>
                     <button
-                      className="button is-dark josefin-sans-b"
+                      className="button is-dark"
                       onClick={() => {
                         customerAddressCreate({
                           variables: {
@@ -240,19 +244,19 @@ const AddAddressForm = () => {
                               firstName: firstNameInput,
                               lastName: lastNameInput,
                               phone: phoneInput,
-                              zip: zipInput
-                            }
-                          }
-                        }).then(result => {
+                              zip: zipInput,
+                            },
+                          },
+                        }).then((result) => {
                           setAddAdressForm(!addAdressForm);
                         });
                       }}
                     >
                       Add adress
                     </button>
-                    <p onClick={() => setAddAdressForm(!addAdressForm)} className="josefin-sans-b">
+                    <button onClick={() => setAddAdressForm(!addAdressForm)}>
                       Cancel
-                    </p>
+                    </button>
                   </form>
                 );
               }}
