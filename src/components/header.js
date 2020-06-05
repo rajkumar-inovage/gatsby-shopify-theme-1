@@ -1,7 +1,7 @@
 import { Link } from "gatsby"; /* eslint-disable */
 import PropTypes from "prop-types";
 import React, { useContext, useState, useEffect } from "react";
-import StoreContext from "../context/store";
+import StoreContext from '~/context/store'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faShoppingBag,
@@ -31,8 +31,44 @@ const countQuantity = (lineItems) => {
 };
 
 const Header = ({ siteTitle }) => {
+  
+
   const context = useContext(StoreContext);
-  const { checkout } = context;
+  const {removeLineItem, client, checkout } = context;
+  
+
+  const [cartCount, setCartCount] = useState(0)
+  const [isOpen, setIsOpen] = useState(false)
+  const toggle = () => setIsOpen(!isOpen)
+  const getLineItemTotal = (quantity, variantPrice) => {
+    const lineItemTotal = quantity * variantPrice
+    return lineItemTotal.toFixed(2)
+  }
+  const getCartCount = () => {
+    if (cartCount !== 0) {
+      return cartCount
+    } else {
+      return ''
+    }
+  }
+  const handleRemove = (event, lineItemId) => {
+    removeLineItem(client, checkout.id, lineItemId).then(() => {
+      setCartCount(cartCount - 1)
+    })
+  }
+  const handleCheckout = () => {
+    window.open(checkout.webUrl)
+  }
+  const lineItems = checkout.lineItems
+  const subtotalPrice = checkout.subtotalPrice
+  useEffect(() => {
+    if (checkout.lineItems.length > 0) {
+      setCartCount(checkout.lineItems.length)
+    }
+  }, [checkout])
+
+  
+ 
   const [quantity, setQuantity] = useState(
     countQuantity(checkout ? checkout.lineItems : [])
   );
@@ -49,8 +85,8 @@ const Header = ({ siteTitle }) => {
   const closeSearchBar = () => {
     setModal(false);
   };
-   const [isOpen, setIsOpen] = useState(false)
-  const toggle = () => setIsOpen(!isOpen)
+  
+  
   const closeNav = () => setIsOpen(false)
  
 
@@ -114,21 +150,110 @@ const Header = ({ siteTitle }) => {
               </Nav>
               <div className="navbar-end d-block d-lg-flex text-center pb-3 pb-lg-0">
               <div className="navbar-item d-inline-block">
-                <FontAwesomeIcon className="has-text-dark is-size-5" onClick={openSearchBar} icon={faSearch}/>
+                <span className="has-text-dark is-size-5" onClick={openSearchBar} icon={faSearch}><i class="fa fa-search" aria-hidden="true"></i></span>
+
               </div>
               <div className="navbar-item d-inline-block">
                 <Link aria-label="cart" to="/account/login">
-                  <FontAwesomeIcon icon={faUser} className="is-size-5 has-text-dark"/>
+                  <span icon={faUser} className="is-size-5 has-text-dark"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
                 </Link>
               </div>
-              <div className="navbar-item d-inline-block">
-                <Link aria-label="cart" to="/cart"> {quantity > 0 ? (
-                    <i data-badge="0" className="fas fa-shopping-bag has-text-dark is-size-5"></i>
+              
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav className="cart position-relative">
+                <i class="fa fa-shopping-cart text-dark" aria-hidden="true" style={{fontSize:'1.2rem'}}></i>
+                  <span className="position-absolute cart-counter text-dark josefin-sans pl-2" style={{top:'-3px'}}>{getCartCount()}</span>
+                </DropdownToggle>
+                <DropdownMenu className="dropdown-menu-right rounded-0">
+                  {lineItems.length > 0 ? (
+                    <ul className="list-group">
+                      {lineItems.map((lineItem, index) => (
+                        <li
+                          key={index}
+                          className={
+                            index > 0
+                              ? 'list-group-item p-2 border-left-0 border-right-0 border-bottom-0 rounded-0'
+                              : 'list-group-item p-2 border-0 rounded-0'
+                          }
+                        >
+                          <div className="media">
+                            <div className="media-left">
+                              <button
+                                onClick={e => handleRemove(e, lineItem.id)}
+                                className="btn btn-link p-0 color-primary"
+                                title="Remove this item"
+                              >
+                                <i className="fa fa-remove"></i>
+                              </button>
+                            </div>
+                            <div className="media-left">
+                              <img
+                                src={lineItem.variant.image.src}
+                                alt=""
+                                className="img-fluid"
+                                style={{ maxWidth: '70px' }}
+                              />
+                            </div>
+                            <div className="media-body">
+                              <span className="d-block color-primary fs-1">
+                                {lineItem.title}
+                              </span>
+                              <span className="d-block color-primary fs-1">
+                                {lineItem.variant.title}
+                              </span>
+                              <span className="text-dark fs-2 float-left">
+                                X&nbsp;{lineItem.quantity}
+                              </span>
+                              <span className="color-primary fs-2 float-right">
+                                CAD&nbsp;
+                                <span className="color-primary fs-2">
+                                  $&nbsp;
+                                </span>
+                                <span className="color-primary fs-2">
+                                  {getLineItemTotal(
+                                    lineItem.quantity,
+                                    lineItem.variant.price
+                                  )}
+                                </span>
+                              </span>
+                            </div>
+                          </div>
+                        </li>
+                      ))}
+                      <li className="list-group-item p-2 text-center border-left-0 border-right-0 mb-0 rounded-0">
+                        <p className="text-center mb-0 color-primary">
+                          <strong>Subtotal: </strong>
+                          <span className="color-primary fs-2 font-weight-bold amount">
+                            CAD&nbsp;
+                            <span className="color-primary fs-2 font-weight-bold currencySymbol">
+                              $
+                            </span>
+                            {subtotalPrice}
+                          </span>
+                        </p>
+                      </li>
+                      <li className="list-group-item p-2 text-center border-0 rounded-0">
+                        <Link
+                          to="/cart/"
+                          className="btn btn-custom-secondary font-weight-bold btn-sm text-dark mx-1"
+                        >
+                          View Cart
+                        </Link>
+                        <button
+                          onClick={handleCheckout}
+                          className="btn btn-checkout btn-sm font-weight-bold space-1 text-dark mx-1"
+                        >
+                          Checkout
+                        </button>
+                      </li>
+                    </ul>
                   ) : (
-                    <FontAwesomeIcon icon={faShoppingBag} className="is-size-5 has-text-dark"/>
+                    <p className="text-center mb-0 color-primary">
+                      Cart is Empty!
+                    </p>
                   )}
-                </Link>
-              </div>
+                </DropdownMenu>
+              </UncontrolledDropdown>
             </div>
           </Collapse>
           

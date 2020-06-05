@@ -208,7 +208,7 @@ const CollectionsPage = ({ data }) => {
                       <div className={cntClass}>
                         <div className="tp-details">
                           <div className="review-and-price d-block mt-3">
-                            <span className="star-value d-inline-block w-50 pl-2 pl-lg-3">
+                            <span className="star-value d-none w-50 pl-2 pl-lg-3">
                               <i className="fa fa-star"></i>
                               <i className="fa fa-star"></i>
                               <i className="fa fa-star"></i>
@@ -218,7 +218,7 @@ const CollectionsPage = ({ data }) => {
                             <span
                               className={
                                 rowpriceClass +
-                                " price josefin-sans-sb text-right w-50 pr-2 pr-lg-3"
+                                " price josefin-sans-sb text-right w-100 pr-2 pr-lg-3"
                               }
                               style={{ fontSize: "1.2rem", color: "#000" }}
                             >

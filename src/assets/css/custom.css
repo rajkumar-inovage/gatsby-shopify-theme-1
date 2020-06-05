@@ -287,6 +287,14 @@ body .news-letter-form input:focus {
 	padding-left: 5px;
 }
 
+.tab-outer .tab-menu li .nav-link{
+	border:2px solid transparent;
+	border-radius: 0px;
+}
+.tab-outer .tab-menu li .nav-link.active {
+	border-top: 2px solid #000;
+}
+
 #gender2 {
 	border: 1px solid #000 !important;
 	border-radius: 0px;
@@ -427,7 +435,6 @@ body .news-letter-form input:focus {
 	text-align: center;
 	outline: none;
 	font-size: 20px;
-	line-height: 2;
 	font-weight: 400;
 	height: 30px;
 }

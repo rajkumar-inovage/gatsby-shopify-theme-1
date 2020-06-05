@@ -1,17 +1,36 @@
-import React from "react";
+import React, {useState} from "react";
 import SEO from "../components/seo";
 import { Link, graphql } from "gatsby";
 import ProductList from "../components/recentProduct";
-import { Container, Row, Col } from "reactstrap";
 import banner from "../assets/img/soap.jpg";
 import shop from "../assets/img/shop.jpg";
 import RecentBlogs from "../components/RecentBlogs";
+import Essentials from "../components/CollectionFilter/Essentials";
+import BathBomb from "../components/CollectionFilter/BathBombs";
+import Donut from "../components/CollectionFilter/Donut";
 import s1 from "../assets/img/s1.jpg"
 import s2 from "../assets/img/s2.jpg"
 import s3 from "../assets/img/s3.jpg"
 import s4 from "../assets/img/s4.jpg"
+import classnames from 'classnames'
+import {
+  TabContent,
+  TabPane,
+  Nav,
+  NavItem,
+  NavLink,
+  Container,
+  Row,
+  Col,
+ 
+} from 'reactstrap'
 
 const IndexPage = ({ data }) => {
+  const [activeTab, setActiveTab] = useState('1')
+
+  const toggle = tab => {
+    if (activeTab !== tab) setActiveTab(tab)
+  }
   return (
     <>
       <SEO title="Home" />
@@ -85,6 +104,86 @@ const IndexPage = ({ data }) => {
           </div>
         </Container>
       </section>
+      <section className="py-5">
+        <Container>
+          <Row className="mx-0">
+            <div className="w-100">
+                  <div className="tab-outer d-block d-md-inline-flex w-100">
+                    <h2
+                      className="josefin-sans-b mb-3 col-12 col-md-5 col-lg-6"
+                      style={{ fontSize: "2.5rem", color: "#000" }}
+                    >
+                      Our Collections
+                    </h2>
+                    <Nav
+                      tabs
+                      className="px-0 col-12 col-md-7 col-lg-6 m-0 text-center tab-menu d-block no-border"
+                    >
+                      <NavItem className="d-inline-block">
+                        <NavLink
+                          className={classnames({ active: activeTab === '1' })}
+                          onClick={() => {
+                            toggle('1')
+                          }}
+                          style={{
+                            fontSize: '1.7rem',
+                            textAlign: 'center',
+                            fontFamily: 'josefinSans-Bold',
+                            fontWeight: 1000,
+                          }}
+                        >
+                          Essentials
+                        </NavLink>
+                      </NavItem>
+                      <NavItem className="d-inline-block">
+                        <NavLink
+                          className={classnames({ active: activeTab === '2' })}
+                          onClick={() => {
+                            toggle('2')
+                          }}
+                          style={{
+                            fontSize: '1.7rem',
+                            textAlign: 'center',
+                            fontFamily: 'josefinSans-Bold',
+                            fontWeight: 1000,
+                          }}
+                        >
+                          Donuts
+                        </NavLink>
+                      </NavItem>
+                      <NavItem className="d-inline-block">
+                        <NavLink
+                          className={classnames({ active: activeTab === '3' })}
+                          onClick={() => {
+                            toggle('3')
+                          }}
+                          style={{
+                            fontSize: '1.7rem',
+                            textAlign: 'center',
+                            fontFamily: 'josefinSans-Bold',
+                            fontWeight: 1000,
+                          }}
+                        >
+                          Bath Bombs
+                        </NavLink>
+                      </NavItem>
+                    </Nav>
+                  </div>
+              <TabContent className="pt-3 pt-lg-5" activeTab={activeTab}>
+                <TabPane tabId="1">
+                    <Essentials />
+                </TabPane>
+                <TabPane tabId="2">
+                  <Donut />
+                </TabPane>
+                <TabPane tabId="3">
+                  <BathBomb />
+                </TabPane>
+              </TabContent>
+            </div>
+          </Row>
+        </Container>
+      </section>
       <section className="py-3 py-lg-5">
         <Container>
           <Row className="mx-0">
@@ -151,6 +250,7 @@ const IndexPage = ({ data }) => {
           </Row>
         </Container>
       </section>
+      
       <section className="py-3 py-lg-5">
         <RecentBlogs />
       </section>
