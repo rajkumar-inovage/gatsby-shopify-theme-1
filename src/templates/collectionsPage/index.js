@@ -94,7 +94,7 @@ const CollectionsPage = ({ data }) => {
               </div>
               <div className="collection-title mt-4 d-inline-flex">
                 <Link
-                  to=""
+                  to="/collections"
                   className="text-decoration-none d-none d-lg-block"
                   style={{ color: "#000" }}
                 >

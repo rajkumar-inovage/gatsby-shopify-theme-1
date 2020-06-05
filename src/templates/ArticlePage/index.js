@@ -43,6 +43,14 @@ const ArticlePage = ({ data }) => {
                     {" "}
                     Home
                   </Link>
+                  <span> / </span>
+                  <Link
+                    to="/blogs"
+                    className="text-decoration-none"
+                    style={{ color: "#000" }}
+                  >
+                    <span>Blogs</span>
+                  </Link>
                 </span>{" "}
                 / <span> {data.shopifyArticle.title}</span>
               </div>
@@ -52,7 +60,7 @@ const ArticlePage = ({ data }) => {
                   style={{
                     fontSize: "3rem",
                     color: "#000",
-                    lineHeight: "24px"
+                    lineHeight: "24px",
                   }}
                 >
                   {data.shopifyArticle.title}
@@ -78,22 +86,42 @@ const ArticlePage = ({ data }) => {
                     className="d-inline-block mx-3 josefin-sans-b"
                     style={{ fontSize: "1.3rem" }}
                   >
-                    <span className="pr-2 josefin-sans-sb">In</span><Link to="/blogs/" className="pl-2 text-decoration-none text-dark">Blogs</Link>
+                    <span className="pr-2 josefin-sans-sb">In</span>
+                    <Link
+                      to="/blogs/"
+                      className="pl-2 text-decoration-none text-dark"
+                    >
+                      Blogs
+                    </Link>
                   </li>
                   <li
                     className="d-inline-block mx-3 josefin-sans-b"
                     style={{ fontSize: "1.3rem" }}
                   >
-                    <button id="share" style={{color: 'rgba(0,0,0,0.4)'}} className="bg-transparent border-0 outline-none">
+                    <button
+                      id="share"
+                      style={{ color: "rgba(0,0,0,0.4)" }}
+                      className="bg-transparent border-0 outline-none"
+                    >
                       <span className="pr-2 josefin-sans-sb text-dark">
                         <i className="fa fa-share-alt pr-2"></i>Share
                       </span>
                     </button>
-                    <UncontrolledPopover placement="left" trigger="legacy" target="share">
+                    <UncontrolledPopover
+                      placement="left"
+                      trigger="legacy"
+                      target="share"
+                    >
                       <PopoverBody>
-                        <FacebookShareButton url={URL} className="p-1"><FacebookIcon size={25} round={true}/></FacebookShareButton>
-                        <TwitterShareButton url={URL} className="p-1"><TwitterIcon size={25} round={true}/></TwitterShareButton>
-                        <PinterestShareButton url={URL} className="p-1"><PinterestIcon size={25} round={true}/></PinterestShareButton>
+                        <FacebookShareButton url={URL} className="p-1">
+                          <FacebookIcon size={25} round={true} />
+                        </FacebookShareButton>
+                        <TwitterShareButton url={URL} className="p-1">
+                          <TwitterIcon size={25} round={true} />
+                        </TwitterShareButton>
+                        <PinterestShareButton url={URL} className="p-1">
+                          <PinterestIcon size={25} round={true} />
+                        </PinterestShareButton>
                       </PopoverBody>
                     </UncontrolledPopover>
                   </li>
