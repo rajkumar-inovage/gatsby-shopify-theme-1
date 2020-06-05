@@ -77,7 +77,7 @@ const EditAddressForm = ({ address }) => {
   return (
     <>
       <button
-        className="button is-dark"
+        className="button is-dark josefin-sans-b"
         onClick={() => setEditAdressForm(!editAdressForm)}
       >
         EDIT
@@ -92,21 +92,21 @@ const EditAddressForm = ({ address }) => {
                     {customerDefaultAddressUpdate => {
                       return (
                         <form>
-                          <h1 className="subtitle is-uppercase has-text-weight-semibold ">
+                          <h1 className="subtitle is-uppercase has-text-weight-semibold josefin-sans-b">
                             EDIT ADDRESS
                           </h1>
                           <div className="columns">
                             <div className="column">
                               <div className="field">
                                 <label
-                                  className="label"
+                                  className="label josefin-sans-b"
                                   htmlFor="firstNameInput"
                                 >
                                   First Name
                                 </label>
                                 <div className="control">
                                   <input
-                                    className="input"
+                                    className="input josefin-sans"
                                     value={firstNameInput}
                                     type="text"
                                     onChange={e =>
@@ -120,14 +120,14 @@ const EditAddressForm = ({ address }) => {
                             <div className="column">
                               <div className="field">
                                 <label
-                                  className="label"
+                                  className="label josefin-sans-b"
                                   htmlFor="lastNameInput"
                                 >
                                   Last Name
                                 </label>
                                 <div className="control">
                                   <input
-                                    className="input"
+                                    className="input josefin-sans"
                                     value={lastNameInput}
                                     type="text"
                                     onChange={e =>
@@ -140,12 +140,12 @@ const EditAddressForm = ({ address }) => {
                             </div>
                           </div>
                           <div className="field">
-                            <label className="label" htmlFor="companyInput">
+                            <label className="label josefin-sans-b" htmlFor="companyInput">
                               Company
                             </label>
                             <div className="control">
                               <input
-                                className="input"
+                                className="input josefin-sans"
                                 value={companyInput}
                                 type="text"
                                 onChange={e => setCompanyInput(e.target.value)}
@@ -154,12 +154,12 @@ const EditAddressForm = ({ address }) => {
                             </div>
                           </div>
                           <div className="field">
-                            <label className="label" htmlFor="addressInput">
+                            <label className="label josefin-sans-b" htmlFor="addressInput">
                               Address
                             </label>
                             <div className="control">
                               <input
-                                className="input"
+                                className="input josefin-sans"
                                 value={addressInput}
                                 type="text"
                                 onChange={e => setAddressInput(e.target.value)}
@@ -168,12 +168,12 @@ const EditAddressForm = ({ address }) => {
                             </div>
                           </div>
                           <div className="field">
-                            <label className="label" htmlFor="apartmentInput">
+                            <label className="label josefin-sans-b" htmlFor="apartmentInput">
                               Apartment, suite, etc.
                             </label>
                             <div className="control">
                               <input
-                                className="input"
+                                className="input josefin-sans"
                                 value={apartmentInput}
                                 type="text"
                                 onChange={e =>
@@ -186,12 +186,12 @@ const EditAddressForm = ({ address }) => {
                           <div className="columns">
                             <div className="column">
                               <div className="field">
-                                <label className="label" htmlFor="cityInput">
+                                <label className="label josefin-sans-b" htmlFor="cityInput">
                                   City
                                 </label>
                                 <div className="control">
                                   <input
-                                    className="input"
+                                    className="input josefin-sans"
                                     value={cityInput}
                                     type="text"
                                     onChange={e => setCityInput(e.target.value)}
@@ -202,7 +202,7 @@ const EditAddressForm = ({ address }) => {
                             </div>
                             <div className="column">
                               <div className="field">
-                                <label className="label" htmlFor="countryInput">
+                                <label className="label josefin-sans-b" htmlFor="countryInput">
                                   Country
                                 </label>
                                 <div className="control">
@@ -219,6 +219,7 @@ const EditAddressForm = ({ address }) => {
                                     >
                                       {countriesAll.map(country => (
                                         <option
+                                         className="josefin-sans"
                                           key={country.name}
                                           value={country.name}
                                         >
@@ -232,12 +233,12 @@ const EditAddressForm = ({ address }) => {
                             </div>
                           </div>
                           <div className="field">
-                            <label className="label" htmlFor="zipInput">
+                            <label className="label josefin-sans-b" htmlFor="zipInput">
                               Postal/Zip Code
                             </label>
                             <div className="control">
                               <input
-                                className="input"
+                                className="input josefin-sans"
                                 value={zipInput}
                                 type="text"
                                 onChange={e => setZipInput(e.target.value)}
@@ -246,12 +247,12 @@ const EditAddressForm = ({ address }) => {
                             </div>
                           </div>
                           <div className="field">
-                            <label className="label" htmlFor="phoneInput">
+                            <label className="label josefin-sans-b" htmlFor="phoneInput">
                               Phone
                             </label>
                             <div className="control">
                               <input
-                                className="input"
+                                className="input josefin-sans"
                                 value={phoneInput}
                                 type="text"
                                 onChange={e => setPhoneInput(e.target.value)}
@@ -262,7 +263,7 @@ const EditAddressForm = ({ address }) => {
                           <div className="field">
                             <div className="control">
                               <label
-                                className="checkbox"
+                                className="checkbox josefin-sans-b"
                                 htmlFor="checkboxDefaultAddress"
                               >
                                 <input
@@ -277,7 +278,7 @@ const EditAddressForm = ({ address }) => {
                             </div>
                           </div>
                           <button
-                            className="button is-dark"
+                            className="button is-dark josefin-sans-b"
                             onClick={() => {
                               customerAddressUpdate({
                                 variables: {
@@ -308,7 +309,7 @@ const EditAddressForm = ({ address }) => {
                           >
                             Update address
                           </button>
-                          <p onClick={() => setEditAdressForm(!editAdressForm)}>
+                          <p onClick={() => setEditAdressForm(!editAdressForm)} className="josefin-sans-b">
                             Cancel
                           </p>
                         </form>

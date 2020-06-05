@@ -57,7 +57,7 @@ const Blogs = () => {
         <Row className="mx-0">
           <Col className="banner-data text-center col-12 mt-5">
             <div className="breadcrump josefin-sans" style={{fontSize:'1.3rem'}}>
-              <span> <Link to="" style={{textDecoration:'none'}} className="text-dark"> Home</Link> </span> / <span>Blogs</span>
+              <span> <Link to="/" style={{textDecoration:'none'}} className="text-dark"> Home</Link> </span> / <span>Blogs</span>
             </div>
             <div className="collection-title mt-4 d-inline-flex">
                 <h1 className="m-0 josefin-sans-b" style={{fontSize:'2.5rem', color:'#000', lineHeight:'24px'}}>Blogs</h1>
@@ -70,6 +70,8 @@ const Blogs = () => {
     <Container>
         
         <Row className="mx-0 mt-3 mt-lg-5 mb-5">
+           
+            <Col className="col-12 col-md-8 col-lg-9" >
             {allShopifyArticle.edges ? (
                         allShopifyArticle.edges.map(
                         ({
@@ -84,8 +86,7 @@ const Blogs = () => {
                             image,
                             },
                         }) => (
-            <Col className="col-12 col-md-8 col-lg-9 d-block d-lg-flex" key={id}>
-                <Row className="mx-0">
+                <Row className="mx-0 mb-5" key={id}>
                 <div className="recent-posts position-relative col-12 col-md-4">
                     <Link
                         className="d-block"
@@ -122,12 +123,13 @@ const Blogs = () => {
                     </div>
                 </div> 
                 </Row>   
+                   )
+                   )
+               ) : (
+                   <p>No Products found!</p>
+               )}
             </Col>
-            )
-            )
-        ) : (
-            <p>No Products found!</p>
-        )}
+         
             <Col className="col-12 col-md-4 col-lg-3">
             </Col>
         </Row>

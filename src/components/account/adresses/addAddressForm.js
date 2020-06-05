@@ -54,7 +54,7 @@ const AddAddressForm = () => {
   return (
     <>
       <button
-        className="button is-dark"
+        className="button is-dark josefin-sans-b"
         onClick={() => setAddAdressForm(!addAdressForm)}
       >
         Add a new adress
@@ -66,18 +66,18 @@ const AddAddressForm = () => {
               {customerAddressCreate => {
                 return (
                   <form>
-                    <h1 className="subtitle is-uppercase has-text-weight-semibold ">
+                    <h1 className="subtitle is-uppercase has-text-weight-semibold josefin-sans-b">
                       ADD A NEW ADDRESS
                     </h1>
                     <div className="columns">
                       <div className="column">
                         <div className="field">
-                          <label className="label" htmlFor="firstNameInput">
+                          <label className="label josefin-sans-b" htmlFor="firstNameInput">
                             First Name
                           </label>
                           <div className="control">
                             <input
-                              className="input"
+                              className="input josefin-sans"
                               value={firstNameInput}
                               type="text"
                               onChange={e => setFirstNameInput(e.target.value)}
@@ -88,12 +88,12 @@ const AddAddressForm = () => {
                       </div>
                       <div className="column">
                         <div className="field">
-                          <label className="label" htmlFor="lastNameInput">
+                          <label className="label josefin-sans-b" htmlFor="lastNameInput">
                             Last Name
                           </label>
                           <div className="control">
                             <input
-                              className="input"
+                              className="input josefin-sans"
                               value={lastNameInput}
                               type="text"
                               onChange={e => setLastNameInput(e.target.value)}
@@ -104,12 +104,12 @@ const AddAddressForm = () => {
                       </div>
                     </div>
                     <div className="field">
-                      <label className="label" htmlFor="companyInput">
+                      <label className="label josefin-sans-b" htmlFor="companyInput">
                         Company
                       </label>
                       <div className="control">
                         <input
-                          className="input"
+                          className="input josefin-sans"
                           value={companyInput}
                           type="text"
                           onChange={e => setCompanyInput(e.target.value)}
@@ -118,12 +118,12 @@ const AddAddressForm = () => {
                       </div>
                     </div>
                     <div className="field">
-                      <label className="label" htmlFor="addressInput">
+                      <label className="label josefin-sans-b" htmlFor="addressInput">
                         Address
                       </label>
                       <div className="control">
                         <input
-                          className="input"
+                          className="input josefin-sans"
                           value={addressInput}
                           type="text"
                           onChange={e => setAddressInput(e.target.value)}
@@ -132,12 +132,12 @@ const AddAddressForm = () => {
                       </div>
                     </div>
                     <div className="field">
-                      <label className="label" htmlFor="apartmentInput">
+                      <label className="label josefin-sans-b" htmlFor="apartmentInput">
                         Apartment, suite, etc.
                       </label>
                       <div className="control">
                         <input
-                          className="input"
+                          className="input josefin-sans"
                           value={apartmentInput}
                           type="text"
                           onChange={e => setApartmentInput(e.target.value)}
@@ -148,12 +148,12 @@ const AddAddressForm = () => {
                     <div className="columns">
                       <div className="column">
                         <div className="field">
-                          <label className="label" htmlFor="cityInput">
+                          <label className="label josefin-sans-b" htmlFor="cityInput">
                             City
                           </label>
                           <div className="control">
                             <input
-                              className="input"
+                              className="input josefin-sans"
                               value={cityInput}
                               type="text"
                               onChange={e => setCityInput(e.target.value)}
@@ -164,18 +164,19 @@ const AddAddressForm = () => {
                       </div>
                       <div className="column">
                         <div className="field">
-                          <label className="label" htmlFor="countryInput">
+                          <label className="label josefin-sans-b" htmlFor="countryInput">
                             Country
                           </label>
                           <div className="control">
                             <div className="select">
                               <select
+                                className="josefin-sans"
                                 value={countryInput}
                                 onChange={e => setCountryInput(e.target.value)}
                                 style={{ minWidth: "140px", maxWidth: "310px" }}
                               >
                                 {countriesAll.map(country => (
-                                  <option value={country.name}>
+                                  <option className="josefin-sans" value={country.name}>
                                     {country.name}
                                   </option>
                                 ))}
@@ -186,12 +187,12 @@ const AddAddressForm = () => {
                       </div>
                     </div>
                     <div className="field">
-                      <label className="label" htmlFor="zipInput">
+                      <label className="label josefin-sans-b" htmlFor="zipInput">
                         Postal/Zip Code
                       </label>
                       <div className="control">
                         <input
-                          className="input"
+                          className="input josefin-sans"
                           value={zipInput}
                           type="text"
                           onChange={e => setZipInput(e.target.value)}
@@ -200,12 +201,12 @@ const AddAddressForm = () => {
                       </div>
                     </div>
                     <div className="field">
-                      <label className="label" htmlFor="phoneInput">
+                      <label className="label josefin-sans-b" htmlFor="phoneInput">
                         Phone
                       </label>
                       <div className="control">
                         <input
-                          className="input"
+                          className="input josefin-sans"
                           value={phoneInput}
                           type="text"
                           onChange={e => setPhoneInput(e.target.value)}
@@ -216,7 +217,7 @@ const AddAddressForm = () => {
                     <div className="field">
                       <div className="control">
                         <label
-                          className="checkbox"
+                          className="checkbox josefin-sans-b"
                           htmlFor="checkboxDefaultAddress"
                         >
                           <input type="checkbox" />
@@ -225,7 +226,7 @@ const AddAddressForm = () => {
                       </div>
                     </div>
                     <button
-                      className="button is-dark"
+                      className="button is-dark josefin-sans-b"
                       onClick={() => {
                         customerAddressCreate({
                           variables: {
@@ -249,7 +250,7 @@ const AddAddressForm = () => {
                     >
                       Add adress
                     </button>
-                    <p onClick={() => setAddAdressForm(!addAdressForm)}>
+                    <p onClick={() => setAddAdressForm(!addAdressForm)} className="josefin-sans-b">
                       Cancel
                     </p>
                   </form>
