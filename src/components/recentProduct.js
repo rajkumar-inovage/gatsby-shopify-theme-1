@@ -22,7 +22,7 @@ const ProductList = ({ data }) => {
         {data.allShopifyProduct ? (
           products.map((p, i) => {
             let product = p;
-            return <ProductBox product={product} />;
+            return <ProductBox key={i} product={product} />;
           })
         ) : (
           <p>No Products found!</p>

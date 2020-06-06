@@ -28,6 +28,7 @@ import atob from "atob";
 import classnames from "classnames";
 import ReactHtmlParser from "react-html-parser";
 import ProductForm from "~/components/ProductForm";
+import AddToCompare from "~/components/AddToCompare";
 import RecommendedProducts from "~/components/RecommendedProducts";
 import SEO from "~/components/seo";
 
@@ -340,7 +341,12 @@ const ProductPage = ({ data }) => {
                       : `No Reviews`}
                   </span>
                 </div>
-                <ProductForm product={product} />
+                <ProductForm product={product} rating={avgRating} />
+                <AddToCompare
+                  className="row align-items-center"
+                  product={product}
+                  rating={avgRating}
+                />
               </div>
             </Col>
           </Row>
@@ -702,14 +708,16 @@ const ProductPage = ({ data }) => {
                 to="/collections/fragrant/"
                 className="text-decoration-none text-dark px-1"
               >
-                 Fragrant
-              </Link>,
+                Fragrant
+              </Link>
+              ,
               <Link
                 to="/collections/recommended-products-seguno/"
                 className="text-decoration-none text-dark px-1"
               >
                 Recommended products
-              </Link>,
+              </Link>
+              ,
               <Link
                 to="/collections/new/"
                 className="text-decoration-none text-dark px-1"
@@ -742,53 +750,66 @@ ProductPage.propTypes = {
 export default ProductPage;
 
 export const query = graphql`
-  query($id: String!) {
-    shopifyProduct(handle: { eq: $id }) {
-      handle
-      id
-      title
-      handle
-      productType
-      description
-      descriptionHtml
-      shopifyId
-      options {
-        id
-        name
-        values
-      }
-      variants {
-        id
-        title
-        price
-        availableForSale
-        shopifyId
-        selectedOptions {
-          name
-          value
-        }
-      }
-      priceRange {
-        minVariantPrice {
-          amount
-          currencyCode
-        }
-        maxVariantPrice {
-          amount
-          currencyCode
-        }
-      }
-      images {
-        originalSrc
-        id
-        localFile {
-          childImageSharp {
-            fluid(maxWidth: 910) {
-              ...GatsbyImageSharpFluid_noBase64
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+         query($id: String!) {
+           shopifyProduct(handle: { eq: $id }) {
+             handle
+             id
+             title
+             handle
+             productType
+             description
+             descriptionHtml
+             shopifyId
+             options {
+               id
+               name
+               values
+             }
+             variants {
+               id
+               title
+               price
+               availableForSale
+               shopifyId
+               sku
+               weight
+               weightUnit
+               presentmentPrices {
+                 edges {
+                   node {
+                     price {
+                       currencyCode
+                       amount
+                     }
+                   }
+                 }
+               }
+               selectedOptions {
+                 name
+                 value
+               }
+             }
+             priceRange {
+               minVariantPrice {
+                 amount
+                 currencyCode
+               }
+               maxVariantPrice {
+                 amount
+                 currencyCode
+               }
+             }
+             images {
+               originalSrc
+               id
+               localFile {
+                 childImageSharp {
+                   fluid(maxWidth: 910) {
+                     ...GatsbyImageSharpFluid_noBase64
+                   }
+                 }
+               }
+             }
+           }
+         }
+       `;
