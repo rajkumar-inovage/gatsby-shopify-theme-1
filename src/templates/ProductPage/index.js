@@ -252,7 +252,7 @@ const ProductPage = ({ data }) => {
       <section className="inner-pages-banner py-100">
         <Container>
           <Row className="mx-0 pt-3 pt-lg-5">
-            <Col className="col-12 col-md-6">
+            <Col className="col-12 col-md-6 pdt-image">
               <Box
                 style={{ margin: "auto", marginTop: "0", boxShadow: "none" }}
                 className="img-hover-zoom--zoom-n-rotate img-hover-zoom"
