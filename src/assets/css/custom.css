@@ -589,3 +589,9 @@ body .visual_contact_form input {
 .single-blog p img{
 	padding:5px 0px;
 }
+.pdt-image .img-hover-zoom--zoom-n-rotate .imgProduct {
+	transition: transform 0.5s;
+}
+.pdt-image .img-hover-zoom--zoom-n-rotate:hover .imgProduct {
+	transform: scale(1.2);
+}

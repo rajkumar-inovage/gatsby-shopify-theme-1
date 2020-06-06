@@ -1,6 +1,6 @@
 import SEO from "~/components/seo";
 import { Container, Row, Col } from "reactstrap";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { graphql, Link } from "gatsby";
 import StoreContext from "~/context/store";
 // import $ from 'jquery'
@@ -8,6 +8,38 @@ import StoreContext from "~/context/store";
 import GridIcon from "~/components/grid-icon";
 import ListIcon from "~/components/list-icon";
 const CollectionsPage = ({ data }) => {
+
+
+  const context = useContext(StoreContext);
+  const [sort, setSort] = useState(context.filteredSort)
+
+  useEffect(() => {
+    context.updateFilterSort(sort)
+  }, [sort])
+
+  const sorts = []
+
+  sorts.push(
+    <>
+      <option key={0} value="featured">
+        Featured
+      </option>
+      <option key={1} value="A-Z">
+        Alphabetically, A-Z
+      </option>
+      <option key={2} value="Z-A">
+        Alphabetically, Z-A
+      </option>
+      <option key={3} value="low">
+        Price, low to high
+      </option>
+      <option key={4} value="high">
+        Price, high to low
+      </option>
+    </>
+  )
+
+
   const MAX_LENGTH = 100;
   const [gridClass, setGridClass] = useState("col-md-4");
   const [imgClass, setImgClass] = useState("col-md-12");
@@ -15,7 +47,7 @@ const CollectionsPage = ({ data }) => {
   const [displayClass, setDisplayClass] = useState("d-unset");
   const [descClass, setDescClass] = useState("d-none");
   const [rowpriceClass, setRowpriceClass] = useState("d-inline-block");
-  const context = useContext(StoreContext);
+  
   const { checkout } = context;
   const buttonClasses =
     "btn-link bg-transparent border-0 text-decoration-none text-body p-0";
@@ -148,23 +180,21 @@ const CollectionsPage = ({ data }) => {
               </button>
             </Col>
             <Col className="col-6 text-right">
-              <select
-                className="product-by custom-select border josefin-sans col-12 col-lg-6"
-                id="gender2"
-              >
-                <option selected value="manual">
-                  Featured
-                </option>
-                <option value="best-selling">Best Selling</option>
-                <option value="title-ascending" selected="selected">
-                  Alphabetically, A-Z
-                </option>
-                <option value="title-descending">Alphabetically, Z-A</option>
-                <option value="price-ascending">Price, low to high</option>
-                <option value="price-descending">Price, high to low</option>
-                <option value="created-descending">Date, new to old</option>
-                <option value="created-ascending">Date, old to new</option>
-              </select>
+            <label htmlFor="sortBy" className="has-text-weight-semibold is-uppercase" style={{ margin: "-20px" }}>SORT BY :
+                  <div className="field">
+                    <div className="control">
+                      <div className="select">
+                        <select
+                          defaultvalues={sort}
+                          onChange={e => setSort(e.target.value)}
+                          id="sortBy"
+                        >
+                          {sorts}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </label>
             </Col>
           </Row>
           <Row className="mt-3 mt-lg-5 product-layout">
