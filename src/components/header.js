@@ -87,7 +87,7 @@ const Header = ({ siteTitle }) => {
   return (
     <>
       <header>
-        <div className="fixed-header w-100 m-0">
+        <div className="fixed-header w-100 m-0 position-fixed bg-white" style={{zIndex:'99'}}>
           <p
             className="text-center josefin-sans-sb primary-color p-2"
             style={{ fontSize: "1.4rem" }}
@@ -99,7 +99,7 @@ const Header = ({ siteTitle }) => {
           color="light"
           light={true}
           expand="lg"
-          className="bg-transparent p-3 p-sm-0 sticky-header"
+          className="bg-transparent p-3 p-sm-0 default-header"
         >
           <Container>
             <div className="navbar-start m-0 logo-box mt-3">
@@ -109,6 +109,233 @@ const Header = ({ siteTitle }) => {
                 to="/"
               >
                 <img src={logo} alt="" className="img-fluid" />
+              </Link>
+            </div>
+            <NavbarToggler
+              onClick={toggle}
+              style={{ padding: "0.25rem 0.5rem", fontSize: "1rem" }}
+            />
+            <div className="d-lg-flex w-100">
+              <Collapse
+                isOpen={isOpen}
+                navbar
+                className="text-center text-lg-left"
+              >
+                <Nav
+                  className="mr-0 ml-auto josefin-sans py-0 w-100 text-center d-lg-block"
+                  navbar
+                >
+                  <NavItem className="mx-3 my-0 d-inline-block py-md-3 py-lg-0">
+                    <Link
+                      to="/collections/essentials/"
+                      onClick={closeNav}
+                      className="space-1 p-sm-0 p-lg-0 p-xl-0 nav-link font-weight-bold"
+                    >
+                      Essential
+                    </Link>
+                  </NavItem>
+                  <NavItem className="mx-3 my-0 d-inline-block py-md-3 py-lg-0">
+                    <Link
+                      to="/collections/fragrant/"
+                      onClick={closeNav}
+                      className="space-1 p-sm-0 p-lg-0 p-xl-0 nav-link font-weight-bold"
+                    >
+                      Fragrant
+                    </Link>
+                  </NavItem>
+                  <NavItem className="mx-3 my-0 d-inline-block py-md-3 py-lg-0">
+                    <Link
+                      to="/collections/figure/"
+                      onClick={closeNav}
+                      className="space-1 p-sm-0 p-lg-0 p-xl-0 nav-link font-weight-bold"
+                    >
+                      Figure
+                    </Link>
+                  </NavItem>
+                  <NavItem className="mx-3 my-0 d-inline-block py-md-3 py-lg-0">
+                    <Link
+                      to="/collections/donut/"
+                      onClick={closeNav}
+                      className="space-1 p-sm-0 p-lg-0 p-xl-0 nav-link font-weight-bold"
+                    >
+                      Donut
+                    </Link>
+                  </NavItem>
+                  <NavItem className="mx-3 my-0 d-inline-block py-md-3 py-lg-0">
+                    <Link
+                      to="/collections/bath-bath-bomb/"
+                      className="space-1 p-sm-0 p-lg-0 p-xl-0 nav-link font-weight-bold"
+                    >
+                      Bath bombs
+                    </Link>
+                  </NavItem>
+                  <NavItem className="mx-3 my-0 d-inline-block py-md-3 py-lg-0">
+                    <Link
+                      to="/collections/treat/"
+                      onClick={closeNav}
+                      className="space-1 p-sm-0 p-lg-0 p-xl-0 nav-link font-weight-bold"
+                    >
+                      Treat
+                    </Link>
+                  </NavItem>
+                  <NavItem className="mx-3 my-0 d-inline-block py-md-3 py-lg-0">
+                    <Link
+                      to="/collections/gift/"
+                      onClick={closeNav}
+                      className="space-1 p-sm-0 p-lg-0 p-xl-0 nav-link font-weight-bold"
+                    >
+                      Gift
+                    </Link>
+                  </NavItem>
+                </Nav>
+                <div className="navbar-end d-block d-lg-flex text-center pb-3 pb-lg-0">
+                  <div className="navbar-item d-inline-block">
+                    <span
+                      className="has-text-dark is-size-5"
+                      onClick={openSearchBar}
+                      icon={faSearch}
+                    >
+                      <i className="fa fa-search" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                  <div className="navbar-item d-inline-block">
+                    <Link aria-label="cart" to="/account/login">
+                      <span icon={faUser} className="is-size-5 has-text-dark">
+                        <i
+                          className="fa fa-user-circle-o"
+                          aria-hidden="true"
+                        ></i>
+                      </span>
+                    </Link>
+                  </div>
+
+                  <UncontrolledDropdown nav inNavbar>
+                    <DropdownToggle nav className="cart position-relative">
+                      <i
+                        className="fa fa-shopping-cart text-dark"
+                        aria-hidden="true"
+                        style={{ fontSize: "1.2rem" }}
+                      ></i>
+                      <span
+                        className="position-absolute cart-counter text-dark josefin-sans pl-2"
+                        style={{ top: "-3px" }}
+                      >
+                        {getCartCount()}
+                      </span>
+                    </DropdownToggle>
+                    <DropdownMenu className="dropdown-menu-right rounded-0">
+                      {lineItems.length > 0 ? (
+                        <ul className="list-group">
+                          {lineItems.map((lineItem, index) => (
+                            <li
+                              key={index}
+                              className={
+                                index > 0
+                                  ? "list-group-item p-2 border-left-0 border-right-0 border-bottom-0 rounded-0"
+                                  : "list-group-item p-2 border-0 rounded-0"
+                              }
+                            >
+                              <div className="media">
+                                <div className="media-left">
+                                  <button
+                                    onClick={(e) =>
+                                      handleRemove(e, lineItem.id)
+                                    }
+                                    className="btn btn-link p-0 text-dark"
+                                    title="Remove this item"
+                                  >
+                                    <i className="fa fa-remove"></i>
+                                  </button>
+                                </div>
+                                <div className="media-left">
+                                  <img
+                                    src={lineItem.variant.image.src}
+                                    alt=""
+                                    className="img-fluid"
+                                    style={{ maxWidth: "70px" }}
+                                  />
+                                </div>
+                                <div className="media-body">
+                                  <span className="d-block text-dark fs-1 josefin-sans-b">
+                                    {lineItem.title}
+                                  </span>
+
+                                  <span className="text-dark fs-2 float-left josefin-sans">
+                                    X&nbsp;{lineItem.quantity}
+                                  </span>
+                                  <span className="color-primary fs-2 float-right josefin-sans-b">
+                                    CAD&nbsp;
+                                    <span className="color-primary fs-2 josefin-sans">
+                                      $&nbsp;
+                                    </span>
+                                    <span className="color-primary fs-2 josefin-sans-b">
+                                      {getLineItemTotal(
+                                        lineItem.quantity,
+                                        lineItem.variant.price
+                                      )}
+                                    </span>
+                                  </span>
+                                </div>
+                              </div>
+                            </li>
+                          ))}
+                          <li className="list-group-item p-2 text-center border-left-0 border-right-0 mb-0 rounded-0">
+                            <p className="text-center mb-0 color-primary">
+                              <strong className="josefin-sans-b">
+                                Subtotal:{" "}
+                              </strong>
+                              <span className="text-dark josefin-sans-b fs-2 font-weight-bold amount">
+                                CAD&nbsp;
+                                <span className="text-dark josefin-sans fs-2 font-weight-bold currencySymbol">
+                                  $
+                                </span>
+                                {subtotalPrice}
+                              </span>
+                            </p>
+                          </li>
+                          <li className="list-group-item p-2 text-center border-0 rounded-0">
+                            <Link
+                              to="/cart/"
+                              className="btn btn-custom-secondary josefin-sans-b font-weight-bold btn-sm  mx-1"
+                              style={{ color: "#000" }}
+                            >
+                              View Cart
+                            </Link>
+                            <button
+                              onClick={handleCheckout}
+                              className="btn btn-checkout josefin-sans-b btn-sm font-weight-bold space-1 text-dark mx-1"
+                              style={{ color: "#000" }}
+                            >
+                              Checkout
+                            </button>
+                          </li>
+                        </ul>
+                      ) : (
+                        <p className="text-center mb-0 color-primary josefin-sans">
+                          Cart is Empty!
+                        </p>
+                      )}
+                    </DropdownMenu>
+                  </UncontrolledDropdown>
+                </div>
+              </Collapse>
+            </div>
+          </Container>
+        </Navbar>
+        <Navbar
+          color="light"
+          light={true}
+          expand="lg"
+          className="bg-white p-3 p-sm-0 sticky-header"
+        >
+          <Container>
+            <div className="navbar-start m-0 logo-box mt-0">
+              <Link
+                aria-label="search"
+                className="has-text-black has-text-weight-bold"
+                to="/"
+              >
+                <img src={logo} alt="" className="img-fluid" style={{width:'75px'}}/>
               </Link>
             </div>
             <NavbarToggler

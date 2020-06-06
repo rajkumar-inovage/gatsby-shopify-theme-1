@@ -52,8 +52,14 @@ a {
 .navbar-brand {
 	width: 110px;
 }
+.sticky-header{
+	position:absolute;
+	top:-100px;
+	z-index: 9;
+	width: 100%;
 
-.sticky-header {
+}
+.default-header, .sticky-active {
 	position: absolute;
 	top: 50px;
 	background-color: transparent;
