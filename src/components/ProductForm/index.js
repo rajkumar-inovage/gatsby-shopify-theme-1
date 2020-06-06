@@ -7,6 +7,7 @@ const ProductForm = ({ product }) => {
     variants: [initialVariant],
     priceRange: { minVariantPrice },
   } = product;
+  const MAX_LENGTH = 200;
   const variant = { ...initialVariant };
   const [quantity, setQuantity] = useState(1);
   const { addVariantToCart, addVariantToCartAndBuyNow, client } = useContext(
@@ -15,7 +16,11 @@ const ProductForm = ({ product }) => {
   const productVariant =
     client.product.helpers.variantForOptions(product, variant) || variant;
   const [available, setAvailable] = useState(productVariant.availableForSale);
-
+  const price = Intl.NumberFormat(undefined, {
+    currency: minVariantPrice.currencyCode,
+    minimumFractionDigits: 2,
+    style: "currency",
+  }).format(variant.price);
   const checkAvailability = useCallback(
     (productId) => {
       client.product.fetch(productId).then((fetchedProduct) => {
@@ -53,14 +58,7 @@ const ProductForm = ({ product }) => {
   };
   const handleBuyNow = () => {
     addVariantToCartAndBuyNow(productVariant.shopifyId, quantity);
-  }
-  const MAX_LENGTH = 200;
-
-  const price = Intl.NumberFormat(undefined, {
-    currency: minVariantPrice.currencyCode,
-    minimumFractionDigits: 2,
-    style: "currency",
-  }).format(variant.price);
+  };
   return (
     <>
       <h3 className="josefin-sans-b product-price">{price}</h3>
@@ -107,16 +105,6 @@ const ProductForm = ({ product }) => {
             onClick={handleBuyNow}
           >
             BUY IT NOW
-          </button>
-        </div>
-        <div className="compare col-12 mt-3 mt-lg-4">
-          <button
-            className="text-decoration-none text-dark josefin-sans-b"
-            style={{ fontSize: "1rem" }}
-          >
-            <span>
-              <i className="fa fa-refresh pr-2"></i>Add To Compare
-            </span>
           </button>
         </div>
       </div>
