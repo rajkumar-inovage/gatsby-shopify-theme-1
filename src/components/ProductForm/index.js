@@ -10,9 +10,12 @@ const ProductForm = ({ product }) => {
   const MAX_LENGTH = 200;
   const variant = { ...initialVariant };
   const [quantity, setQuantity] = useState(1);
-  const { addVariantToCart, addVariantToCartAndBuyNow, client } = useContext(
-    StoreContext
-  );
+  const {
+    addVariantToCart,
+    addVariantToCartAndBuyNow,
+    client,
+    checkout,
+  } = useContext(StoreContext);
   const productVariant =
     client.product.helpers.variantForOptions(product, variant) || variant;
   const [available, setAvailable] = useState(productVariant.availableForSale);
@@ -21,6 +24,8 @@ const ProductForm = ({ product }) => {
     minimumFractionDigits: 2,
     style: "currency",
   }).format(variant.price);
+  //checkout.currencyCode = productVariant.presentmentPrices.edges[1].node.price.currencyCode;
+  console.log(client, checkout.currencyCode);
   const checkAvailability = useCallback(
     (productId) => {
       client.product.fetch(productId).then((fetchedProduct) => {
