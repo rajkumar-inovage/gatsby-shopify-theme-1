@@ -15,7 +15,7 @@ const CollectionsPage = ({ data }) => {
 
   useEffect(() => {
     context.updateFilterSort(sort)
-  }, [sort])
+  }, [context, sort])
 
   const sorts = []
 
@@ -47,6 +47,7 @@ const CollectionsPage = ({ data }) => {
   const [displayClass, setDisplayClass] = useState("d-unset");
   const [descClass, setDescClass] = useState("d-none");
   const [rowpriceClass, setRowpriceClass] = useState("d-inline-block");
+  const [addcartClass, setAddcartClass] = useState("d-block");
   
   const { checkout } = context;
   const buttonClasses =
@@ -66,6 +67,7 @@ const CollectionsPage = ({ data }) => {
       setDescClass("d-flex");
       setImgClass("col-md-3");
       setRowpriceClass("d-none");
+      setAddcartClass("d-none");
     }
     if (size === 2) {
       setGridClass("col-md-6");
@@ -74,6 +76,7 @@ const CollectionsPage = ({ data }) => {
       setDescClass("d-none");
       setImgClass("col-md-12");
       setRowpriceClass("d-inline-block");
+      setAddcartClass("d-block");
     }
     if (size === 3) {
       setGridClass("col-md-4");
@@ -82,6 +85,7 @@ const CollectionsPage = ({ data }) => {
       setDescClass("d-none");
       setImgClass("col-md-12");
       setRowpriceClass("d-inline-block");
+      setAddcartClass("d-block");
     }
     if (size === 4) {
       setGridClass("col-md-3");
@@ -90,6 +94,7 @@ const CollectionsPage = ({ data }) => {
       setDescClass("d-none");
       setImgClass("col-md-12");
       setRowpriceClass("d-inline-block");
+      setAddcartClass("d-block");
     }
   };
   return (
@@ -185,8 +190,8 @@ const CollectionsPage = ({ data }) => {
                     <div className="control">
                       <div className="select">
                         <select
-                          defaultvalues={sort}
-                          onChange={e => setSort(e.target.value)}
+                          defaultValue={sort}
+                          onBlur={e => setSort(e.target.value)}
                           id="sortBy"
                         >
                           {sorts}
@@ -198,6 +203,9 @@ const CollectionsPage = ({ data }) => {
             </Col>
           </Row>
           <Row className="mt-3 mt-lg-5 product-layout">
+
+                
+
             {data.shopifyCollection.products ? (
               data.shopifyCollection.products.map(
                 ({ id, title, handle, description, images, priceRange }) => (
@@ -219,14 +227,7 @@ const CollectionsPage = ({ data }) => {
 
                             <div className="add-to-cart d-inline w-auto p-0">
                               <button
-                                className="tooltips border border-dark btns quick-view position-relative"
-                                style={{ fontSize: "0.8rem" }}
-                              >
-                                <i className="fa fa-eye"></i>
-                              </button>
-
-                              <button
-                                className="josefin-sans-b cart-btn border border-left-0 border-dark btns position-relative"
+                                className={addcartClass + " josefin-sans-b cart-btn border border-dark btns position-relative"}
                                 style={{ fontSize: "0.8rem" }}
                               >
                                 Add To Cart

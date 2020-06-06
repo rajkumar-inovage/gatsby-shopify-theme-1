@@ -74,14 +74,7 @@ const Donut = () => {
 
                           <div className="add-to-cart d-inline w-auto p-0">
                             <button
-                              className="tooltips border border-dark btns quick-view position-relative"
-                              style={{ fontSize: "0.8rem" }}
-                            >
-                              <i className="fa fa-eye"></i>
-                            </button>
-
-                            <button
-                              className="josefin-sans-b cart-btn border border-left-0 border-dark btns position-relative"
+                              className="josefin-sans-b cart-btn border border-dark btns position-relative"
                               style={{ fontSize: "0.8rem" }}
                             >
                               Add To Cart

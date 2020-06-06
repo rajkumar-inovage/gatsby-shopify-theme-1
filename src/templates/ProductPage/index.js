@@ -246,6 +246,7 @@ const ProductPage = ({ data }) => {
     };
     sendReview(`//reviews.hulkapps.com/api/shop/${shopID}/reviews`);
   };
+  
   return (
     <>
       <SEO title={product.title} description={product.description} />
