@@ -39,8 +39,8 @@ const AddToCompareButton = ({
       style={{ position: "absolute", top: "15px", right: "15px" }}
       onClick={toggleCompareModal}
     >
-      <span className="cross-bar">&nbsp;</span>
-      <span className="cross-bar">&nbsp;</span>
+      <span className="cross-bar w-50">&nbsp;</span>
+      <span className="cross-bar w-50">&nbsp;</span>
     </button>
   );
   const removeFromCompare = (e, id) => {
@@ -102,6 +102,7 @@ const AddToCompareButton = ({
         </span>
       </button>
       <Modal
+        className="mx-auto"
         isOpen={compareModal}
         toggle={toggleCompareModal}
         size="xl"
@@ -112,14 +113,14 @@ const AddToCompareButton = ({
         backdropTransition={{ timeout: 700 }}
       >
         <div className="modal-body p-0">
-          <div className="h1 modal-title d-block text-center">
+          <div className="h1 modal-title d-block text-center josefin-sans-b">
             Compare products
           </div>
           <div className="py-4">
             <div className="row no-gutters">
-              <div className="col-2">
+              <div className="col-3">
                 <ul
-                  className="list-group text-center"
+                  className="list-group text-center josefin-sans-b"
                   style={{ borderRight: "6px solid #000" }}
                 >
                   <li className="list-group-item border-top-0 border-left-0 rounded-0">
@@ -130,22 +131,22 @@ const AddToCompareButton = ({
                       Image
                     </div>
                   </li>
-                  <li className="list-group-item border-top-0 border-left-0">
+                  <li className="list-group-item border-top-0 border-left-0 px-1 px-lg-3">
                     Name
                   </li>
-                  <li className="list-group-item border-top-0 border-left-0">
+                  <li className="list-group-item border-top-0 border-left-0 px-1 px-lg-3">
                     Price
                   </li>
-                  <li className="list-group-item border-top-0 border-left-0">
+                  <li className="list-group-item border-top-0 border-left-0 px-1 px-lg-3">
                     Rating
                   </li>
-                  <li className="list-group-item border-top-0 border-left-0">
+                  <li className="list-group-item border-top-0 border-left-0 px-1 px-lg-3">
                     Availability
                   </li>
-                  <li className="list-group-item border-top-0 border-left-0">
+                  <li className="list-group-item border-top-0 border-left-0 px-1 px-lg-3">
                     Weight
                   </li>
-                  <li className="list-group-item border-top-0 border-left-0">
+                  <li className="list-group-item border-top-0 border-left-0 px-1 px-lg-3">
                     SKU
                   </li>
                   <li className="list-group-item border-0 rounded-0">&nbsp;</li>
@@ -175,7 +176,10 @@ const AddToCompareButton = ({
                         <div className="col" data={index} key={index}>
                           <ul className="list-group text-center">
                             <li className="list-group-item border-top-0 border-left-0 border-right-0 rounded-0">
-                              <button onClick={(e) => removeFromCompare(e, id)}>
+                              <button
+                              className="float-right remove-btn border"
+                              style={{borderRadius:'50%'}}
+                               onClick={(e) => removeFromCompare(e, id)}>
                                 &times;
                               </button>
                               <img
@@ -185,28 +189,29 @@ const AddToCompareButton = ({
                                 style={{ maxHeight: "100px" }}
                               />
                             </li>
-                            <li className="list-group-item border-top-0 border-left-0 border-right-0">
+                            <li className="list-group-item border-top-0 border-left-0 border-right-0 josefin-sans">
                               {name}
                             </li>
-                            <li className="list-group-item border-top-0 border-left-0 border-right-0">
+                            <li className="list-group-item border-top-0 border-left-0 border-right-0 josefin-sans">
                               {price}
                             </li>
-                            <li className="list-group-item border-top-0 border-left-0 border-right-0">
+                            <li className="list-group-item border-top-0 border-left-0 border-right-0 josefin-sans">
                               {rating !== 0 ? rating : "No Reviews Yet"}
                             </li>
-                            <li className="list-group-item border-top-0 border-left-0 border-right-0">
+                            <li className="list-group-item border-top-0 border-left-0 border-right-0 josefin-sans">
                               {available ? "In Stock" : "Out of Stock"}
                             </li>
-                            <li className="list-group-item border-top-0 border-left-0 border-right-0">
+                            <li className="list-group-item border-top-0 border-left-0 border-right-0 josefin-sans">
                               {weight !== "" ? weight : <>&nbsp;</>}
                             </li>
-                            <li className="list-group-item border-top-0 border-left-0 border-right-0">
+                            <li className="list-group-item border-top-0 border-left-0 border-right-0 josefin-sans">
                               {sku !== "" ? sku : <>&nbsp;</>}
                             </li>
                             <li className="list-group-item border-bottom-0 border-left-0 border-right-0 rounded-0">
-                              <button
+                              <button className="josefin-sans-b"
                                 onClick={(e) =>
                                   addToCartCompared(e, productVariant)
+                                  
                                 }
                               >
                                 Add To Cart
