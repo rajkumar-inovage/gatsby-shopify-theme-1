@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { reactLocalStorage } from "reactjs-localstorage";
 import StoreContext from "~/context/store";
 import { Modal } from "reactstrap";
 
@@ -27,8 +28,8 @@ const AddToCompareButton = ({
   }).format(productVariant.price);
   const available = variant.availableForSale;
   const [compareData, setCompareData] = useState(
-    localStorage.getItem("compareData")
-      ? JSON.parse(localStorage.getItem("compareData"))
+    reactLocalStorage.get("compareData")
+      ? JSON.parse(reactLocalStorage.get("compareData"))
       : []
   );
   const [compareModal, setCompareModal] = useState(false);
@@ -39,20 +40,20 @@ const AddToCompareButton = ({
       style={{ position: "absolute", top: "15px", right: "15px" }}
       onClick={toggleCompareModal}
     >
-      <span className="cross-bar w-50">&nbsp;</span>
-      <span className="cross-bar w-50">&nbsp;</span>
+      <span className="cross-bar">&nbsp;</span>
+      <span className="cross-bar">&nbsp;</span>
     </button>
   );
   const removeFromCompare = (e, id) => {
     e.preventDefault();
-    let compareData = localStorage.getItem("compareData")
-    ? JSON.parse(localStorage.getItem("compareData"))
-    : [];
+    let compareData = reactLocalStorage.get("compareData")
+      ? JSON.parse(reactLocalStorage.get("compareData"))
+      : [];
     if(compareData.length){
       var removedData = compareData.filter(function(data, index) {
         return data.id !== id;
       });
-      localStorage.setItem("compareData", JSON.stringify(removedData));
+      reactLocalStorage.set("compareData", JSON.stringify(removedData));
       setCompareData(removedData);
       if(removedData.length===0){
         toggleCompareModal();
@@ -63,10 +64,9 @@ const AddToCompareButton = ({
     e.preventDefault();
     addVariantToCart(productVariant.shopifyId, 1);
   };
-  //console.log(available, variant);
   const addToCompare = () => {
-    let add2compare = localStorage.getItem("compareData")
-      ? JSON.parse(localStorage.getItem("compareData"))
+    let add2compare = reactLocalStorage.get("compareData")
+      ? JSON.parse(reactLocalStorage.get("compareData"))
       : [];
     const compareIndex = add2compare.findIndex((compareProduct) => {
       return compareProduct.id === product.shopifyId;
@@ -84,7 +84,7 @@ const AddToCompareButton = ({
         sku: product.variants[0].sku,
       };
       add2compare.push(pushData);
-      localStorage.setItem("compareData", JSON.stringify(add2compare));
+      reactLocalStorage.set("compareData", JSON.stringify(add2compare));
       setCompareData([...compareData, pushData,]);
     }
     toggleCompareModal();

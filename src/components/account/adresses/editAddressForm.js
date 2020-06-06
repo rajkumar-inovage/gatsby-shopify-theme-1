@@ -73,7 +73,6 @@ const EditAddressForm = ({ address }) => {
       setCountriesAll(data);
     });
   }, []);
-  console.log(checkDefaultAddress);
   return (
     <>
       <button
