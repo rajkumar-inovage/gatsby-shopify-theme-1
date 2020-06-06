@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { reactLocalStorage } from "reactjs-localstorage";
 import StoreContext from "~/context/store";
 import { Modal } from "reactstrap";
 
@@ -13,6 +12,7 @@ const AddToCompareButton = ({
   product,
   rating,
 }) => {
+  const isBrowser = typeof window !== "undefined";
   const {
     variants: [initialVariant],
     priceRange: { minVariantPrice },
@@ -28,8 +28,8 @@ const AddToCompareButton = ({
   }).format(productVariant.price);
   const available = variant.availableForSale;
   const [compareData, setCompareData] = useState(
-    reactLocalStorage.get("compareData")
-      ? JSON.parse(reactLocalStorage.get("compareData"))
+    isBrowser && localStorage.getItem("compareData")
+      ? JSON.parse(localStorage.getItem("compareData"))
       : []
   );
   const [compareModal, setCompareModal] = useState(false);
@@ -46,16 +46,17 @@ const AddToCompareButton = ({
   );
   const removeFromCompare = (e, id) => {
     e.preventDefault();
-    let compareData = reactLocalStorage.get("compareData")
-      ? JSON.parse(reactLocalStorage.get("compareData"))
-      : [];
-    if(compareData.length){
+    let compareData =
+      isBrowser && localStorage.getItem("compareData")
+        ? JSON.parse(localStorage.getItem("compareData"))
+        : [];
+    if (compareData.length) {
       var removedData = compareData.filter(function(data, index) {
         return data.id !== id;
       });
-      reactLocalStorage.set("compareData", JSON.stringify(removedData));
+      localStorage.setItem("compareData", JSON.stringify(removedData));
       setCompareData(removedData);
-      if(removedData.length===0){
+      if (removedData.length === 0) {
         toggleCompareModal();
       }
     }
@@ -65,9 +66,10 @@ const AddToCompareButton = ({
     addVariantToCart(productVariant.shopifyId, 1);
   };
   const addToCompare = () => {
-    let add2compare = reactLocalStorage.get("compareData")
-      ? JSON.parse(reactLocalStorage.get("compareData"))
-      : [];
+    let add2compare =
+      isBrowser && localStorage.getItem("compareData")
+        ? JSON.parse(localStorage.getItem("compareData"))
+        : [];
     const compareIndex = add2compare.findIndex((compareProduct) => {
       return compareProduct.id === product.shopifyId;
     });
@@ -84,8 +86,8 @@ const AddToCompareButton = ({
         sku: product.variants[0].sku,
       };
       add2compare.push(pushData);
-      reactLocalStorage.set("compareData", JSON.stringify(add2compare));
-      setCompareData([...compareData, pushData,]);
+      localStorage.setItem("compareData", JSON.stringify(add2compare));
+      setCompareData([...compareData, pushData]);
     }
     toggleCompareModal();
   };
@@ -177,9 +179,10 @@ const AddToCompareButton = ({
                           <ul className="list-group text-center">
                             <li className="list-group-item border-top-0 border-left-0 border-right-0 rounded-0">
                               <button
-                              className="float-right remove-btn border"
-                              style={{borderRadius:'50%'}}
-                               onClick={(e) => removeFromCompare(e, id)}>
+                                className="float-right remove-btn border"
+                                style={{ borderRadius: "50%" }}
+                                onClick={(e) => removeFromCompare(e, id)}
+                              >
                                 &times;
                               </button>
                               <img
@@ -208,10 +211,10 @@ const AddToCompareButton = ({
                               {sku !== "" ? sku : <>&nbsp;</>}
                             </li>
                             <li className="list-group-item border-bottom-0 border-left-0 border-right-0 rounded-0">
-                              <button className="josefin-sans-b"
+                              <button
+                                className="josefin-sans-b"
                                 onClick={(e) =>
                                   addToCartCompared(e, productVariant)
-                                  
                                 }
                               >
                                 Add To Cart
