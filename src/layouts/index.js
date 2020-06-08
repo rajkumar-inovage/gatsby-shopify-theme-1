@@ -23,53 +23,53 @@ class Layout extends Component {
       ...defaultStoreContext,
       customerAccessToken: this.getlocalStorage("customerAccessToken"),
       addVariantToCart: (variantId, quantity) => {
-        this.setState((state) => ({
+        this.setState(state => ({
           store: {
             ...state.store,
-            adding: true,
-          },
+            adding: true
+          }
         }));
 
         const { checkout, client } = this.state.store;
         const checkoutId = checkout.id;
         const lineItemsToUpdate = [
-          { variantId, quantity: parseInt(quantity, 10) },
+          { variantId, quantity: parseInt(quantity, 10) }
         ];
 
         return client.checkout
           .addLineItems(checkoutId, lineItemsToUpdate)
-          .then((checkout) => {
-            this.setState((state) => ({
+          .then(checkout => {
+            this.setState(state => ({
               store: {
                 ...state.store,
                 checkout,
-                adding: false,
-              },
+                adding: false
+              }
             }));
           });
       },
       addVariantToCartAndBuyNow: (variantId, quantity) => {
-        this.setState((state) => ({
+        this.setState(state => ({
           store: {
             ...state.store,
-            adding: true,
-          },
+            adding: true
+          }
         }));
 
         const { checkout, client } = this.state.store;
         const checkoutId = checkout.id;
         const lineItemsToUpdate = [
-          { variantId, quantity: parseInt(quantity, 10) },
+          { variantId, quantity: parseInt(quantity, 10) }
         ];
         return client.checkout
           .addLineItems(checkoutId, lineItemsToUpdate)
-          .then((checkout) => {
-            this.setState((state) => ({
+          .then(checkout => {
+            this.setState(state => ({
               store: {
                 ...state.store,
                 checkout,
-                adding: false,
-              },
+                adding: false
+              }
             }));
             navigate(checkout.webUrl);
           });
@@ -77,57 +77,57 @@ class Layout extends Component {
       removeLineItem: (client, checkoutID, lineItemID) => {
         return client.checkout
           .removeLineItems(checkoutID, [lineItemID])
-          .then((resultat) => {
-            this.setState((state) => ({
+          .then(resultat => {
+            this.setState(state => ({
               store: {
                 ...state.store,
-                checkout: resultat,
-              },
+                checkout: resultat
+              }
             }));
           });
       },
       updateLineItem: (client, checkoutID, lineItemID, quantity) => {
         const lineItemsToUpdate = [
-          { id: lineItemID, quantity: parseInt(quantity, 10) },
+          { id: lineItemID, quantity: parseInt(quantity, 10) }
         ];
         return client.checkout
           .updateLineItems(checkoutID, lineItemsToUpdate)
-          .then((resultat) => {
-            this.setState((state) => ({
+          .then(resultat => {
+            this.setState(state => ({
               store: {
                 ...state.store,
-                checkout: resultat,
-              },
+                checkout: resultat
+              }
             }));
           });
       },
-      updateFilterType: (type) => {
-        this.setState((state) => ({
+      updateFilterType: type => {
+        this.setState(state => ({
           store: {
             ...state.store,
-            filteredType: type,
-          },
+            filteredType: type
+          }
         }));
       },
-      updateFilterSort: (sort) => {
-        this.setState((state) => ({
+      updateFilterSort: sort => {
+        this.setState(state => ({
           store: {
             ...state.store,
-            filteredSort: sort,
-          },
+            filteredSort: sort
+          }
         }));
       },
-      setValue: (value) => {
+      setValue: value => {
         isBrowser &&
           localStorage.setItem("customerAccessToken", JSON.stringify(value));
-        this.setState((state) => ({
+        this.setState(state => ({
           store: {
             ...state.store,
-            customerAccessToken: value,
-          },
+            customerAccessToken: value
+          }
         }));
-      },
-    },
+      }
+    }
   };
 
   async initializeCheckout() {
@@ -137,7 +137,7 @@ class Layout extends Component {
       ? localStorage.getItem("shopify_checkout_id")
       : null;
 
-    const setCheckoutInState = (checkout) => {
+    const setCheckoutInState = checkout => {
       if (isBrowser) {
         localStorage.setItem(
           "shopify_checkout_id",
@@ -145,16 +145,16 @@ class Layout extends Component {
         );
       }
 
-      this.setState((state) => ({
+      this.setState(state => ({
         store: {
           ...state.store,
-          checkout,
-        },
+          checkout
+        }
       }));
     };
 
     const createNewCheckout = () => this.state.store.client.checkout.create();
-    const fetchCheckout = (id) => this.state.store.client.checkout.fetch(id);
+    const fetchCheckout = id => this.state.store.client.checkout.fetch(id);
 
     if (existingCheckoutID) {
       try {
@@ -193,12 +193,14 @@ class Layout extends Component {
               }
             }
           `}
-          render={(data) => (
+          render={data => (
             <>
               <Header siteTitle={data.site.siteMetadata.title} />
+              <div className="child pt-5">
 
               {children}
-              <Footer/>
+              </div>
+              <Footer />
             </>
           )}
         />
@@ -207,7 +209,7 @@ class Layout extends Component {
   }
 }
 Layout.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };
 
 export default Layout;

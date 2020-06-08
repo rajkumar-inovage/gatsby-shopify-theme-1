@@ -51,22 +51,23 @@ const LoginForm = () => {
   return (
     <>
       {passwordForgot ? (
-        <section className="hero is-dark is-fullheight-with-navbar">
+        <section className="hero is-fullheight-with-navbar" style={{backgroundColor:'#e7e7e7'}}>
           <div className="hero-body">
             <div className="container">
               <div className="columns is-centered">
-                <div className="column is-4 is-centered">
+                <div className="column is-centered">
                   <h2 className=" title has-text-centered josefin-sans-b">
                     RESET YOUR PASSWORD
                   </h2>
-                  <p className="josefin-sans">We will send you an email to reset your password.</p>
+                  <p className="josefin-sans text-center">We will send you an email to reset your password.</p>
                   <Mutation mutation={CUSTOMER_PASSWORD_RESET}>
                     {(customerRecover) => {
                       return (
                         <>
-                          <div className="field">
+                        <div className="col-12 col-md-6 col-lg-4 mx-auto" >
+                          <div className="field mt-5">
                             <label
-                              className="label has-text-white josefin-sans-b"
+                              className="label text-dark josefin-sans-b"
                               htmlFor="loginEmail"
                             >
                               Email
@@ -75,6 +76,7 @@ const LoginForm = () => {
                               <input
                                 className="input josefin-sans"
                                 type="email"
+                                aria-label="Email"
                                 id="loginEmail"
                                 onChange={(e) => setEmailReset(e.target.value)}
                               />
@@ -83,7 +85,7 @@ const LoginForm = () => {
                           <div className="field">
                             <div className="control has-text-centered">
                               <button
-                                className="button josefin-sans-b"
+                                className="button text-center josefin-sans-b overflow-hidden py-3 px-5 cart-btn border border-dark btns position-relative text-uppercase text-center"
                                 onClick={() => {
                                   customerRecover({
                                     variables: {
@@ -100,16 +102,17 @@ const LoginForm = () => {
                                 SUBMIT
                               </button>
                             </div>
-                            <div className="field">
-                              <div
+                            <div className="field text-center mt-3">
+                              <button
                                 className="control has-text-centered josefin-sans-b"
                                 onClick={(e) =>
                                   setPasswordForgot(!passwordForgot)
                                 }
                               >
-                                <p>Cancel</p>
-                              </div>
+                                <span>Cancel</span>
+                              </button>
                             </div>
+                          </div>
                           </div>
                         </>
                       );
@@ -121,7 +124,7 @@ const LoginForm = () => {
           </div>
         </section>
       ) : (
-        <section className="hero is-dark is-fullheight-with-navbar">
+        <section className="hero is-fullheight-with-navbar" style={{backgroundColor:'#e7e7e7'}}>
           <div className="hero-body">
             <div className="container">
               <div className="columns is-centered">
@@ -129,22 +132,23 @@ const LoginForm = () => {
                   {messsageInfo && (
                     <div class="notification is-success">{messsageInfo}</div>
                   )}
-                  <h2 className=" title has-text-centered">Login</h2>
+                  <h2 className=" title has-text-centered josefin-sans-b">Login</h2>
                   <Mutation mutation={CUSTOMER_LOGIN}>
                     {(customerLogin) => {
                       return (
                         <>
                           <div className="field">
                             <label
-                              className="label has-text-white"
+                              className="label text-dark josefin-sans-b"
                               htmlFor="loginEmail"
                             >
                               Email
                             </label>
                             <div className="control">
                               <input
-                                className="input"
+                                className="input josefin-sans"
                                 type="email"
+                                aria-label="Email"
                                 id="loginEmail"
                                 onChange={(e) => setEmail(e.target.value)}
                               />
@@ -152,34 +156,35 @@ const LoginForm = () => {
                           </div>
                           <div className="field">
                             <label
-                              className="label has-text-white"
+                              className="label text-dark josefin-sans-b"
                               htmlFor="loginPassword"
                             >
                               Password
                             </label>
                             <div className="control">
                               <input
-                                className="input"
+                                className="input josefin-sans"
                                 type="password"
+                                aria-label="Password"
                                 id="loginPassword"
                                 onChange={(e) => setPassword(e.target.value)}
                               />
                             </div>
                           </div>
-                          <div className="field">
-                            <div
+                          <div className="field text-center">
+                            <button
                               className="control has-text-centered"
                               onClick={(e) =>
                                 setPasswordForgot(!passwordForgot)
                               }
                             >
-                              <p>Forgot your password? </p>
-                            </div>
+                              <span>Forgot your password? </span>
+                            </button>
                           </div>
                           <div className="field">
                             <div className="control has-text-centered">
                               <button
-                                className="button"
+                                className="button josefin-sans-b overflow-hidden py-3 px-5 cart-btn border rounded-none out-line-none border-dark btns position-relative text-uppercase text-center"
                                 onClick={() => {
                                   customerLogin({
                                     variables: {
@@ -206,8 +211,8 @@ const LoginForm = () => {
                           </div>
                           <div className="field">
                             <div className="control has-text-centered">
-                              <Link to="account/register">
-                                <p className="has-text-white">Create account</p>
+                              <Link to="/account/register">
+                                <p className="text-dark josefin-sans-b">Create account</p>
                               </Link>
                             </div>
                           </div>

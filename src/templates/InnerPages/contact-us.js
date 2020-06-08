@@ -22,7 +22,7 @@ const InnerPages = ({ data }) => {
                 <span>
                   {' '}
                   <Link
-                    to=""
+                    to="/"
                     style={{ textDecoration: 'none' }}
                     className="text-dark"
                   >
@@ -34,7 +34,7 @@ const InnerPages = ({ data }) => {
               </div>
               <div className="collection-title mt-4 d-inline-flex">
                 <h1
-                  className="m-0"
+                  className="m-0 josefin-sans-b"
                   style={{
                     fontSize: '2.5rem',
                     color: '#000',

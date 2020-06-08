@@ -22,24 +22,24 @@ const Logout = () => {
   return (
     <Mutation
       mutation={CUSTOMER_LOGOUT}
-      onCompleted={(data) => {
+      onCompleted={data => {
         if (data.customerAccessTokenDelete.userErrors.length) return;
         setValue({
-          customerAccessToken: "",
+          customerAccessToken: ""
         });
         navigate("/account/login");
       }}
     >
-      {(customerLogout) => {
+      {customerLogout => {
         return (
           <Link
             to={`/`}
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               customerLogout({
                 variables: {
-                  customerAccessToken: customerAccessToken.accessToken,
-                },
+                  customerAccessToken: customerAccessToken.accessToken
+                }
               });
             }}
           >

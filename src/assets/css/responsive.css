@@ -1,3 +1,11 @@
+@media only screen and (max-width: 500px) {
+	.default-header{
+		top:67px !important;
+	}
+	body .sticky.sticky-show{
+		top:77px !important;
+	}
+}
 @media only screen and (max-width: 600px) {
 
 	.contact-data .left-box , .contact-data .right-box{
@@ -7,12 +15,17 @@
 .navbar-brand.p-0.m-0 img {
 	width: 75px;
 }
-.collapse.show ul {
-	background-color: #fff;
+.navbar-collapse{
+	background-color:#fff;
 }
+.logo-box a img {
+	width: 75px;
+}
+
+
 }
 @media (min-width: 768px) and (max-width: 1024px) {
-	.collapse.show ul {
-	background-color: #fff;
-}
+	.navbar-collapse{
+		background-color: #fff;
+	}
 }

@@ -1,10 +1,24 @@
-import { Link } from "gatsby"
-import React from "react"
-import {Container, Row, Col} from 'reactstrap'
-import payment from "~/assets/img/payment.png"
-import ScrollUpButton from "react-scroll-up-button"
+import { Link } from "gatsby";
+import React, { useState } from "react";
+import { Container, Row, Col, Alert } from "reactstrap";
+import payment from "~/assets/img/payment.png";
+import ScrollUpButton from "react-scroll-up-button";
+import addToMailchimp from "gatsby-plugin-mailchimp";
 
 const Footer = (data) => {
+  const [email, setEmail] = useState("");
+  const [response, setResponse] = useState(null);
+  const dismissResponse = () => {
+    setResponse(null)
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const result = await addToMailchimp(email);
+    setResponse(result);
+  };
+  const handleChange = (e) => {
+    setEmail(e.target.value);
+  };
   return (
     <>
       <footer className="border border-bottom-0 border-left-0 border-right-0">
@@ -17,7 +31,7 @@ const Footer = (data) => {
                     <Link
                       to="/page/shipping"
                       className="josefin-sans text-dark text-decoration-none"
-                      style={{ fontSize: '1.2rem' }}
+                      style={{ fontSize: "1.2rem" }}
                     >
                       Shipping
                     </Link>
@@ -26,7 +40,7 @@ const Footer = (data) => {
                     <Link
                       to="/page/refund-policy"
                       className="josefin-sans text-dark text-decoration-none"
-                      style={{ fontSize: '1.2rem' }}
+                      style={{ fontSize: "1.2rem" }}
                     >
                       Refund Policy
                     </Link>
@@ -35,7 +49,7 @@ const Footer = (data) => {
                     <Link
                       to="/page/privacy-policy"
                       className="josefin-sans text-dark text-decoration-none"
-                      style={{ fontSize: '1.2rem' }}
+                      style={{ fontSize: "1.2rem" }}
                     >
                       Privacy Policy
                     </Link>
@@ -44,7 +58,7 @@ const Footer = (data) => {
                     <Link
                       to="/page/terms-of-service"
                       className="josefin-sans text-dark text-decoration-none"
-                      style={{ fontSize: '1.2rem' }}
+                      style={{ fontSize: "1.2rem" }}
                     >
                       Terms of service
                     </Link>
@@ -53,7 +67,7 @@ const Footer = (data) => {
                     <Link
                       to="/page/contact-us"
                       className="josefin-sans text-dark text-decoration-none"
-                      style={{ fontSize: '1.2rem' }}
+                      style={{ fontSize: "1.2rem" }}
                     >
                       Contact Us
                     </Link>
@@ -64,22 +78,39 @@ const Footer = (data) => {
                 <div className="news-letter">
                   <h4
                     className="josefin-sans-b"
-                    style={{ color: '#000', fontSize: '1.5rem' }}
+                    style={{ color: "#000", fontSize: "1.5rem" }}
                   >
                     Newsletter
                   </h4>
                   <p
                     className="josefin-sans text-dark"
-                    style={{ fontSize: '1rem' }}
+                    style={{ fontSize: "1rem" }}
                   >
                     Stay up to date with our latest creations and discounts!
                   </p>
                   <div className="single mt-3 mt-lg-4">
-                    <div className="input-group col-12 col-md-8 px-0 news-letter-form">
+                    {response !== null && (
+                      <Alert
+                        className="rounded-0"
+                        isOpen={response !== null}
+                        toggle={dismissResponse}
+                        color={
+                          response.result !== "error" ? "success" : "danger"
+                        }
+                      >
+                        {response.msg}
+                      </Alert>
+                    )}
+                    <form
+                      onSubmit={handleSubmit}
+                      className="input-group col-12 col-md-8 px-0 news-letter-form"
+                    >
                       <input
                         type="email"
+                        aria-label="Email Address"
                         className="form-control josefin-sans"
                         placeholder="Your Email Address"
+                        onChange={handleChange}
                       />
                       <span className="input-group-btn">
                         <button
@@ -89,7 +120,7 @@ const Footer = (data) => {
                           SIGN UP
                         </button>
                       </span>
-                    </div>
+                    </form>
                   </div>
                 </div>
               </Col>
@@ -124,12 +155,12 @@ const Footer = (data) => {
               <Col className="col-12 col-lg-4">
                 <p
                   className="josefin-sans w-100 text-center"
-                  style={{ fontSize: '1.2rem' }}
+                  style={{ fontSize: "1.2rem" }}
                 >
-                  © 2020{' '}
-                  <b className="josefin-sans-b" style={{ color: '#000' }}>
+                  © 2020{" "}
+                  <b className="josefin-sans-b" style={{ color: "#000" }}>
                     Demosoap
-                  </b>{' '}
+                  </b>{" "}
                   All rights reserved.
                 </p>
               </Col>
@@ -142,9 +173,7 @@ const Footer = (data) => {
         <ScrollUpButton />
       </footer>
     </>
-  )
-}
+  );
+};
 
-
-
-export default Footer
+export default Footer;

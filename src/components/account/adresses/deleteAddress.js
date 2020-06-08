@@ -21,7 +21,7 @@ const DeleteAddress = ({ id }) => {
 
   return (
     <Mutation mutation={CUSTOMER_DELETE_ADDRESS}>
-      {(customerAddressDelete) => {
+      {customerAddressDelete => {
         return (
           <button
             className="button"
@@ -29,9 +29,9 @@ const DeleteAddress = ({ id }) => {
               customerAddressDelete({
                 variables: {
                   id: id,
-                  customerAccessToken: customerAccessToken.accessToken,
-                },
-              }).then((result) => {
+                  customerAccessToken: customerAccessToken.accessToken
+                }
+              }).then(result => {
                 typeof window !== "undefined" && window.location.reload();
               });
             }}

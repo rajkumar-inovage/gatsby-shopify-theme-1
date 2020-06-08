@@ -1,13 +1,13 @@
-const path = require('path')
+const path = require("path");
 require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
+  path: `.env.${process.env.NODE_ENV}`
 });
 
 module.exports = {
   siteMetadata: {
     author: `Inovexia`,
     title: `Demosoap`,
-    description: `A Gatsby Shopify theme package built by Team-Innovexia for Team-Innovexia.`,
+    description: `A Gatsby Shoplift theme package built by Team-Innovexia for Team-Innovexia.`,
     short_title: `GISP`,
   },
   plugins: [
@@ -15,20 +15,26 @@ module.exports = {
     `gatsby-plugin-sass`,
     `gatsby-plugin-layout`,
     {
+      resolve: "gatsby-plugin-mailchimp",
+      options: {
+        endpoint: process.env.MAILCHIMP_ENDPOINT,
+      },
+    },
+    {
       resolve: `gatsby-plugin-apollo-shopify`,
       options: {
         shopName: process.env.SHOP_NAME,
         accessToken: process.env.SHOPIFY_ACCESS_TOKEN,
       },
     },
-     {
-      resolve: 'gatsby-plugin-root-import',
+    {
+      resolve: "gatsby-plugin-root-import",
       options: {
-        '~': path.join(__dirname, 'src/'),
+        "~": path.join(__dirname, "src/"),
       },
     },
     {
-      resolve: 'gatsby-plugin-tidio-chat',
+      resolve: "gatsby-plugin-tidio-chat",
       options: {
         tidioKey: process.env.TIDIOKEY,
         enableDuringDevelop: true,
@@ -38,7 +44,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/images`
+        path: `${__dirname}/src/images`,
       },
     },
     {
@@ -46,48 +52,48 @@ module.exports = {
       options: {
         shopName: process.env.SHOP_NAME,
         accessToken: process.env.SHOPIFY_ACCESS_TOKEN,
-        verbose:false,
+        verbose: false,
         // paginationSize: 250,
         // includeCollections: ["shop", "content"],
       },
     },
-    {
-      resolve: "gatsby-source-graphql",
-      options: {
-      	typeName: 'Shopify',
-        fieldName: 'shopify',
-        url: `https://${process.env.SHOP_NAME}.myshopify.com/api/graphql`,
-    	headers: {
-          'X-Shopify-Storefront-Access-Token': process.env.SHOPIFY_ACCESS_TOKEN,
-        },
-    	//refetchInterval: 60
-      },
-    },
-    {
-      resolve: `gatsby-source-graphql`,
-      options: {
-        typeName: `WPGraphQL`,
-        fieldName: `wpgraphql`,
-        url: `${process.env.WORDPRESS_URL}/graphql`,
-        searchAndReplaceContentUrls: {
-          sourceUrl: `${process.env.WORDPRESS_URL}`,
-          replacementUrl: ``,
-        },
-        // refetchInterval: 60,
-      }
-    },
+    // {
+    //   resolve: "gatsby-source-graphql",
+    //   options: {
+    //     typeName: "Shopify",
+    //     fieldName: "shopify",
+    //     url: `https://${process.env.SHOP_NAME}.myshopify.com/api/graphql`,
+    //     headers: {
+    //       "X-Shopify-Storefront-Access-Token": process.env.SHOPIFY_ACCESS_TOKEN
+    //     }
+    //     //refetchInterval: 60
+    //   }
+    // },
+    // {
+    //   resolve: `gatsby-source-graphql`,
+    //   options: {
+    //     typeName: `WPGraphQL`,
+    //     fieldName: `wpgraphql`,
+    //     url: `${process.env.WORDPRESS_URL}/graphql`,
+    //     searchAndReplaceContentUrls: {
+    //       sourceUrl: `${process.env.WORDPRESS_URL}`,
+    //       replacementUrl: ``
+    //     }
+    //     // refetchInterval: 60,
+    //   }
+    // },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-shopify-theme`,
-        short_name: `gatsby-shopify`,
+        name: `Demosoap`,
+        short_name: `demosoap`,
         start_url: `/`,
         background_color: `#333`,
         theme_color: `#333`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`,
+        icon: `src/images/favicon.png`,
       },
     },
   ],

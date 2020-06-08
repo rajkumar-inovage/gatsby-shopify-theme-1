@@ -1,7 +1,7 @@
 import React from "react"; /* eslint-disable */
 import PropTypes from "prop-types";
 
-const VariantSelector = (props) => {
+const VariantSelector = props => {
   const { options } = props;
   return (
     <div className="field is-horizontal">
@@ -20,7 +20,7 @@ const VariantSelector = (props) => {
             name={options.name}
             key={options.id}
           >
-            {options.values.map((value) => (
+            {options.values.map(value => (
               <option
                 key={`${options.name}-${value}`}
                 value={value}
@@ -41,6 +41,6 @@ export default VariantSelector;
 VariantSelector.propTypes = {
   onChange: PropTypes.func,
   options: PropTypes.shape({
-    values: PropTypes.string,
-  }),
-}
+    values: PropTypes.string
+  })
+};

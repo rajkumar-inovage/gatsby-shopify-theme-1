@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import StoreContext from "../context/store";
 
-const LineItem_Mobile = (props) => {
+const LineItem_Mobile = props => {
   const { line_item } = props;
   const context = useContext(StoreContext);
 
@@ -32,9 +32,12 @@ const LineItem_Mobile = (props) => {
           </p>
         </div>
         <div className="column is-1">
-          <p className="has-text-weight-normal delete" onClick={removeItem}>
+          <button
+            className="has-text-weight-normal delete"
+            onClick={removeItem}
+          >
             Delete
-          </p>
+          </button>
         </div>
       </div>
       <div className="columns is-mobile is-vcentered">

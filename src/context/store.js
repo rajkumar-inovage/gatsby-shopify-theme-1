@@ -3,7 +3,7 @@ import Client from "shopify-buy";
 
 const client = Client.buildClient({
   storefrontAccessToken: process.env.SHOPIFY_ACCESS_TOKEN,
-  domain: `${process.env.SHOP_NAME}.myshopify.com`,
+  domain: `${process.env.SHOP_NAME}.myshopify.com`
 });
 
 export const defaultStoreContext = {
@@ -19,7 +19,7 @@ export const defaultStoreContext = {
   addVariantToCart: () => {},
   addVariantToCartAndBuyNow: () => {},
   removeLineItem: () => {},
-  updateLineItem: () => {},
+  updateLineItem: () => {}
 };
 
 const StoreContext = React.createContext(defaultStoreContext);
