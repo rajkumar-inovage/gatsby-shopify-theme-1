@@ -1,3 +1,11 @@
+@media only screen and (max-width: 500px) {
+	.default-header{
+		top:67px !important;
+	}
+	body .sticky.sticky-show{
+		top:77px !important;
+	}
+}
 @media only screen and (max-width: 600px) {
 
 	.contact-data .left-box , .contact-data .right-box{
@@ -8,11 +16,12 @@
 	width: 75px;
 }
 .navbar-collapse{
-	background-color: #fff;
+	background-color:#fff;
 }
 .logo-box a img {
 	width: 75px;
 }
+
 
 }
 @media (min-width: 768px) and (max-width: 1024px) {

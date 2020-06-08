@@ -52,19 +52,25 @@ a {
 .navbar-brand {
 	width: 110px;
 }
-.sticky-header{
-	position:absolute;
+.sticky{
+	position:fixed;
 	top:-100px;
 	z-index: 9;
 	width: 100%;
-
+	transition:all ease-in-out 0.5s;
+	visibility:hidden;
 }
-.default-header, .sticky-active {
+body .sticky.sticky-show{
+	top:50px !important;
+	visibility:visible;
+}
+.default-header{
 	position: absolute;
 	top: 50px;
 	background-color: transparent;
 	z-index: 9;
 	width: 100%;
+	
 }
 
 .inner-body {

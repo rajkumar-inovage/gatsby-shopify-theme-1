@@ -67,11 +67,11 @@ const Header = ({ siteTitle }) => {
     }
     if (isBrowser) {
       $(window).scroll(function() {
-        var sticky = $("header"),
+        var sticky = $(".sticky"),
           scroll = $(window).scrollTop();
 
-        if (scroll >= 100) sticky.addClass("sticky-header");
-        else sticky.removeClass("sticky-header");
+        if (scroll >= 150) sticky.addClass("sticky-show");
+        else sticky.removeClass("sticky-show");
       });
     }
   }, [checkout]);
@@ -106,10 +106,9 @@ const Header = ({ siteTitle }) => {
           </p>
         </div>
         <Navbar
-          color="light"
           light={true}
           expand="lg"
-          className="bg-transparent p-3 p-sm-0 default-header"
+          className="bg-transparent px-3 py-sm-0 py-md-3 default-header"
         >
           <Container>
             <div className="navbar-start m-0 logo-box mt-3">
@@ -333,10 +332,9 @@ const Header = ({ siteTitle }) => {
           </Container>
         </Navbar>
         <Navbar
-          color="light"
           light={true}
           expand="lg"
-          className="bg-white p-3 p-sm-0 sticky-header"
+          className="bg-white px-3 py-sm-0 py-md-3 sticky"
         >
           <Container>
             <div className="navbar-start m-0 logo-box mt-0">

@@ -195,7 +195,6 @@ const CollectionsPage = ({ data }) => {
                 className="has-text-weight-semibold is-uppercase"
                 style={{ margin: "-20px" }}
               >
-                SORT BY :
                 <div className="field">
                   <div className="control">
                     <div className="select">
@@ -206,7 +205,7 @@ const CollectionsPage = ({ data }) => {
                         id="sortBy"
                       >
                         {sorts.map(({ value, title }, index) => (
-                          <option key={index} value={value}>
+                          <option key={index} value={value} className="josefin-sans">
                             {title}
                           </option>
                         ))}
