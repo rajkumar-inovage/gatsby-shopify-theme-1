@@ -341,11 +341,13 @@ const ProductPage = ({ data }) => {
                       : `No Reviews`}
                   </span>
                 </div>
-                <ProductForm product={product} rating={avgRating} />
+                <ProductForm product={product} />
                 <AddToCompare
                   className="row align-items-center"
                   product={product}
-                  rating={avgRating}
+                  rating={
+                    avgRating > 0 ? `${avgRating} out of 5` : `No Reviews`
+                  }
                 />
               </div>
             </Col>

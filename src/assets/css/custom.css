@@ -622,12 +622,15 @@ body .visual_contact_form input {
 .single-blog p img {
 	padding: 5px 0px;
 }
+
 .pdt-image .img-hover-zoom--zoom-n-rotate .imgProduct {
 	transition: transform 0.5s;
 }
+
 .pdt-image .img-hover-zoom--zoom-n-rotate:hover .imgProduct {
 	transform: scale(1.2);
 }
+
 .cross-bar {
 	border-radius: 3px;
 	background-color: #ffffff;
@@ -643,4 +646,14 @@ body .visual_contact_form input {
 
 .cross-bar:last-child {
 	transform: rotate(-45deg);
+}
+
+#compare-modal .remove-btn {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 0;
+	outline: none;
+	width: 30px;
+	height: 30px;
 }
