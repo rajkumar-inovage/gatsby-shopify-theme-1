@@ -92,7 +92,11 @@ const CollectionsPage = ({ data }) => {
       title: "Price, high to low",
     }
   ];
+  const reSortB = (e) => {
+    e.preventDefault();
+  }
   const reSort = (e) => {
+    e.preventDefault();
     setSort(e.target.value);
   };
   return (
@@ -197,7 +201,8 @@ const CollectionsPage = ({ data }) => {
                     <div className="select">
                       <select
                         defaultValue={sort}
-                        onBlur={(e) => reSort(e)}
+                        onChange={(e) => reSort(e)}
+                        onBlur={(e) => reSortB(e)}
                         id="sortBy"
                       >
                         {sorts.map(({ value, title }, index) => (
@@ -240,6 +245,15 @@ const CollectionsPage = ({ data }) => {
                                         .original.src
                                     }
                                     alt={images[0].altText}
+                                    className="img-fluid"
+                                    width={
+                                      images[0].localFile.childImageSharp
+                                        .original.width
+                                    }
+                                    height={
+                                      images[0].localFile.childImageSharp
+                                        .original.height
+                                    }
                                   />
                                 )}
 
@@ -355,9 +369,6 @@ export const query = graphql`
           altText
           localFile {
             childImageSharp {
-              fluid {
-                src
-              }
               original {
                 width
                 src

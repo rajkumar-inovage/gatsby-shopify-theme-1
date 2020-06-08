@@ -1,6 +1,7 @@
 import { Link } from "gatsby"; /* eslint-disable */
 import PropTypes from "prop-types";
 import React, { useContext, useState, useEffect } from "react";
+import $ from "jquery";
 import StoreContext from "~/context/store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -33,9 +34,9 @@ const countQuantity = (lineItems) => {
 };
 
 const Header = ({ siteTitle }) => {
+  const isBrowser = typeof window !== "undefined";
   const context = useContext(StoreContext);
   const { removeLineItem, client, checkout } = context;
-
   const [cartCount, setCartCount] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
@@ -50,11 +51,11 @@ const Header = ({ siteTitle }) => {
       return "";
     }
   };
-  const handleRemove = (event, lineItemId) => {
-    removeLineItem(client, checkout.id, lineItemId).then(() => {
-      setCartCount(cartCount - 1);
-    });
-  };
+    const handleRemove = (event, lineItemId) => {
+      removeLineItem(client, checkout.id, lineItemId).then(() => {
+        setCartCount(cartCount - 1);
+      });
+    };
   const handleCheckout = () => {
     window.open(checkout.webUrl);
   };
@@ -63,6 +64,15 @@ const Header = ({ siteTitle }) => {
   useEffect(() => {
     if (checkout.lineItems.length > 0) {
       setCartCount(checkout.lineItems.length);
+    }
+    if (isBrowser) {
+      $(window).scroll(function() {
+        var sticky = $("header"),
+          scroll = $(window).scrollTop();
+
+        if (scroll >= 100) sticky.addClass("sticky-header");
+        else sticky.removeClass("sticky-header");
+      });
     }
   }, [checkout]);
 

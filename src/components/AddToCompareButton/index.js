@@ -105,6 +105,7 @@ const AddToCompareButton = ({
       </button>
       <Modal
         className="mx-auto"
+        id="compare-modal"
         isOpen={compareModal}
         toggle={toggleCompareModal}
         size="xl"
@@ -115,7 +116,7 @@ const AddToCompareButton = ({
         backdropTransition={{ timeout: 700 }}
       >
         <div className="modal-body p-0">
-          <div className="h1 modal-title d-block text-center josefin-sans-b">
+          <div className="h1 modal-title d-block text-center josefin-sans-b text-capitalize">
             Compare products
           </div>
           <div className="py-4">
@@ -178,19 +179,20 @@ const AddToCompareButton = ({
                         <div className="col" data={index} key={index}>
                           <ul className="list-group text-center">
                             <li className="list-group-item border-top-0 border-left-0 border-right-0 rounded-0">
-                              <button
-                                className="float-right remove-btn border"
-                                style={{ borderRadius: "50%" }}
-                                onClick={(e) => removeFromCompare(e, id)}
-                              >
-                                &times;
-                              </button>
-                              <img
-                                src={image}
-                                alt={name}
-                                className="img-fluid"
-                                style={{ maxHeight: "100px" }}
-                              />
+                              <div className="d-inline-block position-relative">
+                                <button
+                                  className="remove-btn border cart-btn border border-dark rounded-circle"
+                                  onClick={(e) => removeFromCompare(e, id)}
+                                >
+                                  &times;
+                                </button>
+                                <img
+                                  src={image}
+                                  alt={name}
+                                  className="img-fluid"
+                                  style={{ maxHeight: "100px" }}
+                                />
+                              </div>
                             </li>
                             <li className="list-group-item border-top-0 border-left-0 border-right-0 josefin-sans">
                               {name}
@@ -212,7 +214,7 @@ const AddToCompareButton = ({
                             </li>
                             <li className="list-group-item border-bottom-0 border-left-0 border-right-0 rounded-0">
                               <button
-                                className="josefin-sans-b"
+                                className="josefin-sans-b cart-btn border border-dark btns position-relative"
                                 onClick={(e) =>
                                   addToCartCompared(e, productVariant)
                                 }

@@ -12,9 +12,7 @@ const RecentBlogs = () => {
         ) {
           edges {
             node {
-              id
               title
-              excerpt
               url
               blog {
                 url
@@ -53,19 +51,11 @@ const RecentBlogs = () => {
       <Row className="mx-0 mt-3 mt-lg-5">
         {allShopifyArticle.edges ? (
           allShopifyArticle.edges.map(
-            ({
-              node: {
-                id,
-                url,
-                blog,
-                title,
-                content,
-                excerpt,
-                publishedAt,
-                image
-              }
-            }) => (
-              <Col className="col-12 col-md-6 col-lg-3" key={id}>
+            (
+              { node: { url, blog, title, publishedAt, image } },
+              index
+            ) => (
+              <Col className="col-12 col-md-6 col-lg-3" key={index}>
                 <div className="recent-posts position-relative">
                   <span
                     className="position-absolute publish-date p-1 josefin-sans-b bg-white border"
@@ -73,7 +63,7 @@ const RecentBlogs = () => {
                       fontSize: "12px",
                       top: "25px",
                       left: "-10px",
-                      zIndex: "9"
+                      zIndex: "9",
                     }}
                   >
                     {publishedAt}
@@ -92,7 +82,7 @@ const RecentBlogs = () => {
                         WebkitBackgroundSize: "cover",
                         backgroundRepeat: "no-repaet",
                         backgroundPosition: "center",
-                        transition: "all 0.3s"
+                        transition: "all 0.3s",
                       }}
                     ></div>
                   </Link>
