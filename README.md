@@ -1,6 +1,6 @@
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <h1 align="center">
-  <img alt="Gatsby" src="resources/demosoap-logo.webp" height="60px" />
+  <img alt="Gatsby" src="images/demosoap-logo.png" height="60px" />
   <br/>
   Demosoap WP/Shopify Beeta
 </h1>
