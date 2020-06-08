@@ -12,6 +12,7 @@ const AddToCompareButton = ({
   product,
   rating,
 }) => {
+  const isBrowser = typeof window !== "undefined";
   const {
     variants: [initialVariant],
     priceRange: { minVariantPrice },
@@ -27,7 +28,7 @@ const AddToCompareButton = ({
   }).format(productVariant.price);
   const available = variant.availableForSale;
   const [compareData, setCompareData] = useState(
-    localStorage.getItem("compareData")
+    isBrowser && localStorage.getItem("compareData")
       ? JSON.parse(localStorage.getItem("compareData"))
       : []
   );
@@ -39,22 +40,23 @@ const AddToCompareButton = ({
       style={{ position: "absolute", top: "15px", right: "15px" }}
       onClick={toggleCompareModal}
     >
-      <span className="cross-bar w-50">&nbsp;</span>
-      <span className="cross-bar w-50">&nbsp;</span>
+      <span className="cross-bar">&nbsp;</span>
+      <span className="cross-bar">&nbsp;</span>
     </button>
   );
   const removeFromCompare = (e, id) => {
     e.preventDefault();
-    let compareData = localStorage.getItem("compareData")
-    ? JSON.parse(localStorage.getItem("compareData"))
-    : [];
-    if(compareData.length){
+    let compareData =
+      isBrowser && localStorage.getItem("compareData")
+        ? JSON.parse(localStorage.getItem("compareData"))
+        : [];
+    if (compareData.length) {
       var removedData = compareData.filter(function(data, index) {
         return data.id !== id;
       });
       localStorage.setItem("compareData", JSON.stringify(removedData));
       setCompareData(removedData);
-      if(removedData.length===0){
+      if (removedData.length === 0) {
         toggleCompareModal();
       }
     }
@@ -63,11 +65,11 @@ const AddToCompareButton = ({
     e.preventDefault();
     addVariantToCart(productVariant.shopifyId, 1);
   };
-  //console.log(available, variant);
   const addToCompare = () => {
-    let add2compare = localStorage.getItem("compareData")
-      ? JSON.parse(localStorage.getItem("compareData"))
-      : [];
+    let add2compare =
+      isBrowser && localStorage.getItem("compareData")
+        ? JSON.parse(localStorage.getItem("compareData"))
+        : [];
     const compareIndex = add2compare.findIndex((compareProduct) => {
       return compareProduct.id === product.shopifyId;
     });
@@ -85,7 +87,7 @@ const AddToCompareButton = ({
       };
       add2compare.push(pushData);
       localStorage.setItem("compareData", JSON.stringify(add2compare));
-      setCompareData([...compareData, pushData,]);
+      setCompareData([...compareData, pushData]);
     }
     toggleCompareModal();
   };
@@ -177,9 +179,10 @@ const AddToCompareButton = ({
                           <ul className="list-group text-center">
                             <li className="list-group-item border-top-0 border-left-0 border-right-0 rounded-0">
                               <button
-                              className="float-right remove-btn border"
-                              style={{borderRadius:'50%'}}
-                               onClick={(e) => removeFromCompare(e, id)}>
+                                className="float-right remove-btn border"
+                                style={{ borderRadius: "50%" }}
+                                onClick={(e) => removeFromCompare(e, id)}
+                              >
                                 &times;
                               </button>
                               <img
@@ -208,10 +211,10 @@ const AddToCompareButton = ({
                               {sku !== "" ? sku : <>&nbsp;</>}
                             </li>
                             <li className="list-group-item border-bottom-0 border-left-0 border-right-0 rounded-0">
-                              <button className="josefin-sans-b"
+                              <button
+                                className="josefin-sans-b"
                                 onClick={(e) =>
                                   addToCartCompared(e, productVariant)
-                                  
                                 }
                               >
                                 Add To Cart

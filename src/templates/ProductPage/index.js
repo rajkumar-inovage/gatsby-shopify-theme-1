@@ -108,7 +108,6 @@ const ProductPage = ({ data }) => {
       res
         .json()
         .then((responseJson) => {
-          console.log(responseJson);
           const allRating = responseJson.data;
           let sum = 0;
           allRating.forEach(function(v) {

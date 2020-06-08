@@ -14,7 +14,7 @@ const ProductForm = ({ product }) => {
     addVariantToCart,
     addVariantToCartAndBuyNow,
     client,
-    checkout,
+    //checkout,
   } = useContext(StoreContext);
   const productVariant =
     client.product.helpers.variantForOptions(product, variant) || variant;
@@ -25,7 +25,6 @@ const ProductForm = ({ product }) => {
     style: "currency",
   }).format(variant.price);
   //checkout.currencyCode = productVariant.presentmentPrices.edges[1].node.price.currencyCode;
-  console.log(client, checkout.currencyCode);
   const checkAvailability = useCallback(
     (productId) => {
       client.product.fetch(productId).then((fetchedProduct) => {
