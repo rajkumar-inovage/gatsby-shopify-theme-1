@@ -70,7 +70,9 @@ body .sticky.sticky-show{
 	background-color: transparent;
 	z-index: 9;
 	width: 100%;
-	
+}
+body .select:not(.is-multiple):not(.is-loading)::after {
+	border-color: #000;
 }
 
 .inner-body {
